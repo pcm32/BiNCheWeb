@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="net.sourceforge.metware.binche.execs.BiNCheExecWeb"%>
-<%@ page import="org.json.simple.*"%>
 
 <html>
 <head>
@@ -181,7 +180,7 @@
 
 	<div align="center" style="padding: 5px">
 		<h3>
-			The graph from the enrichment analysis for the target '<%=request.getParameter("type")%>'
+			The graph from the enrichment analysis for the target ChEBI '<%=request.getParameter("targetType")%>'
 		</h3>
 		<p>
 			The number of compounds input :
@@ -237,15 +236,16 @@
 				var vis = new org.cytoscapeweb.Visualization(div_id, options);
 
 				//specify the graph and layout to draw
-				var draw_options = {
+				
+			var draw_options = {
 					network : network_json,
 					layout : {
 						name : "Tree",
 						options : {
 							orientation : "topToBottom",
-							breadthSpace : 120,
-							depthSpace : 50,
-							subtreeSpace : 20
+							breadthSpace : 150,
+							depthSpace : 10,
+							subtreeSpace : 40
 						}
 					},
 					visualStyle : {
@@ -339,7 +339,7 @@
 						<div id="exporter_xgmml"></div>
 					</div>
 
-					 <!-- GRAPHML Format -->
+					<!-- GRAPHML Format -->
 					<div class="selection" id="save_graphml">
 						<div class="description">
 							<label>GraphML</label> <span>Graph Markup Language</span>
@@ -347,7 +347,7 @@
 						<div id="exporter_graphml"></div>
 					</div>
 
-					 <!-- SIF Format -->
+					<!-- SIF Format -->
 					<div class="selection" id="save_sif">
 						<div class="description">
 							<label>SIF</label> <span>Simple Interaction Format</span>
@@ -367,7 +367,7 @@
 						<div id="exporter_svg"></div>
 					</div>
 
-					<!--  PNG Format --> 
+					<!--  PNG Format -->
 					<div class="selection" id="save_png">
 						<div class="description">
 							<label>PNG</label> <span>Bitmap Image</span>

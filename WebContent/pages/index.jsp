@@ -28,8 +28,8 @@
 	min-height: 100%;
 	background-color: white;
 	text-align: center;
-	opacity : 0.85;
-	filter: alpha(opacity = 85);
+	opacity: 0.85;
+	filter: alpha(opacity =       85);
 }
 
 #loadingtext {
@@ -45,10 +45,11 @@
 
 <body>
 	<center>
-		<div id="loading" style="display: ;">
+		<div id="loading" style="display:;">
 			<div id="loadingtext">
-				Please wait...<br />
-				  <img src="${ pageContext.request.contextPath }/images/ajax-loader.gif" border="0" /> 
+				Please wait...<br /> <img
+					src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
+					border="0" />
 			</div>
 		</div>
 		<h1>Enrichment Analysis</h1>
@@ -81,14 +82,14 @@
 
 					</span> <span id="plainInfo" style="display: none; padding: 2px">
 							This method accepts a list of CHEBI Ids only.<br /> <br> <b>Select
-								target of enrichment</b> <select name="type">
-								<option value="structure">ChEBI structure
-									classification</option>
-								<option value="role" selected="selected">ChEBI role
-									classification</option>
+								target of enrichment</b> <select name="targetType">
+								<option value="structure" selected="selected">ChEBI
+									structure classification</option>
+								<option value="role">ChEBI role classification</option>
 								<option value="both">ChEBI structures and roles</option>
 						</select>
-					</span><br> <input type="submit" value="Submit" onclick="document.getElementById('loading').style.display = 'block';"/>
+					</span><br> <input type="submit" value="Submit"
+						onclick="document.getElementById('loading').style.display = 'block';" />
 					</td>
 				</tr>
 			</table>

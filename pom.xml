@@ -42,18 +42,28 @@
 			</plugin>
 		</plugins>
 	</build>
-	 <dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies> 
+		<dependency>
+			<groupId>be.ugent.psb</groupId>
+			<artifactId>binche</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	</dependencies>
 	<packaging>war</packaging>
-	<parent>
-		<groupId>be.ugent.psb</groupId>
-		<artifactId>binche</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
 </project>
