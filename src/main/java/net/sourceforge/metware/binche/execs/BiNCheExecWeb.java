@@ -39,9 +39,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.sourceforge.metware.binche.core.BiNChe;
-import net.sourceforge.metware.binche.graph.ChebiEdge;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.ChebiVertex;
+import net.sourceforge.metware.binche.graph.core.ChebiEdge;
+import net.sourceforge.metware.binche.graph.core.ChebiGraph;
+import net.sourceforge.metware.binche.graph.core.ChebiVertex;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -73,7 +73,7 @@ public class BiNCheExecWeb {
 
 		LOGGER.log(Level.INFO, "############ Start ############");
 
-		String ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNChe-JSP/src/resources/data/chebi_role_only.obo";
+		String ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_only.obo";
 
 		LOGGER.log(Level.INFO, "Setting default parameters ...");
 		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
@@ -117,13 +117,13 @@ public class BiNCheExecWeb {
 		
 		String target = request.getParameter("targetType");	
 		if (target.equalsIgnoreCase("structure")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNChe-JSP/src/resources/data/chebi_structure_only.obo";
+			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_structure_only.obo";
 		}
 		else if (target.equalsIgnoreCase("role")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNChe-JSP/src/resources/data/chebi_role_only.obo";
+			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_only.obo";
 		}
 		else if(target.equalsIgnoreCase("both")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNChe-JSP/src/resources/data/chebi_role_and_structure.obo";
+			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_and_structure.obo";
 		}
 
 		LOGGER.log(Level.INFO, "Setting default parameters ...");

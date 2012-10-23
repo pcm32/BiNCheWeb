@@ -244,8 +244,8 @@
 						options : {
 							orientation : "topToBottom",
 							breadthSpace : 150,
-							depthSpace : 10,
-							subtreeSpace : 40
+							depthSpace : 30,
+							subtreeSpace : 60
 						}
 					},
 					visualStyle : {

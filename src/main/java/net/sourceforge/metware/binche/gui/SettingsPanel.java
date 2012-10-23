@@ -33,7 +33,8 @@ package net.sourceforge.metware.binche.gui;
 import BiNGO.BingoParameters;
 import BiNGO.methods.BingoAlgorithm;
 import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
+import net.sourceforge.metware.binche.graph.core.ChebiGraph;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
