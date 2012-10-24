@@ -39,12 +39,21 @@ public class ValidateInput extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String string = request.getParameter("input").trim();
-		String[] input = string.split("\\s+");
-		int inputSize = input.length;
-		request.setAttribute("inputSize", inputSize); //for testing filter
-		String type = request.getParameter("analysisType");
+		//Process input ids
+		String rawInput = request.getParameter("input").trim();
+		String[] input = null;
+		//Check if values are tab-separated or comma-separated
+		if (rawInput.split(",").length>1) {
+			input = rawInput.split(",");
+		}
+		else {
+			input = rawInput.split("\\s+");
+		}
 		
+		int inputSize = input.length;
+		
+		//Process type of analysis
+		String type = request.getParameter("analysisType");
 		if (type.equalsIgnoreCase("weighted")) {
 			Map <String, String> inputMap = new HashMap<String, String>();
 			List<String> errors = new ArrayList<String>();
@@ -67,6 +76,8 @@ public class ValidateInput extends HttpServlet {
 
 			if (errors.isEmpty()) {
 				request.setAttribute("inputMap", inputMap);
+				inputSize = inputMap.keySet().size();
+				request.setAttribute("inputSize", inputSize); //for testing filter
 				//response.sendRedirect("pages/ResultPage.jsp");
 				request.getRequestDispatcher("pages/ResultJSON.jsp").forward(request, response);
 			}
@@ -81,8 +92,10 @@ public class ValidateInput extends HttpServlet {
 				dummyMap.put(id, "1");
 			}
 			request.setAttribute("inputMap", dummyMap);
+			request.setAttribute("inputSize", inputSize); //for testing filter
 			request.getRequestDispatcher("pages/ResultJSON.jsp").forward(request, response);
 		}
+		
 	}
 
 }

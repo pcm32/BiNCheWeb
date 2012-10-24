@@ -38,10 +38,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sourceforge.metware.binche.core.BiNChe;
-import net.sourceforge.metware.binche.graph.core.ChebiEdge;
-import net.sourceforge.metware.binche.graph.core.ChebiGraph;
-import net.sourceforge.metware.binche.graph.core.ChebiVertex;
+import net.sourceforge.metware.binche.BiNChe;
+import net.sourceforge.metware.binche.graph.ChebiEdge;
+import net.sourceforge.metware.binche.graph.ChebiGraph;
+import net.sourceforge.metware.binche.graph.ChebiVertex;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

@@ -180,7 +180,7 @@
 
 	<div align="center" style="padding: 5px">
 		<h3>
-			The graph from the enrichment analysis for the target ChEBI '<%=request.getParameter("targetType")%>'
+			The graph from '<%=request.getParameter("analysisType")%>' enrichment analysis for the target ChEBI '<%=request.getParameter("targetType")%>'
 		</h3>
 		<p>
 			The number of compounds input :

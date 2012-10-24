@@ -50,7 +50,8 @@
 		<dependency>
 			<groupId>be.ugent.psb</groupId>
 			<artifactId>binche</artifactId>
-			<version>0.0.1</version>
+			<!-- <version>0.0.1</version> -->
+			<version>0.0.5-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
