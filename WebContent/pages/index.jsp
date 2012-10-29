@@ -52,9 +52,8 @@
 					border="0" />
 			</div>
 		</div>
-		<h1>Enrichment Analysis</h1>
-		<br /> Please enter your list of CHEBI ids, separated by space or
-		newline. <br> <br> <br>
+		<h1>ENRICHMENT ANALYSIS</h1>
+		<br /> Please enter your list of CHEBI ids, separated by tab, newline or comma. <br> <br> <br>
 
 
 		<form action="${ pageContext.request.contextPath }/ValidateInput"

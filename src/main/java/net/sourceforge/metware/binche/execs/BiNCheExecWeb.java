@@ -18,38 +18,24 @@
  */
 package net.sourceforge.metware.binche.execs;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.RenderingHints;
+import BiNGO.BingoParameters;
+import BiNGO.methods.BingoAlgorithm;
+import edu.uci.ics.jung.visualization.VisualizationImageServer;
+import net.sourceforge.metware.binche.BiNChe;
+import net.sourceforge.metware.binche.graph.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.ChebiEdge;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.ChebiVertex;
-
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import BiNGO.BingoParameters;
-import BiNGO.methods.BingoAlgorithm;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.VisualizationImageServer;
 
 /**
  * @author Stephan Beisken
@@ -61,7 +47,7 @@ public class BiNCheExecWeb {
 	public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		System.out.println("Starting main method....");
-		BiNCheExecWeb bincheexec = new BiNCheExecWeb();
+//		BiNCheExecWeb bincheexec = new BiNCheExecWeb();
 		//		bincheexec.generateImage(args, request, response);
 	}
 
@@ -111,10 +97,10 @@ public class BiNCheExecWeb {
 	public void generateJson(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		LOGGER.log(Level.INFO, "############ Start ############");
-		
+
 		//Assign appropriate ontology file depending on target selected by user
 		String ontologyFile = null;		
-		
+
 		String target = request.getParameter("targetType");	
 		if (target.equalsIgnoreCase("structure")) {
 			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_structure_only.obo";
@@ -144,7 +130,27 @@ public class BiNCheExecWeb {
 		ChebiGraph chebiGraph =
 				new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
 
-		//Convert the chebi Graph to a JSON Object for display on website
+		List<ChEBIGraphPruner> pruners = Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+		, new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+		int originalVertices = chebiGraph.getVertexCount();
+		System.out.println("Number of nodes before pruning : " + originalVertices);
+
+		int prunes=0;
+		for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
+			chEBIGraphPruner.prune(chebiGraph);
+			prunes++;
+			System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
+			System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
+			originalVertices = chebiGraph.getVertexCount();
+			System.out.println("Writing out graph ...");
+		}
+		
+		int finalVertices = chebiGraph.getVertexCount();
+
+		System.out.println("Final vertices : " + (finalVertices));
+
+
+		//Convert the chebi Graph to a JSON Object for display on webapp
 		getJsonObjectFromGraph(chebiGraph, request, response);
 
 		LOGGER.log(Level.INFO, "############ Stop ############");
@@ -156,55 +162,70 @@ public class BiNCheExecWeb {
 	private void getJsonObjectFromGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
 
 		//layout
-		Layout<ChebiVertex, ChebiEdge> layout = chebiGraph.getLayout();
-		Graph<ChebiVertex, ChebiEdge> layoutGraph = layout.getGraph();
+		//Layout<ChebiVertex, ChebiEdge> layout = chebiGraph.getLayout();
+		//Graph<ChebiVertex, ChebiEdge> layoutGraph = layout.getGraph();
 
 		//Colors
-		Collection<ChebiVertex> graphVertices = layoutGraph.getVertices();
+		//Collection<ChebiVertex> graphVertices = layoutGraph.getVertices();
 		Map<String, String> colorMap = new HashMap<String, String>();
-		for (ChebiVertex vertex : graphVertices) {
+		for (ChebiVertex vertex : chebiGraph.getVertices()) {
 			Color rgbColor = vertex.getColor();
 			String hexColor = toHex(rgbColor.getRed(), rgbColor.getGreen(), rgbColor.getBlue());
 			colorMap.put(vertex.getChebiName(), hexColor);
 		}		
 
 		//NODES
-		Map<Integer, ChebiVertex> vertexmap = chebiGraph.getVertexMap();
-		Map <Integer, String> vertexMapWithChebiName = new HashMap<Integer, String>();
+		Map<Integer, ChebiVertex> vertexmap = new HashMap<Integer, ChebiVertex>();
 		List <String> nodeList = new ArrayList<String>();
-		for (Integer key : vertexmap.keySet()) {
-			String chebiName = vertexmap.get(key).getChebiName();
-			vertexMapWithChebiName.put(key, chebiName);
-			String nodeId = "id :" +"\"" +Integer.toString(key) +"\"";
-			String nodelabel = "label :" +"\"" +chebiName +"\"";			
-			if (colorMap.containsKey(chebiName)) {
-				String color = colorMap.get(chebiName).toString();
+		for (ChebiVertex vertex : chebiGraph.getVertices()) {
+			String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
+			String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
+			if (colorMap.containsKey(vertex.getChebiName())) {
+				String color = colorMap.get(vertex.getChebiName()).toString();
 				String nodeColor = "color :" +"\"" +color +"\"";
-				nodeList.add("{ " +nodeId +" , " +nodelabel +" , " +nodeColor +" }"); 
+				nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" }"); 
 			}
-			else nodeList.add("{ " +nodeId +" , " +nodelabel +" }"); 
+			else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }"); 
 		}
-		
+
+		//NODES - Older version which requires getVertexMap and getLayout methods in ChebiGraph 
+		//		Map<Integer, ChebiVertex> vertexmap = chebiGraph.getVertexMap();
+		//		List <String> nodeList = new ArrayList<String>();
+		//		for (Integer key : vertexmap.keySet()) {
+		//			String chebiName = vertexmap.get(key).getChebiName();
+		//			String nodeId = "id :" +"\"" +Integer.toString(key) +"\"";
+		//			String nodeLabel = "label :" +"\"" +chebiName +"\"";			
+		//			if (colorMap.containsKey(chebiName)) {
+		//				String color = colorMap.get(chebiName).toString();
+		//				String nodeColor = "color :" +"\"" +color +"\"";
+		//				nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" }"); 
+		//			}
+		//			else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }"); 
+		//		}
+
 		int outputSize = nodeList.size();
 		request.setAttribute("outputSize", outputSize); //to display on website for testing filter
 
 		//Move 24431=chemical entity element to the top of the list,
 		//because cytoscape web layout sets the first node it receives as the root of the tree.
 		//If it is already in the first position, the list remains unchanged
-		
-//		for(String element : nodeList){
-//			if (element.indexOf("24431")!= -1) {
-//				Collections.swap(nodeList, nodeList.indexOf(element), 0);
-//				break;
-//			}
-//		}
+
+		//		for(String element : nodeList){
+		//			if (element.indexOf("24431")!= -1) {
+		//				Collections.swap(nodeList, nodeList.indexOf(element), 0);
+		//				break;
+		//			}
+		//		}
 
 		//EDGES
 		List <String> edgeList = new ArrayList<String>();
 		//get edges from layout.getGraph instead of chebiGraph.getGraph, because layout.graph has trimmed edges
 		//Solved the problem of multiple parents for nodes
-		Collection<ChebiEdge> edgeset = layoutGraph.getEdges(); 
-		for (ChebiEdge edge : edgeset) {
+		//Collection<ChebiEdge> edgeSet = layoutGraph.getEdges(); 
+
+		Collection<ChebiEdge> edgeSet = chebiGraph.getEdges();
+
+		for (ChebiEdge edge : edgeSet) {
 			//swapped vertices to reverse direction of edges
 			String vertexOne = edge.getId().split("-")[1];
 			String vertexTwo = edge.getId().split("-")[0];

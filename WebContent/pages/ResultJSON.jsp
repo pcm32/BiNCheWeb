@@ -250,7 +250,7 @@
 					},
 					visualStyle : {
 						global : {
-							backgroundColor : "#ffffff",
+							backgroundColor : "#ffffff"
 						},
 						nodes : {
 							shape : "roundrect",
@@ -262,7 +262,7 @@
 							}
 						},
 						edges : {
-							color : "#000000",
+							color : "#000000"
 						}
 					}
 				};
