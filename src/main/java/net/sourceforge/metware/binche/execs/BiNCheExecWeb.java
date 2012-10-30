@@ -61,9 +61,10 @@ public class BiNCheExecWeb {
 
 		LOGGER.log(Level.INFO, "############ Start ############");
 
-		String ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_only.obo";
+		String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
 
-		LOGGER.log(Level.INFO, "Setting default parameters ...");
+
+        LOGGER.log(Level.INFO, "Setting default parameters ...");
 		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
 
 		BiNChe binche = new BiNChe();
@@ -232,8 +233,8 @@ public class BiNCheExecWeb {
 
 		for (ChebiEdge edge : edgeSet) {
 			//swapped vertices to reverse direction of edges
-			String vertexOne = edge.getId().split("-")[1];
-			String vertexTwo = edge.getId().split("-")[0];
+			String vertexOne = edge.getId().split("-")[0];
+			String vertexTwo = edge.getId().split("-")[1];
 			vertexOne = "source : " +"\"" +vertexOne +"\"";
 			vertexTwo = "target : " +"\"" +vertexTwo +"\"";		
 			edgeList.add("{ " +vertexTwo + " , " +vertexOne +" }");
