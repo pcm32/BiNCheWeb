@@ -19,12 +19,14 @@
 package net.sourceforge.metware.binche.execs;
 
 import BiNGO.BingoParameters;
+import BiNGO.ParameterFactory;
 import BiNGO.methods.BingoAlgorithm;
 import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import sun.jkernel.Bundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,24 +101,27 @@ public class BiNCheExecWeb {
 		LOGGER.log(Level.INFO, "############ Start ############");
 
 		//Assign appropriate ontology file depending on target selected by user
-		String ontologyFile = null;		
+//        String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
 
-		String target = request.getParameter("targetType");	
+		String ontologyFile = null;
+
+		String target = request.getParameter("targetType");
 		if (target.equalsIgnoreCase("structure")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_structure_only.obo";
+			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_structure_only.obo").getFile();
 		}
 		else if (target.equalsIgnoreCase("role")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_only.obo";
+			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_role_only.obo.obo").getFile();
 		}
 		else if(target.equalsIgnoreCase("both")) {
-			ontologyFile = "/home/bhavana/workspace/BiNChe_JSP/BiNCheJSP/src/main/resources/data/chebi_role_and_structure.obo";
+			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_role_and_structure.obo.obo").getFile();
 		}
 
 		LOGGER.log(Level.INFO, "Setting default parameters ...");
-		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
+//		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
+        BingoParameters parametersChEBIBin = ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile);
 
-		BiNChe binche = new BiNChe();
-		binche.setParameters(parametersSaddle);
+        BiNChe binche = new BiNChe();
+		binche.setParameters(parametersChEBIBin);
 
 		LOGGER.log(Level.INFO, "Reading input file ...");
 		try {

@@ -45,7 +45,7 @@
 
 <body>
 	<center>
-		<div id="loading" style="display:;">
+		<div id="loading" style="display:none;">
 			<div id="loadingtext">
 				Please wait...<br /> <img
 					src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
@@ -62,16 +62,59 @@
 			<table style="vertical-align: middle">
 				<tr>
 					<td style="padding: 10px"><textarea rows="10" cols="50"
-							name="input"> </textarea></td>
+							name="input">
+                        CHEBI:10101
+                        CHEBI:10102
+                        CHEBI:101161
+                        CHEBI:101335
+                        CHEBI:102265
+                        CHEBI:10283
+                        CHEBI:10319
+                        CHEBI:10334
+                        CHEBI:103784
+                        CHEBI:10432
+                        CHEBI:104381
+                        CHEBI:10577
+                        CHEBI:10615
+                        CHEBI:10702
+                        CHEBI:10782
+                        CHEBI:108133
+                        CHEBI:108141
+                        CHEBI:10983
+                        CHEBI:114833
+                        CHEBI:13719
+                        CHEBI:142589
+                        CHEBI:144308
+                        CHEBI:144365
+                        CHEBI:14498
+                        CHEBI:14597
+                        CHEBI:147265
+                        CHEBI:14885
+                        CHEBI:15035
+                        CHEBI:15036
+                        CHEBI:15040
+                        CHEBI:15347
+                        CHEBI:15349
+                        CHEBI:15355
+                        CHEBI:15375
+                        CHEBI:15382
+                        CHEBI:15383
+                        CHEBI:15388
+                        CHEBI:15389
+                        CHEBI:15450
+                        CHEBI:15451
+                        CHEBI:15475
+                        CHEBI:15481
+                        CHEBI:15483</textarea></td>
 				</tr>
 				<tr>
 					<td style="clear: both; padding: 10px"><br> <b>Select
 							type of analysis </b> <br /> <span> <input type="radio"
 							id="weighted" name="analysisType" value="weighted"
-							checked="checked" onclick="display('weighted');" /> <b>Weighted
+							onclick="display('weighted');" /> <b>Weighted
 								Enrichment Analysis </b>
 					</span> <span> <input type="radio" id="plain" name="analysisType"
-							value="plain" onclick="display('plain');" /> <b>Enrichment
+							value="plain" checked="checked" onclick="display('plain');" /> <b>Plain Enrichment
 								Analysis </b> <br />
 					</span> <br> <span id="weightInfo"
 						style="display: none; padding: 2px"> This method accepts a
