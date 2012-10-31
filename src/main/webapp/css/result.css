@@ -1,0 +1,198 @@
+@CHARSET "UTF-8";
+
+html,body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#cytoweb_container {
+	position: relative;
+	border: 1px solid #cfcfcf;
+}
+
+#cytoscapeweb {
+	height: 90%;
+	vertical-align: middle;
+	padding: 5px;
+	width: 75%;
+	border: 1px #cfcfcf solid;
+}
+
+#save_file {
+	background-color: #666666;
+	visibility: visible;
+	display: block;
+	height: 30px;
+	width: 75%;
+	padding: 5px;
+	color: #fff;
+	border: 1px #cfcfcf solid;
+}
+
+.save_screen {
+	opacity: 0.85;
+	width: 75%;
+	height: 100%;
+	background: #fff;
+	z-index: 10000;
+	overflow: auto;
+	position: absolute;
+	left: 0px;
+	top: 0;
+	display: none;
+	padding: 5px;
+}
+
+.save_screen .back {
+	width: 130px;
+	height: 130px;
+	padding: 5px;
+	display: block;
+	float: left;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.save_screen .back span {
+	position: absolute;
+	padding: 2px;
+	left: 20px;
+	top: 10px;
+}
+
+.save_screen .back .icon {
+	position: absolute;
+	background-image: url("/BhavanasJSPs/images/back.png");
+	width: 120px;
+	height: 120px;
+	top: 30px;
+	padding: 2px;
+	left: 10px;
+}
+
+.save_screen .selections {
+	left: 130px;
+	top: 30px;
+	text-align: center;
+	padding: 5px;
+	position: relative;
+	width: 75%;
+}
+
+.save_screen .selections h3 {
+	padding-top: 0;
+	width: 450px;
+	height: 30px;
+	text-align: center;
+	left: 250px;
+	text-align: center;
+}
+
+.save_screen .selections .data_formats {
+	margin: 0 auto;
+	text-align: center;
+	width: 600px;
+}
+
+.save_screen .selections .image_formats {
+	margin: 0 auto;
+	text-align: center;
+	width: 600px;
+	clear: both;
+}
+
+.save_screen .description {
+	text-align: center;
+	width: 100%;
+}
+
+.save_screen .selection {
+	float: left;
+	position: relative;
+	margin: 1em;
+	padding: 2px;
+	width: 128px;
+	height: 100px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.save_screen .selection label {
+	display: block;
+	cursor: pointer;
+	font-size: medium;
+}
+
+.save_screen .selection span {
+	position: absolute;
+	top: 22px;
+}
+
+.side {
+	position: absolute;
+	overflow: hidden;
+	top: 0px;
+	left: 75.7%;
+	height: 100%;
+	width: 300px;
+	display: block;
+	list-style-type: none;
+	padding: 5px;
+}
+
+.side .side_header {
+	position: absolute;
+	top: 0px;
+	background-color: #666666;
+	visibility: visible;
+	display: block;
+	height: 30px;
+	width: 95%;
+	padding: 5px;
+	color: #fff;
+	border: 1px #cfcfcf solid;
+}
+
+.side #filter {
+	display: block;
+	position: absolute;
+	top: 40px;
+	width: 96%;
+	height: 90%;
+	text-align: center;
+	padding: 5px;
+}
+
+/*--------------CytoscapeWeb-------------*/
+.side #filter .slider_area {
+	clear: both;
+	top: 100px;
+}
+
+#filter .slider {
+	margin: 0 4em;
+}
+
+#filter .slider_min,#filter .slider_max {
+	color: #707070;
+	width: 3.125em;
+	display: block;
+	line-height: 1em;
+	font-size: 0.8em;
+	overflow: hidden;
+}
+
+#filter .slider_min {
+	float: left;
+	text-align: right;
+	padding-right: 1.25em;
+}
+
+#filter .slider_max {
+	float: right;
+	text-align: left;
+	padding-left: 1.25em;
+}
