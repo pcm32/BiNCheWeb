@@ -26,7 +26,6 @@ import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import sun.jkernel.Bundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,12 +45,12 @@ public class BiNCheExecWeb {
 
 	private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
 
-	public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		System.out.println("Starting main method....");
+//	public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
+//
+//		System.out.println("Starting main method....");
 //		BiNCheExecWeb bincheexec = new BiNCheExecWeb();
-		//		bincheexec.generateImage(args, request, response);
-	}
+//				bincheexec.generateImage(args, request, response);
+//	}
 
 	public BiNCheExecWeb() {
 
