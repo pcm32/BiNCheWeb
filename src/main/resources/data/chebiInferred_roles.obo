@@ -1,0 +1,4726 @@
+format-version: 1.2
+date: 09:11:2012 15:37
+saved-by: tudose
+auto-generated-by: The OWL API (version 3.4.1.2018)
+id_space: rdfs http://www.w3.org/2000/01/rdf-schema#
+id_space: obo http://purl.obolibrary.org/obo/
+id_space: owl http://www.w3.org/2002/07/owl#
+id_space: rdf http://www.w3.org/1999/02/22-rdf-syntax-ns#
+id_space: ontology1352475430817 urn:defaultOBONamespace:ontology1352475430817#
+id_space: xsd http://www.w3.org/2001/XMLSchema#
+
+
+! ----------------------  CLASSES  -------------------------
+
+[Term]
+id: CHEBI:13193
+name: hydrogen acceptor
+namespace: obo
+is_a: CHEBI:17654
+
+[Term]
+id: CHEBI:15022
+name: electron donor
+namespace: obo
+is_a: CHEBI:17891
+
+[Term]
+id: CHEBI:15339
+name: acceptor
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:17499
+name: hydrogen donor
+namespace: obo
+is_a: CHEBI:15022
+
+[Term]
+id: CHEBI:17654
+name: electron acceptor
+namespace: obo
+is_a: CHEBI:15339
+
+[Term]
+id: CHEBI:17891
+name: donor
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:20569
+name: 5-enolpyruvylshikimate-3-phosphate synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:20854
+name: ATP synthase inhibitor
+namespace: obo
+is_a: CHEBI:25355
+
+[Term]
+id: CHEBI:21241
+name: vitamin C
+namespace: obo
+is_a: CHEBI:27314
+
+[Term]
+id: CHEBI:22153
+name: acaricide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:22180
+name: acetohydroxyacid synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+is_a: CHEBI:24527
+
+[Term]
+id: CHEBI:22309
+name: alicyclic antibiotics
+namespace: obo
+is_a: CHEBI:22582
+
+[Term]
+id: CHEBI:22311
+name: aliphatic antibiotics
+namespace: obo
+is_a: CHEBI:22582
+
+[Term]
+id: CHEBI:22333
+name: alkylating agent
+namespace: obo
+is_a: CHEBI:25435
+
+[Term]
+id: CHEBI:22368
+name: alpha-1-microglobulin-Ig alpha complex chromophores
+namespace: obo
+is_a: CHEBI:23240
+
+[Term]
+id: CHEBI:22476
+name: amino acid derivative antibiotics
+namespace: obo
+is_a: CHEBI:22582
+
+[Term]
+id: CHEBI:22581
+name: antiauxins
+namespace: obo
+is_a: CHEBI:26155
+
+[Term]
+id: CHEBI:22582
+name: antibiotic
+namespace: obo
+is_a: CHEBI:27026
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:22583
+name: antifeedant
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:22586
+name: antioxidant
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:22587
+name: antiviral agent
+namespace: obo
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:22676
+name: auxin
+namespace: obo
+is_a: CHEBI:26155
+
+[Term]
+id: CHEBI:22695
+name: base
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:22917
+name: phytogenic insecticide
+namespace: obo
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:22986
+name: calcium ionophore
+namespace: obo
+is_a: CHEBI:24869
+
+[Term]
+id: CHEBI:23018
+name: carbonic anhydrase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:23092
+name: chemosterilant
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:23100
+name: chitin synthesis inhibitor
+namespace: obo
+is_a: CHEBI:24851
+
+[Term]
+id: CHEBI:23240
+name: chromophore
+namespace: obo
+is_a: CHEBI:52215
+
+[Term]
+id: CHEBI:23354
+name: coenzyme
+namespace: obo
+is_a: CHEBI:23357
+
+[Term]
+id: CHEBI:23357
+name: cofactor
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:23366
+name: compatible osmolytes
+namespace: obo
+is_a: CHEBI:25728
+
+[Term]
+id: CHEBI:23529
+name: cytochrome-b6f complex inhibitor
+namespace: obo
+is_a: CHEBI:26087
+
+[Term]
+id: CHEBI:23530
+name: cytokinin
+namespace: obo
+is_a: CHEBI:37848
+
+[Term]
+id: CHEBI:23582
+name: defoliant
+namespace: obo
+is_a: CHEBI:24527
+
+[Term]
+id: CHEBI:23888
+name: drug
+namespace: obo
+is_a: CHEBI:52217
+
+[Term]
+id: CHEBI:23891
+name: ecdysone antagonists
+namespace: obo
+is_a: CHEBI:24851
+
+[Term]
+id: CHEBI:23924
+name: enzyme inhibitor
+namespace: obo
+is_a: CHEBI:35222
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:24002
+name: ethylene releasers
+namespace: obo
+is_a: CHEBI:26155
+
+[Term]
+id: CHEBI:24020
+name: fat-soluble vitamin
+namespace: obo
+is_a: CHEBI:33229
+
+[Term]
+id: CHEBI:24028
+name: iron(3+) chelator
+namespace: obo
+is_a: CHEBI:38157
+
+[Term]
+id: CHEBI:24127
+name: fungicide
+namespace: obo
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:24319
+name: glutamine synthetase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:24430
+name: group transfer coenzymes
+namespace: obo
+is_a: CHEBI:23354
+
+[Term]
+id: CHEBI:24432
+name: biological role
+namespace: obo
+is_a: CHEBI:50906
+
+[Term]
+id: CHEBI:24527
+name: herbicide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:24621
+name: hormone
+namespace: obo
+is_a: CHEBI:33280
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:24850
+name: insect attractant
+namespace: obo
+is_a: CHEBI:26645
+
+[Term]
+id: CHEBI:24851
+name: insect growth regulator
+namespace: obo
+is_a: CHEBI:39317
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:24852
+name: insecticide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:24853
+name: intercalator
+namespace: obo
+is_a: CHEBI:25435
+
+[Term]
+id: CHEBI:24869
+name: ionophore
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:24874
+name: iron ionophore
+namespace: obo
+is_a: CHEBI:24869
+
+[Term]
+id: CHEBI:24937
+name: jasmonates
+namespace: obo
+is_a: CHEBI:37848
+
+[Term]
+id: CHEBI:24941
+name: juvenile hormone antagonists
+namespace: obo
+is_a: CHEBI:24851
+
+[Term]
+id: CHEBI:24942
+name: juvenile hormone mimic
+namespace: obo
+is_a: CHEBI:24851
+
+[Term]
+id: CHEBI:25078
+name: luciferin
+namespace: obo
+is_a: CHEBI:52216
+
+[Term]
+id: CHEBI:25212
+name: metabolite
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:25355
+name: mitochondrial respiratory-chain inhibitor
+namespace: obo
+is_a: CHEBI:38497
+
+[Term]
+id: CHEBI:25435
+name: mutagen
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:25442
+name: mycotoxin
+namespace: obo
+is_a: CHEBI:27026
+
+[Term]
+id: CHEBI:25491
+name: nematicide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:25512
+name: neurotransmitter
+namespace: obo
+is_a: CHEBI:33280
+
+[Term]
+id: CHEBI:25573
+name: nodulation factor
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:25605
+name: nucleoside antibiotic
+namespace: obo
+is_a: CHEBI:22582
+
+[Term]
+id: CHEBI:25728
+name: osmolyte
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:25747
+name: oxidized luciferins
+namespace: obo
+is_a: CHEBI:25078
+
+[Term]
+id: CHEBI:25943
+name: pesticide synergist
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:25944
+name: pesticide
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:26013
+name: pheromone
+namespace: obo
+is_a: CHEBI:26645
+
+[Term]
+id: CHEBI:26083
+name: phosphorus containing antibiotics
+namespace: obo
+is_a: CHEBI:22311
+
+[Term]
+id: CHEBI:26087
+name: photosynthetic electron-transport chain inhibitor
+namespace: obo
+is_a: CHEBI:38496
+is_a: CHEBI:24527
+
+[Term]
+id: CHEBI:26088
+name: photosystem-I inhibitor
+namespace: obo
+is_a: CHEBI:26087
+
+[Term]
+id: CHEBI:26089
+name: photosystem-II inhibitor
+namespace: obo
+is_a: CHEBI:26087
+
+[Term]
+id: CHEBI:26115
+name: phytoalexin
+namespace: obo
+is_a: CHEBI:38231
+
+[Term]
+id: CHEBI:26130
+name: biological pigment
+namespace: obo
+is_a: CHEBI:52208
+
+[Term]
+id: CHEBI:26155
+name: plant growth regulator
+namespace: obo
+is_a: CHEBI:39317
+
+[Term]
+id: CHEBI:26157
+name: plant growth stimulator
+namespace: obo
+is_a: CHEBI:26155
+
+[Term]
+id: CHEBI:26220
+name: precocenes
+namespace: obo
+is_a: CHEBI:24941
+
+[Term]
+id: CHEBI:26348
+name: prosthetic group
+namespace: obo
+is_a: CHEBI:23357
+
+[Term]
+id: CHEBI:26413
+name: pyrethroid insecticide
+namespace: obo
+is_a: CHEBI:39000
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:26619
+name: secondary metabolite
+namespace: obo
+is_a: CHEBI:25212
+
+[Term]
+id: CHEBI:26645
+name: semiochemical
+namespace: obo
+is_a: CHEBI:33280
+
+[Term]
+id: CHEBI:26671
+name: sideramine
+namespace: obo
+is_a: CHEBI:26672
+
+[Term]
+id: CHEBI:26672
+name: siderophore
+namespace: obo
+is_a: CHEBI:24874
+is_a: CHEBI:24028
+
+[Term]
+id: CHEBI:26841
+name: synthetic auxin
+namespace: obo
+is_a: CHEBI:35703
+is_a: CHEBI:22676
+
+[Term]
+id: CHEBI:26842
+name: systemic acquired resistance inducing compounds
+namespace: obo
+is_a: CHEBI:35703
+
+[Term]
+id: CHEBI:27026
+name: toxin
+namespace: obo
+is_a: CHEBI:26619
+is_a: CHEBI:64909
+
+[Term]
+id: CHEBI:27027
+name: micronutrient
+namespace: obo
+is_a: CHEBI:33284
+
+[Term]
+id: CHEBI:27090
+name: triaziquone
+namespace: obo
+is_a: CHEBI:25435
+
+[Term]
+id: CHEBI:27311
+name: volatile oil component
+namespace: obo
+is_a: CHEBI:26619
+
+[Term]
+id: CHEBI:27314
+name: water-soluble vitamin
+namespace: obo
+is_a: CHEBI:33229
+
+[Term]
+id: CHEBI:27334
+name: xenobiotic organic ethers
+namespace: obo
+is_a: CHEBI:35703
+
+[Term]
+id: CHEBI:27780
+name: detergent
+namespace: obo
+is_a: CHEBI:33232
+is_a: CHEBI:35195
+
+[Term]
+id: CHEBI:33229
+name: vitamin
+namespace: obo
+is_a: CHEBI:52211
+
+[Term]
+id: CHEBI:33231
+name: antitubercular drug
+namespace: obo
+is_a: CHEBI:64912
+
+[Term]
+id: CHEBI:33232
+name: application
+namespace: obo
+is_a: CHEBI:50906
+
+[Term]
+id: CHEBI:33280
+name: molecular messenger
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:33281
+name: antimicrobial agent
+namespace: obo
+is_a: CHEBI:24432
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:33282
+name: antibacterial agent
+namespace: obo
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:33284
+name: nutrient
+namespace: obo
+is_a: CHEBI:52211
+
+[Term]
+id: CHEBI:33286
+name: agrochemical
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:33287
+name: fertilizer
+namespace: obo
+is_a: CHEBI:33286
+
+[Term]
+id: CHEBI:33288
+name: rodenticide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:33289
+name: avicide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:33290
+name: food
+namespace: obo
+is_a: CHEBI:52211
+
+[Term]
+id: CHEBI:33292
+name: fuel
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:33295
+name: diagnostic agent
+namespace: obo
+is_a: CHEBI:52217
+
+[Term]
+id: CHEBI:33893
+name: reagent
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:33904
+name: molluscicide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:33937
+name: macronutrient
+namespace: obo
+is_a: CHEBI:33284
+
+[Term]
+id: CHEBI:35195
+name: surfactant
+namespace: obo
+is_a: CHEBI:63046
+
+[Term]
+id: CHEBI:35197
+name: lumiphore
+namespace: obo
+is_a: CHEBI:52215
+
+[Term]
+id: CHEBI:35204
+name: tracer
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:35205
+name: chemical tracer
+namespace: obo
+is_a: CHEBI:35204
+
+[Term]
+id: CHEBI:35206
+name: isotopic tracer
+namespace: obo
+is_a: CHEBI:35204
+
+[Term]
+id: CHEBI:35207
+name: radioactive tracer
+namespace: obo
+is_a: CHEBI:35204
+
+[Term]
+id: CHEBI:35208
+name: physical tracer
+namespace: obo
+is_a: CHEBI:35204
+
+[Term]
+id: CHEBI:35209
+name: label
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:35210
+name: spin label
+namespace: obo
+is_a: CHEBI:35209
+
+[Term]
+id: CHEBI:35211
+name: radioactive label
+namespace: obo
+is_a: CHEBI:35209
+
+[Term]
+id: CHEBI:35219
+name: plant growth retardant
+namespace: obo
+is_a: CHEBI:26155
+
+[Term]
+id: CHEBI:35220
+name: primary metabolite
+namespace: obo
+is_a: CHEBI:25212
+
+[Term]
+id: CHEBI:35221
+name: antimetabolite
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:35222
+name: inhibitor
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:35223
+name: catalyst
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:35224
+name: effector
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:35225
+name: buffer
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:35226
+name: spin probe
+namespace: obo
+is_a: CHEBI:50406
+
+[Term]
+id: CHEBI:35230
+name: fossil fuel
+namespace: obo
+is_a: CHEBI:33292
+
+[Term]
+id: CHEBI:35231
+name: nuclear fuel
+namespace: obo
+is_a: CHEBI:33292
+
+[Term]
+id: CHEBI:35232
+name: radiopharmaceutical
+namespace: obo
+is_a: CHEBI:52217
+
+[Term]
+id: CHEBI:35337
+name: central nervous system stimulant
+namespace: obo
+is_a: CHEBI:35470
+
+[Term]
+id: CHEBI:35441
+name: antiinfective drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35442
+name: antiparasitic drug
+namespace: obo
+is_a: CHEBI:35441
+
+[Term]
+id: CHEBI:35443
+name: anthelminthic drug
+namespace: obo
+is_a: CHEBI:35442
+
+[Term]
+id: CHEBI:35444
+name: antinematodal drug
+namespace: obo
+is_a: CHEBI:35443
+is_a: CHEBI:25491
+
+[Term]
+id: CHEBI:35457
+name: angiotensin-converting enzyme inhibitor
+namespace: obo
+is_a: CHEBI:23924
+is_a: CHEBI:35674
+
+[Term]
+id: CHEBI:35469
+name: antidepressant
+namespace: obo
+is_a: CHEBI:35471
+
+[Term]
+id: CHEBI:35470
+name: central nervous system drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35471
+name: psychotropic drug
+namespace: obo
+is_a: CHEBI:35470
+
+[Term]
+id: CHEBI:35472
+name: anti-inflammatory drug
+namespace: obo
+is_a: CHEBI:23888
+is_a: CHEBI:67079
+
+[Term]
+id: CHEBI:35473
+name: tranquilizing drug
+namespace: obo
+is_a: CHEBI:35471
+is_a: CHEBI:35488
+
+[Term]
+id: CHEBI:35474
+name: anxiolytic drug
+namespace: obo
+is_a: CHEBI:35473
+
+[Term]
+id: CHEBI:35475
+name: non-steroidal anti-inflammatory drug
+namespace: obo
+is_a: CHEBI:35842
+is_a: CHEBI:35472
+
+[Term]
+id: CHEBI:35476
+name: antipsychotic agent
+namespace: obo
+is_a: CHEBI:35473
+
+[Term]
+id: CHEBI:35477
+name: antimanic drug
+namespace: obo
+is_a: CHEBI:35473
+
+[Term]
+id: CHEBI:35480
+name: analgesic
+namespace: obo
+is_a: CHEBI:23888
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:35481
+name: non-narcotic analgesic
+namespace: obo
+is_a: CHEBI:35480
+
+[Term]
+id: CHEBI:35482
+name: opioid analgesic
+namespace: obo
+is_a: CHEBI:35480
+
+[Term]
+id: CHEBI:35487
+name: aldehyde dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35488
+name: central nervous system depressant
+namespace: obo
+is_a: CHEBI:35470
+
+[Term]
+id: CHEBI:35493
+name: antipyretic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35497
+name: androgen antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:35498
+name: diuretic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35499
+name: hallucinogen
+namespace: obo
+is_a: CHEBI:35471
+
+[Term]
+id: CHEBI:35522
+name: beta-adrenergic agonist
+namespace: obo
+is_a: CHEBI:48540
+is_a: CHEBI:37886
+
+[Term]
+id: CHEBI:35523
+name: bronchodilator agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35524
+name: sympathomimetic agent
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:35526
+name: hypoglycemic drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35530
+name: beta-adrenergic antagonist
+namespace: obo
+is_a: CHEBI:48540
+is_a: CHEBI:37887
+
+[Term]
+id: CHEBI:35544
+name: cyclooxygenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35554
+name: cardiovascular drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35569
+name: alpha-adrenergic agonist
+namespace: obo
+is_a: CHEBI:48539
+is_a: CHEBI:37886
+
+[Term]
+id: CHEBI:35608
+name: protein tyrosine phosphatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35610
+name: antineoplastic agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35617
+name: flavouring agent
+namespace: obo
+is_a: CHEBI:64047
+
+[Term]
+id: CHEBI:35620
+name: vasodilator agent
+namespace: obo
+is_a: CHEBI:35554
+
+[Term]
+id: CHEBI:35623
+name: anticonvulsant
+namespace: obo
+is_a: CHEBI:35488
+
+[Term]
+id: CHEBI:35625
+name: beta-lactamase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35634
+name: xanthine oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35640
+name: adrenergic uptake inhibitor
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:35660
+name: HIV protease inhibitor
+namespace: obo
+is_a: CHEBI:37670
+is_a: CHEBI:64946
+
+[Term]
+id: CHEBI:35664
+name: hydroxymethylglutaryl-CoA reductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+is_a: CHEBI:35821
+
+[Term]
+id: CHEBI:35674
+name: antihypertensive agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35678
+name: histamine agonist
+namespace: obo
+is_a: CHEBI:37957
+
+[Term]
+id: CHEBI:35679
+name: antilipemic drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35684
+name: antiplatyhelmintic drug
+namespace: obo
+is_a: CHEBI:35443
+
+[Term]
+id: CHEBI:35703
+name: xenobiotic
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:35705
+name: immunosuppressive agent
+namespace: obo
+is_a: CHEBI:50846
+
+[Term]
+id: CHEBI:35717
+name: sedative
+namespace: obo
+is_a: CHEBI:35488
+
+[Term]
+id: CHEBI:35718
+name: antifungal agent
+namespace: obo
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:35816
+name: leprostatic drug
+namespace: obo
+is_a: CHEBI:64912
+
+[Term]
+id: CHEBI:35818
+name: coccidiostat
+namespace: obo
+is_a: CHEBI:35820
+
+[Term]
+id: CHEBI:35820
+name: antiprotozoal drug
+namespace: obo
+is_a: CHEBI:35442
+
+[Term]
+id: CHEBI:35821
+name: anticholesteremic drug
+namespace: obo
+is_a: CHEBI:35679
+
+[Term]
+id: CHEBI:35841
+name: uricosuric drug
+namespace: obo
+is_a: CHEBI:35846
+is_a: CHEBI:35845
+
+[Term]
+id: CHEBI:35842
+name: antirheumatic drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35845
+name: gout suppressant
+namespace: obo
+is_a: CHEBI:35842
+
+[Term]
+id: CHEBI:35846
+name: renal agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:35856
+name: lipoxygenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:35941
+name: serotonergic agonist
+namespace: obo
+is_a: CHEBI:48278
+
+[Term]
+id: CHEBI:35942
+name: neurotransmitter agent
+namespace: obo
+is_a: CHEBI:23888
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:36043
+name: antimicrobial drug
+namespace: obo
+is_a: CHEBI:35441
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:36044
+name: antiviral drug
+namespace: obo
+is_a: CHEBI:36043
+is_a: CHEBI:22587
+
+[Term]
+id: CHEBI:36047
+name: antibacterial drug
+namespace: obo
+is_a: CHEBI:36043
+is_a: CHEBI:33282
+
+[Term]
+id: CHEBI:36050
+name: antitreponemal drug
+namespace: obo
+is_a: CHEBI:36047
+
+[Term]
+id: CHEBI:36051
+name: antisyphilitic drug
+namespace: obo
+is_a: CHEBI:36050
+
+[Term]
+id: CHEBI:36053
+name: acaricide drug
+namespace: obo
+is_a: CHEBI:35442
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:36063
+name: oxytocic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:36333
+name: local anaesthetic
+namespace: obo
+is_a: CHEBI:38867
+
+[Term]
+id: CHEBI:36335
+name: trypanocidal drug
+namespace: obo
+is_a: CHEBI:35820
+
+[Term]
+id: CHEBI:36413
+name: anabolic agent
+namespace: obo
+is_a: CHEBI:24621
+
+[Term]
+id: CHEBI:36710
+name: interferon inducer
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:37153
+name: protein serine/threonine phosphatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:37334
+name: diagnostic imaging agent
+namespace: obo
+is_a: CHEBI:33295
+
+[Term]
+id: CHEBI:37335
+name: MRI contrast agent
+namespace: obo
+is_a: CHEBI:37334
+
+[Term]
+id: CHEBI:37336
+name: radioactive imaging agent
+namespace: obo
+is_a: CHEBI:37334
+
+[Term]
+id: CHEBI:37337
+name: ultrasound contrast agent
+namespace: obo
+is_a: CHEBI:37334
+
+[Term]
+id: CHEBI:37338
+name: radioopaque medium
+namespace: obo
+is_a: CHEBI:37334
+
+[Term]
+id: CHEBI:37416
+name: RNA polymerase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:37527
+name: acid
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:37670
+name: protease inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:37699
+name: protein kinase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:37700
+name: protein kinase C inhibitor
+namespace: obo
+is_a: CHEBI:37699
+
+[Term]
+id: CHEBI:37733
+name: cholinesterase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:37845
+name: growth hormone
+namespace: obo
+is_a: CHEBI:24621
+
+[Term]
+id: CHEBI:37848
+name: phytohormone
+namespace: obo
+is_a: CHEBI:26155
+is_a: CHEBI:24621
+
+[Term]
+id: CHEBI:37886
+name: adrenergic agonist
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:37887
+name: adrenergic antagonist
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:37890
+name: alpha-adrenergic antagonist
+namespace: obo
+is_a: CHEBI:48539
+is_a: CHEBI:37887
+
+[Term]
+id: CHEBI:37930
+name: phenothiazine antipsychotic drug
+namespace: obo
+is_a: CHEBI:65190
+
+[Term]
+id: CHEBI:37955
+name: H1-receptor antagonist
+namespace: obo
+is_a: CHEBI:37956
+
+[Term]
+id: CHEBI:37956
+name: histamine antagonist
+namespace: obo
+is_a: CHEBI:37957
+
+[Term]
+id: CHEBI:37957
+name: histaminergic drug
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:37958
+name: dye
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:37961
+name: H2-receptor antagonist
+namespace: obo
+is_a: CHEBI:37956
+
+[Term]
+id: CHEBI:37962
+name: adrenergic agent
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:38060
+name: triazine insecticide
+namespace: obo
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:38068
+name: antimalarial
+namespace: obo
+is_a: CHEBI:64915
+is_a: CHEBI:35820
+
+[Term]
+id: CHEBI:38070
+name: anti-arrhythmia drug
+namespace: obo
+is_a: CHEBI:35554
+
+[Term]
+id: CHEBI:38147
+name: cardiotonic drug
+namespace: obo
+is_a: CHEBI:35554
+
+[Term]
+id: CHEBI:38155
+name: phytosiderophore
+namespace: obo
+is_a: CHEBI:24874
+is_a: CHEBI:24028
+
+[Term]
+id: CHEBI:38157
+name: iron chelator
+namespace: obo
+is_a: CHEBI:38161
+
+[Term]
+id: CHEBI:38161
+name: chelator
+namespace: obo
+is_a: CHEBI:52214
+
+[Term]
+id: CHEBI:38162
+name: iron(2+) chelator
+namespace: obo
+is_a: CHEBI:38157
+
+[Term]
+id: CHEBI:38215
+name: calcium channel blocker
+namespace: obo
+is_a: CHEBI:38808
+
+[Term]
+id: CHEBI:38231
+name: phytotoxin
+namespace: obo
+is_a: CHEBI:27026
+
+[Term]
+id: CHEBI:38234
+name: DNA polymerase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:38317
+name: HPPD inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:38323
+name: cholinergic drug
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:38324
+name: cholinergic agonist
+namespace: obo
+is_a: CHEBI:38323
+
+[Term]
+id: CHEBI:38325
+name: muscarinic agonist
+namespace: obo
+is_a: CHEBI:38324
+
+[Term]
+id: CHEBI:38456
+name: ecdysone agonist
+namespace: obo
+is_a: CHEBI:24851
+
+[Term]
+id: CHEBI:38461
+name: carbamate insecticide
+namespace: obo
+is_a: CHEBI:38462
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:38462
+name: acetylcholinesterase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:38496
+name: electron-transport chain inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:38497
+name: respiratory-chain inhibitor
+namespace: obo
+is_a: CHEBI:38496
+
+[Term]
+id: CHEBI:38498
+name: mitochondrial NADH:ubiquinone reductase inhibitor
+namespace: obo
+is_a: CHEBI:38503
+is_a: CHEBI:25355
+
+[Term]
+id: CHEBI:38499
+name: mitochondrial cytochrome-bc1 complex inhibitor
+namespace: obo
+is_a: CHEBI:38502
+is_a: CHEBI:25355
+
+[Term]
+id: CHEBI:38500
+name: mitochondrial cytochrome-c oxidase inhibitor
+namespace: obo
+is_a: CHEBI:38501
+is_a: CHEBI:25355
+
+[Term]
+id: CHEBI:38501
+name: cytochrome-c oxidase inhibitor
+namespace: obo
+is_a: CHEBI:38497
+
+[Term]
+id: CHEBI:38502
+name: cytochrome-bc1 complex inhibitor
+namespace: obo
+is_a: CHEBI:38497
+
+[Term]
+id: CHEBI:38503
+name: NADH:ubiquinone reductase inhibitor
+namespace: obo
+is_a: CHEBI:38497
+
+[Term]
+id: CHEBI:38577
+name: triazole insecticide
+namespace: obo
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:38623
+name: monoamine oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:38632
+name: membrane transport modulator
+namespace: obo
+is_a: CHEBI:52208
+
+[Term]
+id: CHEBI:38633
+name: sodium channel blocker
+namespace: obo
+is_a: CHEBI:39000
+
+[Term]
+id: CHEBI:38634
+name: voltage-gated sodium channel blocker
+namespace: obo
+is_a: CHEBI:38633
+
+[Term]
+id: CHEBI:38637
+name: tyrosine kinase inhibitor
+namespace: obo
+is_a: CHEBI:37699
+
+[Term]
+id: CHEBI:38706
+name: pediculicide
+namespace: obo
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:38807
+name: calcium channel agonist
+namespace: obo
+is_a: CHEBI:38808
+
+[Term]
+id: CHEBI:38808
+name: calcium channel modulator
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:38809
+name: ryanodine receptor modulator
+namespace: obo
+is_a: CHEBI:38808
+
+[Term]
+id: CHEBI:38828
+name: nonionic surfactant
+namespace: obo
+is_a: CHEBI:35195
+
+[Term]
+id: CHEBI:38849
+name: blood substitute
+namespace: obo
+is_a: CHEBI:52217
+
+[Term]
+id: CHEBI:38867
+name: anaesthetic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:38869
+name: general anaesthetic
+namespace: obo
+is_a: CHEBI:38867
+
+[Term]
+id: CHEBI:38870
+name: inhalation anaesthetic
+namespace: obo
+is_a: CHEBI:38869
+
+[Term]
+id: CHEBI:38877
+name: intravenous anaesthetic
+namespace: obo
+is_a: CHEBI:38869
+
+[Term]
+id: CHEBI:38941
+name: schistosomicide drug
+namespace: obo
+is_a: CHEBI:35684
+
+[Term]
+id: CHEBI:38956
+name: ectoparasiticide
+namespace: obo
+is_a: CHEBI:35442
+
+[Term]
+id: CHEBI:38999
+name: GABA-gated chloride channel antagonist
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:39000
+name: sodium channel modulator
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:39011
+name: Good's buffer substance
+namespace: obo
+is_a: CHEBI:35225
+
+[Term]
+id: CHEBI:39116
+name: pyrethroid ester insecticide
+namespace: obo
+is_a: CHEBI:26413
+
+[Term]
+id: CHEBI:39141
+name: Bronsted acid
+namespace: obo
+is_a: CHEBI:37527
+is_a: CHEBI:17891
+
+[Term]
+id: CHEBI:39142
+name: Bronsted base
+namespace: obo
+is_a: CHEBI:15339
+is_a: CHEBI:22695
+
+[Term]
+id: CHEBI:39143
+name: Lewis acid
+namespace: obo
+is_a: CHEBI:37527
+is_a: CHEBI:15339
+
+[Term]
+id: CHEBI:39144
+name: Lewis base
+namespace: obo
+is_a: CHEBI:17891
+is_a: CHEBI:22695
+
+[Term]
+id: CHEBI:39208
+name: antibiotic insecticide
+namespace: obo
+is_a: CHEBI:39215
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:39215
+name: antibiotic pesticide
+namespace: obo
+is_a: CHEBI:25944
+is_a: CHEBI:22582
+
+[Term]
+id: CHEBI:39216
+name: antibiotic acaricide
+namespace: obo
+is_a: CHEBI:39215
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39217
+name: antibiotic nematicide
+namespace: obo
+is_a: CHEBI:39215
+is_a: CHEBI:25491
+
+[Term]
+id: CHEBI:39259
+name: pyrethroid ester acaricide
+namespace: obo
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39276
+name: fumigant
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:39277
+name: fumigant insecticide
+namespace: obo
+is_a: CHEBI:39276
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:39301
+name: sulfite ester acaricide
+namespace: obo
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39316
+name: mite growth regulator
+namespace: obo
+is_a: CHEBI:39317
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39317
+name: growth regulator
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:39318
+name: tetrazine acaricide
+namespace: obo
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39351
+name: pyrethroid ether insecticide
+namespace: obo
+is_a: CHEBI:26413
+
+[Term]
+id: CHEBI:39369
+name: pyrethroid ether acaricide
+namespace: obo
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39378
+name: homopteran inhibitor of chitin biosynthesis
+namespace: obo
+is_a: CHEBI:23100
+
+[Term]
+id: CHEBI:39379
+name: lepidopteran inhibitor of chitin biosynthesis
+namespace: obo
+is_a: CHEBI:23100
+
+[Term]
+id: CHEBI:39412
+name: bridged diphenyl acaricide
+namespace: obo
+is_a: CHEBI:22153
+
+[Term]
+id: CHEBI:39415
+name: dinitrophenol insecticide
+namespace: obo
+is_a: CHEBI:24852
+
+[Term]
+id: CHEBI:39442
+name: fluorescent probe
+namespace: obo
+is_a: CHEBI:50406
+
+[Term]
+id: CHEBI:39456
+name: antiglaucoma drug
+namespace: obo
+is_a: CHEBI:66981
+
+[Term]
+id: CHEBI:46787
+name: solvent
+namespace: obo
+is_a: CHEBI:33232
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:47867
+name: indicator
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:47868
+name: photosensitizing agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:47958
+name: nicotinic agonist
+namespace: obo
+is_a: CHEBI:38324
+
+[Term]
+id: CHEBI:48001
+name: protein synthesis inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:48218
+name: antiseptic drug
+namespace: obo
+is_a: CHEBI:35441
+
+[Term]
+id: CHEBI:48219
+name: disinfectant
+namespace: obo
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:48278
+name: serotonergic drug
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:48279
+name: serotonergic antagonist
+namespace: obo
+is_a: CHEBI:48278
+
+[Term]
+id: CHEBI:48318
+name: fragrance
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:48353
+name: serine proteinase inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:48354
+name: polar solvent
+namespace: obo
+is_a: CHEBI:46787
+
+[Term]
+id: CHEBI:48355
+name: non-polar solvent
+namespace: obo
+is_a: CHEBI:46787
+
+[Term]
+id: CHEBI:48356
+name: protic solvent
+namespace: obo
+is_a: CHEBI:48354
+is_a: CHEBI:39141
+
+[Term]
+id: CHEBI:48357
+name: aprotic solvent
+namespace: obo
+is_a: CHEBI:46787
+
+[Term]
+id: CHEBI:48358
+name: polar aprotic solvent
+namespace: obo
+is_a: CHEBI:48354
+is_a: CHEBI:48357
+
+[Term]
+id: CHEBI:48359
+name: protophilic solvent
+namespace: obo
+is_a: CHEBI:48354
+is_a: CHEBI:39142
+
+[Term]
+id: CHEBI:48360
+name: amphiprotic solvent
+namespace: obo
+is_a: CHEBI:48356
+is_a: CHEBI:48359
+
+[Term]
+id: CHEBI:48406
+name: catechol O-methyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:48407
+name: antiparkinson drug
+namespace: obo
+is_a: CHEBI:66956
+
+[Term]
+id: CHEBI:48422
+name: angiogenesis inhibitor
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:48425
+name: topical anaesthetic
+namespace: obo
+is_a: CHEBI:36333
+
+[Term]
+id: CHEBI:48525
+name: calcimimetic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:48539
+name: alpha-adrenergic drug
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:48540
+name: beta-adrenergic drug
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:48550
+name: aldose reductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:48560
+name: dopaminergic agent
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:48561
+name: dopaminergic antagonist
+namespace: obo
+is_a: CHEBI:48560
+
+[Term]
+id: CHEBI:48578
+name: radical scavenger
+namespace: obo
+is_a: CHEBI:22586
+
+[Term]
+id: CHEBI:48668
+name: gamma secretase modulator
+namespace: obo
+is_a: CHEBI:35224
+
+[Term]
+id: CHEBI:48675
+name: antifibrinolytic drug
+namespace: obo
+is_a: CHEBI:48676
+
+[Term]
+id: CHEBI:48676
+name: fibrin modulating drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:48705
+name: agonist
+namespace: obo
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:48706
+name: antagonist
+namespace: obo
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:48873
+name: cholinergic antagonist
+namespace: obo
+is_a: CHEBI:38323
+
+[Term]
+id: CHEBI:48876
+name: muscarinic antagonist
+namespace: obo
+is_a: CHEBI:48873
+
+[Term]
+id: CHEBI:48878
+name: nicotinic antagonist
+namespace: obo
+is_a: CHEBI:48873
+
+[Term]
+id: CHEBI:48887
+name: bile acid metabolite
+namespace: obo
+is_a: CHEBI:26619
+
+[Term]
+id: CHEBI:49020
+name: hormone antagonist
+namespace: obo
+is_a: CHEBI:48706
+is_a: CHEBI:51061
+
+[Term]
+id: CHEBI:49023
+name: prostaglandin antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:49103
+name: drug metabolite
+namespace: obo
+is_a: CHEBI:25212
+
+[Term]
+id: CHEBI:49110
+name: peripheral nervous system drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:49159
+name: leukotriene antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:49167
+name: anti-asthmatic drug
+namespace: obo
+is_a: CHEBI:23888
+is_a: CHEBI:65023
+
+[Term]
+id: CHEBI:49200
+name: proton pump inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:49201
+name: anti-ulcer drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:49205
+name: CETP inhibitor
+namespace: obo
+is_a: CHEBI:35222
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:49323
+name: contraceptive drug
+namespace: obo
+is_a: CHEBI:50689
+
+[Term]
+id: CHEBI:49324
+name: female contraceptive drug
+namespace: obo
+is_a: CHEBI:49323
+
+[Term]
+id: CHEBI:49325
+name: oral contraceptive
+namespace: obo
+is_a: CHEBI:49324
+
+[Term]
+id: CHEBI:49326
+name: synthetic oral contraceptive
+namespace: obo
+is_a: CHEBI:49325
+
+[Term]
+id: CHEBI:50103
+name: excitatory amino acid agonist
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:50112
+name: sex hormone
+namespace: obo
+is_a: CHEBI:24621
+
+[Term]
+id: CHEBI:50137
+name: mu-opioid receptor antagonist
+namespace: obo
+is_a: CHEBI:60605
+is_a: CHEBI:60599
+
+[Term]
+id: CHEBI:50141
+name: bronchoconstrictor agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50176
+name: keratolytic drug
+namespace: obo
+is_a: CHEBI:50177
+
+[Term]
+id: CHEBI:50177
+name: dermatologic drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50183
+name: P450 inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50184
+name: ion transport inhibitor
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:50185
+name: fatty acid synthesis inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50188
+name: provitamin
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:50218
+name: phosphodiesterase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50241
+name: cholinesterase reactivator
+namespace: obo
+is_a: CHEBI:50242
+
+[Term]
+id: CHEBI:50242
+name: enzyme reactivator
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:50247
+name: antidote
+namespace: obo
+is_a: CHEBI:50267
+
+[Term]
+id: CHEBI:50248
+name: hematologic agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50249
+name: anticoagulant
+namespace: obo
+is_a: CHEBI:50248
+
+[Term]
+id: CHEBI:50266
+name: prodrug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50267
+name: protective agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50268
+name: GABA modulator
+namespace: obo
+is_a: CHEBI:51374
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:50269
+name: alcohol dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50276
+name: topoisomerase I inhibitor
+namespace: obo
+is_a: CHEBI:70727
+
+[Term]
+id: CHEBI:50370
+name: parasympatholytic
+namespace: obo
+is_a: CHEBI:48873
+
+[Term]
+id: CHEBI:50380
+name: 4-hydroxyphenyl-pyruvate dioxygenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50382
+name: glucosylceramide synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50390
+name: NAD(P)H:quinone oxidoreductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50406
+name: probe
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:50407
+name: acid-base indicator
+namespace: obo
+is_a: CHEBI:50410
+
+[Term]
+id: CHEBI:50408
+name: visual indicator
+namespace: obo
+is_a: CHEBI:47867
+
+[Term]
+id: CHEBI:50409
+name: adsorption indicator
+namespace: obo
+is_a: CHEBI:50408
+
+[Term]
+id: CHEBI:50410
+name: colour indicator
+namespace: obo
+is_a: CHEBI:50408
+
+[Term]
+id: CHEBI:50411
+name: one-colour indicator
+namespace: obo
+is_a: CHEBI:50410
+
+[Term]
+id: CHEBI:50412
+name: two-colour indicator
+namespace: obo
+is_a: CHEBI:50410
+
+[Term]
+id: CHEBI:50423
+name: NADPH oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50427
+name: platelet aggregation inhibitor
+namespace: obo
+is_a: CHEBI:50248
+
+[Term]
+id: CHEBI:50433
+name: platelet glycoprotein-IIb/IIIa receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+is_a: CHEBI:50427
+
+[Term]
+id: CHEBI:50444
+name: adenosine phosphodiesterase inhibitor
+namespace: obo
+is_a: CHEBI:50218
+
+[Term]
+id: CHEBI:50445
+name: adenosine deaminase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50469
+name: phospholipase A2 inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50502
+name: dihydropteroate synthetase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50503
+name: laxative
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50504
+name: osmotic diuretic
+namespace: obo
+is_a: CHEBI:35498
+
+[Term]
+id: CHEBI:50505
+name: sweetening agent
+namespace: obo
+is_a: CHEBI:35617
+
+[Term]
+id: CHEBI:50507
+name: appetite depressant
+namespace: obo
+is_a: CHEBI:50780
+
+[Term]
+id: CHEBI:50509
+name: potassium channel blocker
+namespace: obo
+is_a: CHEBI:50510
+
+[Term]
+id: CHEBI:50510
+name: potassium channel modulator
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:50513
+name: mydriatic agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50514
+name: vasoconstrictor agent
+namespace: obo
+is_a: CHEBI:35554
+
+[Term]
+id: CHEBI:50533
+name: protein denaturant
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:50566
+name: nitric oxide donor
+namespace: obo
+is_a: CHEBI:17891
+
+[Term]
+id: CHEBI:50568
+name: phosphodiesterase III inhibitor
+namespace: obo
+is_a: CHEBI:50218
+
+[Term]
+id: CHEBI:50627
+name: alpha-amylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50628
+name: alpha-glucoside hydrolase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50629
+name: cyclooxygenase 2 inhibitor
+namespace: obo
+is_a: CHEBI:35544
+
+[Term]
+id: CHEBI:50630
+name: cyclooxygenase 1 inhibitor
+namespace: obo
+is_a: CHEBI:35544
+
+[Term]
+id: CHEBI:50635
+name: urease inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50643
+name: farnesyl pyrophosphate synthetase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50646
+name: bone density conservation agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50664
+name: matrix metalloproteinase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50671
+name: antithyroid drug
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:50683
+name: dihydrofolate reductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50684
+name: cross-linking reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:50685
+name: antitrichomonal drug
+namespace: obo
+is_a: CHEBI:35820
+
+[Term]
+id: CHEBI:50689
+name: reproductive control drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50691
+name: abortifacient
+namespace: obo
+is_a: CHEBI:50689
+
+[Term]
+id: CHEBI:50696
+name: penicillin binding protein 3 inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50733
+name: nutraceutical
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50739
+name: estrogen receptor modulator
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50741
+name: retinoic acid receptor alpha/beta agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:50745
+name: progestogen
+namespace: obo
+is_a: CHEBI:50112
+
+[Term]
+id: CHEBI:50748
+name: antipsoriatic
+namespace: obo
+is_a: CHEBI:50177
+
+[Term]
+id: CHEBI:50750
+name: topoisomerase II inhibitor
+namespace: obo
+is_a: CHEBI:70727
+
+[Term]
+id: CHEBI:50751
+name: anti-estrogen
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50779
+name: appetite enhancer
+namespace: obo
+is_a: CHEBI:50780
+
+[Term]
+id: CHEBI:50780
+name: appetite regulator
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50781
+name: 5alpha-reductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50788
+name: 3beta-hydroxysteroid dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50790
+name: aromatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50792
+name: estrogen receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50827
+name: antiparathyroid drug
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:50837
+name: estrogen antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:50843
+name: antimineralocorticoid
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:50844
+name: aldosterone antagonist
+namespace: obo
+is_a: CHEBI:50843
+
+[Term]
+id: CHEBI:50846
+name: immunomodulator
+namespace: obo
+is_a: CHEBI:24432
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50847
+name: immunological adjuvant
+namespace: obo
+is_a: CHEBI:60809
+is_a: CHEBI:50846
+
+[Term]
+id: CHEBI:50855
+name: antiatherogenic agent
+namespace: obo
+is_a: CHEBI:35554
+
+[Term]
+id: CHEBI:50857
+name: anti-allergic drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50864
+name: insulin-sensitizing drug
+namespace: obo
+is_a: CHEBI:70781
+is_a: CHEBI:35526
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:50902
+name: genotoxin
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50903
+name: carcinogenic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50904
+name: allergenic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50905
+name: teratogenic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50906
+name: role
+namespace: obo
+
+[Term]
+id: CHEBI:50907
+name: deaminating agent
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:50908
+name: hepatotoxic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50909
+name: nephrotoxic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50910
+name: neurotoxic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50911
+name: neurotoxin
+namespace: obo
+is_a: CHEBI:64909
+
+[Term]
+id: CHEBI:50912
+name: cardiotoxic agent
+namespace: obo
+is_a: CHEBI:52209
+
+[Term]
+id: CHEBI:50913
+name: fixative
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:50914
+name: phosphatidylinositol-3-OH kinase inhibitor
+namespace: obo
+is_a: CHEBI:50916
+
+[Term]
+id: CHEBI:50916
+name: lipid kinase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:50919
+name: antiemetic
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50925
+name: serine/threonine kinase inhibitor
+namespace: obo
+is_a: CHEBI:37699
+
+[Term]
+id: CHEBI:50926
+name: angiogenesis modulating agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:50927
+name: angiogenesis inducing agent
+namespace: obo
+is_a: CHEBI:50926
+
+[Term]
+id: CHEBI:50949
+name: serotonin uptake inhibitor
+namespace: obo
+is_a: CHEBI:48278
+
+[Term]
+id: CHEBI:51039
+name: dopamine uptake inhibitor
+namespace: obo
+is_a: CHEBI:48560
+
+[Term]
+id: CHEBI:51060
+name: hormone agonist
+namespace: obo
+is_a: CHEBI:51061
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:51061
+name: hormone receptor modulator
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:51065
+name: dopamine agonist
+namespace: obo
+is_a: CHEBI:48560
+
+[Term]
+id: CHEBI:51068
+name: miotic
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:51076
+name: antifouling biocide
+namespace: obo
+is_a: CHEBI:25944
+
+[Term]
+id: CHEBI:51086
+name: chemical role
+namespace: obo
+is_a: CHEBI:50906
+
+[Term]
+id: CHEBI:51087
+name: protecting group
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:51121
+name: fluorescent dye
+namespace: obo
+is_a: CHEBI:37958
+
+[Term]
+id: CHEBI:51166
+name: Wittig reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:51177
+name: antitussive
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:51217
+name: fluorochrome
+namespace: obo
+is_a: CHEBI:51121
+
+[Term]
+id: CHEBI:51237
+name: Grignard reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:51266
+name: gelator
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:51267
+name: swelling agent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:51268
+name: drying control chemical additive
+namespace: obo
+is_a: CHEBI:46787
+
+[Term]
+id: CHEBI:51371
+name: muscle relaxant
+namespace: obo
+is_a: CHEBI:51372
+
+[Term]
+id: CHEBI:51372
+name: neuromuscular agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:51373
+name: GABA agonist
+namespace: obo
+is_a: CHEBI:51374
+
+[Term]
+id: CHEBI:51374
+name: GABA agent
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:51451
+name: endothelin receptor antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:51452
+name: endothelin A receptor antagonist
+namespace: obo
+is_a: CHEBI:51451
+
+[Term]
+id: CHEBI:51577
+name: partial prostacyclin agonist
+namespace: obo
+is_a: CHEBI:50427
+is_a: CHEBI:35620
+
+[Term]
+id: CHEBI:52206
+name: biochemical role
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52208
+name: biophysical role
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52209
+name: aetiopathogenetic role
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52210
+name: pharmacological role
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52211
+name: physiological role
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52214
+name: ligand
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:52215
+name: photochemical role
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:52216
+name: photobiochemical role
+namespace: obo
+is_a: CHEBI:52215
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:52217
+name: pharmaceutical
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:52271
+name: squaraine dye
+namespace: obo
+is_a: CHEBI:51121
+
+[Term]
+id: CHEBI:52290
+name: mitogen
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:52303
+name: sterol methyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:52424
+name: glycoside hydrolase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:52425
+name: neuraminidase inhibitor
+namespace: obo
+is_a: CHEBI:52424
+is_a: CHEBI:36044
+
+[Term]
+id: CHEBI:52629
+name: HIV-1 RNase H inhibitor
+namespace: obo
+is_a: CHEBI:64947
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:52726
+name: proteasome inhibitor
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:52941
+name: phosphate protecting group
+namespace: obo
+is_a: CHEBI:51087
+
+[Term]
+id: CHEBI:52943
+name: carboxylic acid protecting group
+namespace: obo
+is_a: CHEBI:51087
+
+[Term]
+id: CHEBI:53000
+name: epitope
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:53121
+name: adenosine A2A receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:53142
+name: P2Y2 receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:53337
+name: tissue adhesive
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:53353
+name: GHB receptor agonist
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:53431
+name: chain carrier
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:53559
+name: topoisomerase IV inhibitor
+namespace: obo
+is_a: CHEBI:70727
+
+[Term]
+id: CHEBI:53659
+name: diamine oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:53746
+name: inosine monophosphate dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:53756
+name: HIV-1 reverse transcriptase inhibitor
+namespace: obo
+is_a: CHEBI:64947
+is_a: CHEBI:59897
+
+[Term]
+id: CHEBI:53784
+name: antispasmodic drug
+namespace: obo
+is_a: CHEBI:51371
+
+[Term]
+id: CHEBI:55322
+name: mu-opioid receptor agonist
+namespace: obo
+is_a: CHEBI:60606
+is_a: CHEBI:60599
+
+[Term]
+id: CHEBI:55323
+name: antidiarrhoeal drug
+namespace: obo
+is_a: CHEBI:55324
+
+[Term]
+id: CHEBI:55324
+name: gastrointestinal drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:55347
+name: vitamin K antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:55350
+name: neurokinin-1 receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:55351
+name: substance P receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:59010
+name: antiseborrheic
+namespace: obo
+is_a: CHEBI:50177
+
+[Term]
+id: CHEBI:59105
+name: acid--amino-acid ligase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59107
+name: metalloendopeptidase inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:59132
+name: antigen
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:59163
+name: biomarker
+namespace: obo
+is_a: CHEBI:47867
+
+[Term]
+id: CHEBI:59174
+name: hapten
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:59229
+name: GnRH antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:5924
+name: serine endopeptidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59282
+name: kappa-opioid receptor agonist
+namespace: obo
+is_a: CHEBI:60603
+is_a: CHEBI:60606
+
+[Term]
+id: CHEBI:59283
+name: delta-opioid receptor antagonist
+namespace: obo
+is_a: CHEBI:60605
+is_a: CHEBI:60601
+
+[Term]
+id: CHEBI:59285
+name: squalene monooxygenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59321
+name: aromatic-L-amino-acid decarboxylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59499
+name: dipeptidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59517
+name: DNA synthesis inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59544
+name: phosphoantigen
+namespace: obo
+is_a: CHEBI:59132
+
+[Term]
+id: CHEBI:59647
+name: serine palmitoyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59672
+name: chitin synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59680
+name: vasopressin  receptor antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:59683
+name: antipruritic drug
+namespace: obo
+is_a: CHEBI:50177
+
+[Term]
+id: CHEBI:59727
+name: vasopressin receptor agonist
+namespace: obo
+is_a: CHEBI:51060
+
+[Term]
+id: CHEBI:59739
+name: electrophilic reagent
+namespace: obo
+is_a: CHEBI:33893
+is_a: CHEBI:39143
+
+[Term]
+id: CHEBI:59740
+name: nucleophilic reagent
+namespace: obo
+is_a: CHEBI:39144
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:59745
+name: chromatographic reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:59752
+name: bolaamphiphile
+namespace: obo
+is_a: CHEBI:35195
+
+[Term]
+id: CHEBI:59826
+name: progestin
+namespace: obo
+is_a: CHEBI:50745
+
+[Term]
+id: CHEBI:59844
+name: antihyperplasia drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:59864
+name: depigmentation drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:59886
+name: HIV fusion inhibitor
+namespace: obo
+is_a: CHEBI:64946
+is_a: CHEBI:36044
+
+[Term]
+id: CHEBI:59897
+name: reverse transcriptase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:59941
+name: amphiphile
+namespace: obo
+is_a: CHEBI:35195
+
+[Term]
+id: CHEBI:59997
+name: tyrosinase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60186
+name: Ca(2+)-transporting ATPase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60218
+name: mimotope
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:60258
+name: peptidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60280
+name: glutaminase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60311
+name: thyroid hormone
+namespace: obo
+is_a: CHEBI:24621
+
+[Term]
+id: CHEBI:60545
+name: spiroketalamine fungicide
+namespace: obo
+is_a: CHEBI:24127
+
+[Term]
+id: CHEBI:60575
+name: phenoxy herbicide
+namespace: obo
+is_a: CHEBI:24527
+
+[Term]
+id: CHEBI:60576
+name: phenoxyacetic herbicide
+namespace: obo
+is_a: CHEBI:60575
+
+[Term]
+id: CHEBI:60593
+name: conazole fungicide
+namespace: obo
+is_a: CHEBI:24127
+
+[Term]
+id: CHEBI:60598
+name: opioid agent
+namespace: obo
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:60599
+name: mu-opioid agent
+namespace: obo
+is_a: CHEBI:60598
+
+[Term]
+id: CHEBI:60600
+name: amide fungicide
+namespace: obo
+is_a: CHEBI:24127
+
+[Term]
+id: CHEBI:60601
+name: delta-opioid agent
+namespace: obo
+is_a: CHEBI:60598
+
+[Term]
+id: CHEBI:60603
+name: kappa-opioid agent
+namespace: obo
+is_a: CHEBI:60598
+
+[Term]
+id: CHEBI:60605
+name: opioid receptor antagonist
+namespace: obo
+is_a: CHEBI:60598
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:60606
+name: opioid receptor agonist
+namespace: obo
+is_a: CHEBI:60598
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:60643
+name: N-methyl-D-aspartate receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:60644
+name: bridged diphenyl fungicide
+namespace: obo
+is_a: CHEBI:24127
+
+[Term]
+id: CHEBI:60646
+name: chiral reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:60649
+name: glucagon receptor antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:60688
+name: tryptophan synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60788
+name: affinity label
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:60797
+name: NMDA receptor antagonist
+namespace: obo
+is_a: CHEBI:60798
+
+[Term]
+id: CHEBI:60798
+name: excitatory amino acid antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:60807
+name: anaesthesia adjuvant
+namespace: obo
+is_a: CHEBI:60809
+
+[Term]
+id: CHEBI:60809
+name: adjuvant
+namespace: obo
+is_a: CHEBI:52217
+
+[Term]
+id: CHEBI:60816
+name: immunogen
+namespace: obo
+is_a: CHEBI:59132
+
+[Term]
+id: CHEBI:60832
+name: tubulin modulator
+namespace: obo
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:60901
+name: riboflavin synthetase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:61015
+name: nephrotoxin
+namespace: obo
+is_a: CHEBI:64909
+
+[Term]
+id: CHEBI:61016
+name: angiotensin receptor antagonist
+namespace: obo
+is_a: CHEBI:49020
+
+[Term]
+id: CHEBI:61026
+name: bile therapy drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:61115
+name: histone deacetylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:61774
+name: inositol phosphorylceramide synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:61908
+name: nitric oxide synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:61950
+name: microtubule-stabilising agent
+namespace: obo
+is_a: CHEBI:60832
+
+[Term]
+id: CHEBI:61951
+name: microtubule-destabilising agent
+namespace: obo
+is_a: CHEBI:64911
+is_a: CHEBI:60832
+
+[Term]
+id: CHEBI:61966
+name: metabotropic glutamate receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:62049
+name: acyl donor
+namespace: obo
+is_a: CHEBI:17891
+
+[Term]
+id: CHEBI:62089
+name: glutamate synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62215
+name: allelochemical
+namespace: obo
+is_a: CHEBI:26619
+
+[Term]
+id: CHEBI:62434
+name: anaplastic lymphoma kinase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62488
+name: signalling molecule
+namespace: obo
+is_a: CHEBI:33280
+
+[Term]
+id: CHEBI:62530
+name: sphingosine N-acyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62608
+name: aconitase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62609
+name: phosphonopyruvate hydrolase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62670
+name: phosphoprotein phosphatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62754
+name: glycine receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:62803
+name: fuel additive
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:62868
+name: hepatoprotective agent
+namespace: obo
+is_a: CHEBI:50267
+
+[Term]
+id: CHEBI:62871
+name: phenylalanine ammonia-lyase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62872
+name: retinoic acid synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62873
+name: odorant receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:62887
+name: tankyrase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62913
+name: poly(ADP-ribose) polymerase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62914
+name: axin stabilizer
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:62915
+name: sialyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:62966
+name: cytochrome c oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63046
+name: emulsifier
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63047
+name: food emulsifier
+namespace: obo
+is_a: CHEBI:63046
+
+[Term]
+id: CHEBI:63054
+name: osteogenesis regulator
+namespace: obo
+is_a: CHEBI:39317
+
+[Term]
+id: CHEBI:63060
+name: phase-transfer catalyst
+namespace: obo
+is_a: CHEBI:35223
+
+[Term]
+id: CHEBI:63064
+name: crystallisation adjutant
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63090
+name: purine nucleoside phosphorylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63114
+name: sphingosine-1-phosphate receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:63146
+name: insulin release inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:63156
+name: alcohol oxidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63157
+name: cystathionine-beta-synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63158
+name: carnitine palmitoyltransferase-1 inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63172
+name: S1P receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:63173
+name: T-cell proliferation inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:63175
+name: peptidomimetic
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:63247
+name: reducing agent
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63248
+name: oxidising agent
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63330
+name: sodium-dependent Pi-transporter inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:63332
+name: alkaline phosphatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63457
+name: fibroblast growth factor receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:63490
+name: explosive
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63510
+name: Na(+)/K(+)-transporting ATPase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63533
+name: gonadotropin releasing hormone agonist
+namespace: obo
+is_a: CHEBI:51060
+
+[Term]
+id: CHEBI:63562
+name: glucocorticoid receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:63673
+name: chemokine receptor 5 antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:63674
+name: 4-aminobutyrate transaminase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63720
+name: thymidylate synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63721
+name: glycinamide ribonucleotide formyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63726
+name: neuroprotective agent
+namespace: obo
+is_a: CHEBI:50267
+
+[Term]
+id: CHEBI:63794
+name: retinoid X receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:63908
+name: film-forming compound
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:63923
+name: sclerotherapy agent
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:63932
+name: tyrosine 3-monooxygenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63936
+name: alpha1B-adrenoceptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:63951
+name: estrogen receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:63957
+name: adenosine A1 receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:63958
+name: cellulose synthesis inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:63962
+name: Hsp90 inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:63963
+name: metabotropic glutamate receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:64018
+name: protein kinase C agonist
+namespace: obo
+is_a: CHEBI:64106
+
+[Term]
+id: CHEBI:64033
+name: arachidonoylethanolamide amidohydrolase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64047
+name: food additive
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:64049
+name: acidity regulator
+namespace: obo
+is_a: CHEBI:64047
+
+[Term]
+id: CHEBI:64054
+name: delta-opioid receptor agonist
+namespace: obo
+is_a: CHEBI:60601
+is_a: CHEBI:60606
+
+[Term]
+id: CHEBI:64088
+name: incretin mimetic
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:64102
+name: AMPA receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:64105
+name: protein kinase G agonist
+namespace: obo
+is_a: CHEBI:64106
+
+[Term]
+id: CHEBI:64106
+name: protein kinase agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:64133
+name: protein farnesyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64152
+name: cysteine protease inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:64154
+name: H3-receptor agonist
+namespace: obo
+is_a: CHEBI:35678
+
+[Term]
+id: CHEBI:64155
+name: H4-receptor agonist
+namespace: obo
+is_a: CHEBI:35678
+
+[Term]
+id: CHEBI:64176
+name: H3-receptor antagonist
+namespace: obo
+is_a: CHEBI:37956
+
+[Term]
+id: CHEBI:64237
+name: N-acetylglucosamine phosphotransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64297
+name: reaction intermediate
+namespace: obo
+is_a: CHEBI:51086
+
+[Term]
+id: CHEBI:64338
+name: K-ATP channel agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:64345
+name: MALDI matrix material
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:64370
+name: glutamate transporter activator
+namespace: obo
+is_a: CHEBI:64371
+
+[Term]
+id: CHEBI:64371
+name: neurotransmitter transporter modulator
+namespace: obo
+is_a: CHEBI:38632
+is_a: CHEBI:35942
+
+[Term]
+id: CHEBI:64406
+name: cathepsin K inhibitor
+namespace: obo
+is_a: CHEBI:64152
+
+[Term]
+id: CHEBI:64411
+name: geranylgeranyl diphosphate synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64416
+name: arogenate dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64477
+name: monolignol
+namespace: obo
+is_a: CHEBI:26619
+
+[Term]
+id: CHEBI:64570
+name: serine hydroxymethyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64571
+name: NMDA receptor agonist
+namespace: obo
+is_a: CHEBI:50103
+
+[Term]
+id: CHEBI:64577
+name: flour treatment agent
+namespace: obo
+is_a: CHEBI:64047
+
+[Term]
+id: CHEBI:64584
+name: uremic toxin
+namespace: obo
+is_a: CHEBI:27026
+
+[Term]
+id: CHEBI:64588
+name: glycine transporter 1 inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:64589
+name: glycine receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:64670
+name: thioredoxin reductase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64696
+name: acyl-CoA:cholesterol acyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64697
+name: acyl-CoA:cholesterol acyltransferase 2 inhibitor
+namespace: obo
+is_a: CHEBI:64696
+
+[Term]
+id: CHEBI:64763
+name: phosphatidylinositol-specific phospholipase C inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64857
+name: cosmetic
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:64909
+name: poison
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:64911
+name: antimitotic
+namespace: obo
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:64912
+name: antimycobacterial drug
+namespace: obo
+is_a: CHEBI:36047
+
+[Term]
+id: CHEBI:64915
+name: antiplasmodial drug
+namespace: obo
+is_a: CHEBI:35820
+is_a: CHEBI:35442
+
+[Term]
+id: CHEBI:64919
+name: diacylglycerol O-acyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64920
+name: DNA ligase (ATP) inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64922
+name: leukocyte elastase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64924
+name: hepatitis C protease inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:64926
+name: serine protease inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:64932
+name: cathepsin B inhibitor
+namespace: obo
+is_a: CHEBI:64152
+
+[Term]
+id: CHEBI:64933
+name: melanin synthesis inhibitor
+namespace: obo
+is_a: CHEBI:59864
+
+[Term]
+id: CHEBI:64943
+name: chymotrypsin inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64946
+name: anti-HIV agent
+namespace: obo
+is_a: CHEBI:22587
+
+[Term]
+id: CHEBI:64947
+name: anti-HIV-1 agent
+namespace: obo
+is_a: CHEBI:64946
+
+[Term]
+id: CHEBI:64949
+name: anti-HIV-2 agent
+namespace: obo
+is_a: CHEBI:64946
+
+[Term]
+id: CHEBI:64951
+name: anti-HBV agent
+namespace: obo
+is_a: CHEBI:22587
+
+[Term]
+id: CHEBI:64952
+name: anti-HSV agent
+namespace: obo
+is_a: CHEBI:22587
+
+[Term]
+id: CHEBI:64953
+name: anti-HSV-1 agent
+namespace: obo
+is_a: CHEBI:64952
+
+[Term]
+id: CHEBI:64954
+name: anti-HSV-2 agent
+namespace: obo
+is_a: CHEBI:64952
+
+[Term]
+id: CHEBI:64955
+name: heparanase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:64957
+name: chymase inhibitor
+namespace: obo
+is_a: CHEBI:37670
+
+[Term]
+id: CHEBI:64964
+name: arachidonate 5-lipoxygenase inhibitor
+namespace: obo
+is_a: CHEBI:35856
+
+[Term]
+id: CHEBI:64995
+name: arachidonate 12-lipoxygenase inhibitor
+namespace: obo
+is_a: CHEBI:35856
+
+[Term]
+id: CHEBI:64996
+name: arachidonate 15-lipoxygenase inhibitor
+namespace: obo
+is_a: CHEBI:35856
+
+[Term]
+id: CHEBI:65001
+name: triacylglycerol lipase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65023
+name: anti-asthmatic agent
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:65053
+name: arginine decarboxylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65056
+name: fructose-bisphosphatase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65057
+name: adenosine A1 receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:65064
+name: cyclopropane fatty acid synthase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65065
+name: DNA adenine methyltransferase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65190
+name: first generation antipsychotic
+namespace: obo
+is_a: CHEBI:35476
+
+[Term]
+id: CHEBI:65191
+name: second generation antipsychotic
+namespace: obo
+is_a: CHEBI:35476
+
+[Term]
+id: CHEBI:65207
+name: vascular endothelial growth factor receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:65232
+name: thrombin inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65239
+name: golgi alpha-mannosidase II inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:65254
+name: LRH-1 agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:65255
+name: food preservative
+namespace: obo
+is_a: CHEBI:64047
+
+[Term]
+id: CHEBI:65256
+name: antimicrobial preservative
+namespace: obo
+is_a: CHEBI:65255
+is_a: CHEBI:33281
+
+[Term]
+id: CHEBI:65259
+name: GABA antagonist
+namespace: obo
+is_a: CHEBI:51374
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:65265
+name: antacid
+namespace: obo
+is_a: CHEBI:23888
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:66894
+name: erythropeotin receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:66900
+name: prostaglandin receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:66902
+name: CFTR potentiator
+namespace: obo
+is_a: CHEBI:38632
+
+[Term]
+id: CHEBI:66908
+name: SMO receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:66921
+name: Janus kinase inhibitor
+namespace: obo
+is_a: CHEBI:38637
+
+[Term]
+id: CHEBI:66956
+name: antidyskinesia agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:66980
+name: nootropic agent
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:66981
+name: ophthalmology drug
+namespace: obo
+is_a: CHEBI:23888
+
+[Term]
+id: CHEBI:66987
+name: radiation protective agent
+namespace: obo
+is_a: CHEBI:50267
+
+[Term]
+id: CHEBI:66991
+name: sympatholytic agent
+namespace: obo
+is_a: CHEBI:37962
+
+[Term]
+id: CHEBI:66993
+name: tocolytic agent
+namespace: obo
+is_a: CHEBI:50689
+
+[Term]
+id: CHEBI:67072
+name: cannabinoid receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:67079
+name: anti-inflammatory agent
+namespace: obo
+is_a: CHEBI:33232
+
+[Term]
+id: CHEBI:67105
+name: insect sterilant
+namespace: obo
+is_a: CHEBI:24852
+is_a: CHEBI:23092
+
+[Term]
+id: CHEBI:67114
+name: ryanodine receptor activator
+namespace: obo
+is_a: CHEBI:38809
+
+[Term]
+id: CHEBI:67126
+name: colorimetric reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:67137
+name: NMR shift reagent
+namespace: obo
+is_a: CHEBI:33893
+
+[Term]
+id: CHEBI:67170
+name: anti-angiogenic agent
+namespace: obo
+is_a: CHEBI:50926
+
+[Term]
+id: CHEBI:67189
+name: microbial collagenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67195
+name: gap junctional intercellular communication inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:67198
+name: retinoic acid receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:67199
+name: AP-1 antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:67200
+name: provitamin A
+namespace: obo
+is_a: CHEBI:50188
+
+[Term]
+id: CHEBI:67230
+name: glucosylceramidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67231
+name: sucrose alpha-glucosidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67232
+name: oligo-1,6-glucosidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67239
+name: alpha-glucosidase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67267
+name: geranylgeranyltransferase type I inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:67268
+name: HIV-1 integrase inhibitor
+namespace: obo
+is_a: CHEBI:64947
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:68481
+name: mTOR inhibitor
+namespace: obo
+is_a: CHEBI:37699
+
+[Term]
+id: CHEBI:68494
+name: apoptosis inhibitor
+namespace: obo
+is_a: CHEBI:35222
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:68495
+name: apoptosis inducer
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:68509
+name: glutathione depleting agent
+namespace: obo
+is_a: CHEBI:24432
+
+[Term]
+id: CHEBI:68542
+name: dihydroorotate dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:68543
+name: pyrimidine synthesis inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:68553
+name: guanylate cyclase 2C agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:68557
+name: bradykinin receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:68563
+name: P2Y12 receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:68581
+name: coagulation factor Xa inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:68612
+name: dipeptidyl peptidase-4 inhibitor
+namespace: obo
+is_a: CHEBI:60258
+
+[Term]
+id: CHEBI:68640
+name: cytochrome P450 17-alpha-hydroxylase/C17,20-lyase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:68844
+name: phosphodiesterase IV inhibitor
+namespace: obo
+is_a: CHEBI:50218
+
+[Term]
+id: CHEBI:70709
+name: progesterone receptor agonist
+namespace: obo
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:70722
+name: acetyl-CoA carboxylase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:70724
+name: cell dedifferentiation agent
+namespace: obo
+is_a: CHEBI:52206
+
+[Term]
+id: CHEBI:70725
+name: adenosine A3 receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:70727
+name: topoisomerase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+[Term]
+id: CHEBI:70728
+name: actin polymerisation inhibitor
+namespace: obo
+is_a: CHEBI:35222
+
+[Term]
+id: CHEBI:70770
+name: Aurora kinase inhibitor
+namespace: obo
+is_a: CHEBI:37699
+
+[Term]
+id: CHEBI:70774
+name: capsaicin receptor antagonist
+namespace: obo
+is_a: CHEBI:48706
+
+[Term]
+id: CHEBI:70781
+name: PPAR modulator
+namespace: obo
+is_a: CHEBI:52210
+
+[Term]
+id: CHEBI:70782
+name: PPARalpha agonist
+namespace: obo
+is_a: CHEBI:70781
+is_a: CHEBI:48705
+
+[Term]
+id: CHEBI:70817
+name: glyceraldehyde-3-phosphate dehydrogenase inhibitor
+namespace: obo
+is_a: CHEBI:23924
+
+
+! ----------------------  PROPERTIES  -------------------------
+
+
+! ----------------------  INSTANCES  -------------------------

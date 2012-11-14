@@ -43,14 +43,14 @@ import java.util.List;
  */
 public class BiNCheExecWeb {
 
-	private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
+    private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
 
-//	public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//
-//		System.out.println("Starting main method....");
-//		BiNCheExecWeb bincheexec = new BiNCheExecWeb();
+    public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        System.out.println("Starting main method....");
+        BiNCheExecWeb bincheexec = new BiNCheExecWeb();
 //				bincheexec.generateImage(args, request, response);
-//	}
+    }
 
 	public BiNCheExecWeb() {
 
@@ -98,196 +98,199 @@ public class BiNCheExecWeb {
 
 	public void generateJson(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		LOGGER.log(Level.INFO, "############ Start ############");
+        LOGGER.log(Level.INFO, "############ Start ############");
+        Boolean structureEnrichment = false;
+        Boolean roleEnrichment = false;
 
-		//Assign appropriate ontology file depending on target selected by user
-//        String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
+        String ontologyFile = null;
 
-		String ontologyFile = null;
+        String target = request.getParameter("targetType");
+        if (target.equalsIgnoreCase("structure")) {
+            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_chemEnt.obo").getFile();
+//            ontologyFile = BiNCheExecWeb.class.getResource("/data/ontology-enrichment-CHEM.on").getFile();
+            structureEnrichment = true;
+        }
+        else if (target.equalsIgnoreCase("role")) {
+            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_roles.obo").getFile();
+//            ontologyFile = BiNCheExecWeb.class.getResource("/data/ontology-enrichment-ROLE.on").getFile();
+            roleEnrichment = true;
+        }
+        else if(target.equalsIgnoreCase("both")) {
+            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_chemEnt_roles.obo").getFile();
+            structureEnrichment= true;
+        }
 
-		String target = request.getParameter("targetType");
-		if (target.equalsIgnoreCase("structure")) {
-			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_structure_only.obo").getFile();
-		}
-		else if (target.equalsIgnoreCase("role")) {
-			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_role_only.obo.obo").getFile();
-		}
-		else if(target.equalsIgnoreCase("both")) {
-			ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_role_and_structure.obo.obo").getFile();
-		}
-
-		LOGGER.log(Level.INFO, "Setting default parameters ...");
-//		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
+        LOGGER.log(Level.INFO, "Setting default parameters ...");
         BingoParameters parametersChEBIBin = ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile);
 
+        //Set annotation file separately from ontology file
+        if (structureEnrichment) {
+            parametersChEBIBin.setAnnotationFile(BiNCheExecWeb.class.getResource("/data/ontology-annotations-CHEM.anno").getFile());
+        }
+
+        if (roleEnrichment) {
+            parametersChEBIBin.setAnnotationFile(BiNCheExecWeb.class.getResource("/data/ontology-annotations-ROLE.anno").getFile());
+        }
+
         BiNChe binche = new BiNChe();
-		binche.setParameters(parametersChEBIBin);
+        binche.setParameters(parametersChEBIBin);
 
-		LOGGER.log(Level.INFO, "Reading input file ...");
-		try {
-			binche.loadDesiredElementsForEnrichmentFromInput(input);
-		} catch (IOException exception) {
-			LOGGER.log(Level.ERROR, "Error reading file: " + exception.getMessage());
-			System.exit(1);
-		}
-		binche.execute();
+        LOGGER.log(Level.INFO, "Reading input file ...");
+        try {
+            binche.loadDesiredElementsForEnrichmentFromInput(input);
+        } catch (IOException exception) {
+            LOGGER.log(Level.ERROR, "Error reading file: " + exception.getMessage());
+            System.exit(1);
+        }
+        binche.execute();
 
-		ChebiGraph chebiGraph =
-				new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
+        ChebiGraph chebiGraph = new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
 
-		List<ChEBIGraphPruner> pruners = Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-		, new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
-		int originalVertices = chebiGraph.getVertexCount();
-		System.out.println("Number of nodes before pruning : " + originalVertices);
+        List<ChEBIGraphPruner> pruners = Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+        int originalVertices = chebiGraph.getVertexCount();
+        System.out.println("Number of nodes before pruning : " + originalVertices);
 
-		int prunes=0;
-		for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-			chEBIGraphPruner.prune(chebiGraph);
-			prunes++;
-			System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
-			System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
-			originalVertices = chebiGraph.getVertexCount();
-			System.out.println("Writing out graph ...");
-		}
-		
-		int finalVertices = chebiGraph.getVertexCount();
+        int prunes=0;
+        for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
+            if (chebiGraph.getVertexCount()>50) {
+                chEBIGraphPruner.prune(chebiGraph);
+                prunes++;
+                System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
+                System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
+                originalVertices = chebiGraph.getVertexCount();
+            }
+        }
 
-		System.out.println("Final vertices : " + (finalVertices));
+        int finalVertices = chebiGraph.getVertexCount();
+
+        System.out.println("Final vertices : " + (finalVertices));
+
+        //Convert the chebi Graph to a JSON Object for display on webapp
+        getJsonObjectFromGraph(chebiGraph, request, response);
+
+        LOGGER.log(Level.INFO, "############ Stop ############");
+
+        response.setContentType("text/html");
+
+    }
+
+    /*
+    Returns the chebi graph as an array of nodes and edges in a json format
+     */
+    private void getJsonObjectFromGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
+
+        //Convert vertex colours from RGB to hexadecimal for the web-app
+        Map<String, String> colorMap = new HashMap<String, String>();
+        for (ChebiVertex vertex : chebiGraph.getVertices()) {
+            Color rgbColor = vertex.getColor();
+            String hexColor = toHex(rgbColor.getRed(), rgbColor.getGreen(), rgbColor.getBlue());
+            colorMap.put(vertex.getChebiName(), hexColor);
+        }
+
+        //NODES
+        List <String> nodeList = getNodesForDisplay(chebiGraph, colorMap);
 
 
-		//Convert the chebi Graph to a JSON Object for display on webapp
-		getJsonObjectFromGraph(chebiGraph, request, response);
+        //EDGES
+        List <String> edgeList = getEdgesForDisplay(chebiGraph);
 
-		LOGGER.log(Level.INFO, "############ Stop ############");
+        HttpSession session = request.getSession();
+        session.setAttribute("nodeList", nodeList);
+        session.setAttribute("edgeList", edgeList);
+    }
 
-		response.setContentType("text/html");
+    /*
+    Returns the edges in a json format that can be read by CytoscapeWeb
+     */
+    private List<String> getEdgesForDisplay(ChebiGraph chebiGraph) {
+        List<String> edgeList = new ArrayList<String>();
+        Collection<ChebiEdge> edgeSet = chebiGraph.getEdges();
+        for (ChebiEdge edge : edgeSet) {
+            //swapped vertices to reverse direction of edges
+            String vertexOne = edge.getId().split("-")[0];
+            String vertexTwo = edge.getId().split("-")[1];
+            vertexOne = "source :" +"\"" +vertexOne +"\"";
+            vertexTwo = "target :" +"\"" +vertexTwo +"\"";
+            edgeList.add("{ " + vertexTwo + " , " + vertexOne + " }");
+        }
 
-	}
+        return edgeList;
+    }
 
-	private void getJsonObjectFromGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
+    /*
+    Returns the nodes and their properties (colour, alpha which indicates opacity, label, id) in a json format
+    */
+    private List getNodesForDisplay (ChebiGraph chebiGraph, Map<String, String> colorMap) {
+        List nodeList = new ArrayList();
+        for (ChebiVertex vertex : chebiGraph.getVertices()) {
+            String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
+            String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
+            if (colorMap.containsKey(vertex.getChebiName())) {
+                String color = colorMap.get(vertex.getChebiName()).toString();
+                String nodeColor = "color :" +"\"" +color +"\"";
+                Integer alpha = vertex.getColor().getAlpha();
+                double alphaScaled = scaleAlpha(alpha);
+                String nodeAlpha = "alpha :" +"\""+alphaScaled +"\"";
+                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" }");
+            }
+            else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }");
 
-		//layout
-		//Layout<ChebiVertex, ChebiEdge> layout = chebiGraph.getLayout();
-		//Graph<ChebiVertex, ChebiEdge> layoutGraph = layout.getGraph();
+        }
 
-		//Colors
-		//Collection<ChebiVertex> graphVertices = layoutGraph.getVertices();
-		Map<String, String> colorMap = new HashMap<String, String>();
-		for (ChebiVertex vertex : chebiGraph.getVertices()) {
-			Color rgbColor = vertex.getColor();
-			String hexColor = toHex(rgbColor.getRed(), rgbColor.getGreen(), rgbColor.getBlue());
-			colorMap.put(vertex.getChebiName(), hexColor);
-		}		
+        return nodeList;
+    }
 
-		//NODES
-		Map<Integer, ChebiVertex> vertexmap = new HashMap<Integer, ChebiVertex>();
-		List <String> nodeList = new ArrayList<String>();
-		for (ChebiVertex vertex : chebiGraph.getVertices()) {
-			String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
-			String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
-			if (colorMap.containsKey(vertex.getChebiName())) {
-				String color = colorMap.get(vertex.getChebiName()).toString();
-				String nodeColor = "color :" +"\"" +color +"\"";
-				nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" }"); 
-			}
-			else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }"); 
-		}
+    /*
+    Scales alpha from a 0-255 range to 0-1.0
+     */
+    private double scaleAlpha(Integer alpha) {
+        double al = alpha * (1.0/255.0);
+        return al;
+    }
 
-		//NODES - Older version which requires getVertexMap and getLayout methods in ChebiGraph 
-		//		Map<Integer, ChebiVertex> vertexmap = chebiGraph.getVertexMap();
-		//		List <String> nodeList = new ArrayList<String>();
-		//		for (Integer key : vertexmap.keySet()) {
-		//			String chebiName = vertexmap.get(key).getChebiName();
-		//			String nodeId = "id :" +"\"" +Integer.toString(key) +"\"";
-		//			String nodeLabel = "label :" +"\"" +chebiName +"\"";			
-		//			if (colorMap.containsKey(chebiName)) {
-		//				String color = colorMap.get(chebiName).toString();
-		//				String nodeColor = "color :" +"\"" +color +"\"";
-		//				nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" }"); 
-		//			}
-		//			else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }"); 
-		//		}
+    public static String toHex(int r, int g, int b) {
+        return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
+    }
 
-		int outputSize = nodeList.size();
-		request.setAttribute("outputSize", outputSize); //to display on website for testing filter
+    private static String toBrowserHexValue(int number) {
+        StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
+        while (builder.length() < 2) {
+            builder.append("0");
+        }
+        return builder.toString().toUpperCase();
+    }
 
-		//Move 24431=chemical entity element to the top of the list,
-		//because cytoscape web layout sets the first node it receives as the root of the tree.
-		//If it is already in the first position, the list remains unchanged
+    private static BufferedImage toBufferedImage(Image src) {
 
-		//		for(String element : nodeList){
-		//			if (element.indexOf("24431")!= -1) {
-		//				Collections.swap(nodeList, nodeList.indexOf(element), 0);
-		//				break;
-		//			}
-		//		}
+        int w = src.getWidth(null);
+        int h = src.getHeight(null);
+        int type = BufferedImage.TYPE_INT_ARGB;
+        BufferedImage dest = new BufferedImage(w, h, type);
+        Graphics2D g2 = dest.createGraphics();
+        g2.fillRect(0, 0, w, h);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(src, 0, 0, null);
+        g2.dispose();
+        return dest;
+    }
 
-		//EDGES
-		List <String> edgeList = new ArrayList<String>();
-		//get edges from layout.getGraph instead of chebiGraph.getGraph, because layout.graph has trimmed edges
-		//Solved the problem of multiple parents for nodes
-		//Collection<ChebiEdge> edgeSet = layoutGraph.getEdges(); 
+    public BingoParameters getDefaultParameters(String ontologyFile) {
 
-		Collection<ChebiEdge> edgeSet = chebiGraph.getEdges();
+        BingoParameters parametersSaddle = new BingoParameters();
 
-		for (ChebiEdge edge : edgeSet) {
-			//swapped vertices to reverse direction of edges
-			String vertexOne = edge.getId().split("-")[0];
-			String vertexTwo = edge.getId().split("-")[1];
-			vertexOne = "source : " +"\"" +vertexOne +"\"";
-			vertexTwo = "target : " +"\"" +vertexTwo +"\"";		
-			edgeList.add("{ " +vertexTwo + " , " +vertexOne +" }");
-		}
+        parametersSaddle.setTest(BingoAlgorithm.SADDLESUM);
+        parametersSaddle.setCorrection(BingoAlgorithm.NONE);
+        parametersSaddle.setOntologyFile(ontologyFile);
+        parametersSaddle.setOntology_default(false);
+        parametersSaddle.setNameSpace("chebi_ontology");
+        parametersSaddle.setOverOrUnder("Overrepresentation");
+        parametersSaddle.setSignificance(new BigDecimal(0.05));
+        parametersSaddle.setCategory(BingoAlgorithm.CATEGORY_CORRECTION);
+        parametersSaddle.setReferenceSet(BingoAlgorithm.GENOME);
+        parametersSaddle.setAllNodes(null);
+        parametersSaddle.setSelectedNodes(null);
 
-		HttpSession session = request.getSession();
-		session.setAttribute("nodeList", nodeList);
-		session.setAttribute("edgeList", edgeList);
-		request.setAttribute("outputSize", outputSize);
-
-	}
-
-	public static String toHex(int r, int g, int b) {
-		return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
-	}
-
-	private static String toBrowserHexValue(int number) {
-		StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
-		while (builder.length() < 2) {
-			builder.append("0");
-		}
-		return builder.toString().toUpperCase();
-	}
-
-	private static BufferedImage toBufferedImage(Image src) {
-
-		int w = src.getWidth(null);
-		int h = src.getHeight(null);
-		int type = BufferedImage.TYPE_INT_ARGB;
-		BufferedImage dest = new BufferedImage(w, h, type);
-		Graphics2D g2 = dest.createGraphics();
-		g2.fillRect(0, 0, w, h);
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2.drawImage(src, 0, 0, null);
-		g2.dispose();
-		return dest;
-	}
-
-	public BingoParameters getDefaultParameters(String ontologyFile) {
-
-		BingoParameters parametersSaddle = new BingoParameters();
-
-		parametersSaddle.setTest(BingoAlgorithm.SADDLESUM);
-		parametersSaddle.setCorrection(BingoAlgorithm.NONE);
-		parametersSaddle.setOntologyFile(ontologyFile);
-		parametersSaddle.setOntology_default(false);
-		parametersSaddle.setNameSpace("chebi_ontology");
-		parametersSaddle.setOverOrUnder("Overrepresentation");
-		parametersSaddle.setSignificance(new BigDecimal(0.05));
-		parametersSaddle.setCategory(BingoAlgorithm.CATEGORY_CORRECTION);
-		parametersSaddle.setReferenceSet(BingoAlgorithm.GENOME);
-		parametersSaddle.setAllNodes(null);
-		parametersSaddle.setSelectedNodes(null);
-
-		return parametersSaddle;
-	}
+        return parametersSaddle;
+    }
 }

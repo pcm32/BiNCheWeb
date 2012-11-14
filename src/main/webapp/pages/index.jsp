@@ -29,7 +29,7 @@
 	background-color: white;
 	text-align: center;
 	opacity: 0.85;
-	filter: alpha(opacity =       85);
+	filter: alpha(opacity = 85);
 }
 
 #loadingtext {
@@ -63,49 +63,14 @@
 				<tr>
 					<td style="padding: 10px"><textarea rows="10" cols="50"
 							name="input">
-                        CHEBI:10101
-                        CHEBI:10102
-                        CHEBI:101161
-                        CHEBI:101335
-                        CHEBI:102265
-                        CHEBI:10283
-                        CHEBI:10319
-                        CHEBI:10334
-                        CHEBI:103784
-                        CHEBI:10432
-                        CHEBI:104381
-                        CHEBI:10577
-                        CHEBI:10615
-                        CHEBI:10702
-                        CHEBI:10782
-                        CHEBI:108133
-                        CHEBI:108141
-                        CHEBI:10983
-                        CHEBI:114833
-                        CHEBI:13719
-                        CHEBI:142589
-                        CHEBI:144308
-                        CHEBI:144365
-                        CHEBI:14498
-                        CHEBI:14597
-                        CHEBI:147265
-                        CHEBI:14885
-                        CHEBI:15035
-                        CHEBI:15036
-                        CHEBI:15040
-                        CHEBI:15347
-                        CHEBI:15349
-                        CHEBI:15355
-                        CHEBI:15375
-                        CHEBI:15382
-                        CHEBI:15383
-                        CHEBI:15388
-                        CHEBI:15389
-                        CHEBI:15450
-                        CHEBI:15451
-                        CHEBI:15475
-                        CHEBI:15481
-                        CHEBI:15483</textarea></td>
+                        CHEBI:17079
+                        CHEBI:46816
+                        CHEBI:28658
+                        CHEBI:28611
+                        CHEBI:28594
+                        CHEBI:17048
+                        CHEBI:7852
+                        CHEBI:3540</textarea></td>
 				</tr>
 				<tr>
 					<td style="clear: both; padding: 10px"><br> <b>Select

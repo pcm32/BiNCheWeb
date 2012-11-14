@@ -81,8 +81,6 @@ public class GraphExporter extends HttpServlet {
 			Image image = getNetworkAsImage(request, response);
 			ServletOutputStream output = response.getOutputStream();
 			ImageIO.write((RenderedImage) image, "png", output);
-			//PrintWriter output = response.getWriter();
-			//output.print(test);
 			output.close();
 
 		}
@@ -91,7 +89,7 @@ public class GraphExporter extends HttpServlet {
 
 			//Get the network from the flash
 			String networkString = getNetworkAsString(request, response);
-			ServletOutputStream output = response.getOutputStream(); //does not work for png and pdf
+			ServletOutputStream output = response.getOutputStream();
 			output.print(networkString);
 			output.close();
 		}
@@ -100,15 +98,6 @@ public class GraphExporter extends HttpServlet {
 
 	private Image getNetworkAsImage(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-
-		//		byte[] content = new byte [16384];
-		//		ServletInputStream is = request.getInputStream();
-		//		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		//		while (is.read(content) != -1)
-		//		{
-		//			output.write(content);
-		//		}
-		//		return output.toByteArray();
 
 		Image content = ImageIO.read(request.getInputStream());
 		return content;
