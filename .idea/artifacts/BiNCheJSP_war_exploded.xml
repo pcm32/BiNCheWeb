@@ -1,0 +1,90 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BiNCheJSP:war exploded">
+    <output-path>$PROJECT_DIR$/target/BiNCheWebApp</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="BiNCheJSP/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BiNCheJSP" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="binche-0.0.5-SNAPSHOT.jar">
+            <element id="module-output" name="BiNChe" />
+          </element>
+          <element id="library" level="project" name="Maven: cytoscape:application:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:util-intr:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:graph-dynamic:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:graph-fixed:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:giny:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:render-immed:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:render-stateful:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:geom-spacial:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:render-export:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:fing:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:phoebe-dnd:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:geom-rtree:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:undo-support:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:equations:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:task:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:ding:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:obo:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: cytoscape.corelibs:commons-cli-1-x-cytocape-custom:2.8.4-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:l2fprod-common-sheet:7.3" />
+          <element id="library" level="project" name="Maven: org.swinglabs:swingx:1.6.1" />
+          <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235" />
+          <element id="library" level="project" name="Maven: org.swinglabs:swing-worker:1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:l2fprod-common-shared:7.3" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:l2fprod-common-fontchooser:7.3" />
+          <element id="library" level="project" name="Maven: javax.help:javahelp:2.0.02" />
+          <element id="library" level="project" name="Maven: com.lowagie:itext:2.0.8" />
+          <element id="library" level="project" name="Maven: bouncycastle:bcmail-jdk14:138" />
+          <element id="library" level="project" name="Maven: bouncycastle:bcprov-jdk14:138" />
+          <element id="library" level="project" name="Maven: colt:colt:1.0.3" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:biojava:1.4" />
+          <element id="library" level="project" name="Maven: org.jdom:jdom:1.1" />
+          <element id="library" level="project" name="Maven: org.swinglabs:swing-layout:1.0.3" />
+          <element id="library" level="project" name="Maven: com.jgoodies:looks:2.1.4" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-export:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-graphics2d:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-graphicsio:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-graphicsio-ps:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-graphicsio-svg:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-graphicsio-java:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-io:2.0.2" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-swing:2.0.3" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-util:2.0.2" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-xml:2.1.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:freehep-jas-plotter:2.2" />
+          <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:3.0.1" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:tclib:1.0" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:violinstrings:1.0.2" />
+          <element id="library" level="project" name="Maven: cytoscape-temp:install4j:4.0" />
+          <element id="library" level="project" name="Maven: cytoscape-sun:jaxb-api:1.0" />
+          <element id="library" level="project" name="Maven: cytoscape-sun:jaxb-impl:1.0" />
+          <element id="library" level="project" name="Maven: net.sf.jung:jung-graph-impl:2.0.1" />
+          <element id="library" level="project" name="Maven: net.sf.jung:jung-api:2.0.1" />
+          <element id="library" level="project" name="Maven: net.sourceforge.collections:collections-generic:4.01" />
+          <element id="library" level="project" name="Maven: net.sf.jung:jung-visualization:2.0.1" />
+          <element id="library" level="project" name="Maven: net.sf.jung:jung-algorithms:2.0.1" />
+          <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.1" />
+          <element id="library" level="project" name="Maven: batik:batik-svggen:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-gvt:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-awt-util:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-util:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-gui-util:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-ext:1.6-1" />
+          <element id="library" level="project" name="Maven: xml-apis:xmlParserAPIs:2.0.2" />
+          <element id="library" level="project" name="Maven: batik:batik-svg-dom:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-dom:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-css:1.6-1" />
+          <element id="library" level="project" name="Maven: batik:batik-xml:1.6-1" />
+          <element id="library" level="project" name="Maven: xerces:xercesImpl:2.5.0" />
+          <element id="library" level="project" name="Maven: batik:batik-parser:1.6-1" />
+          <element id="library" level="project" name="Maven: junit:junit:4.8.2" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

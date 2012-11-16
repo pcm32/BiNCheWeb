@@ -226,15 +226,16 @@ public class BiNCheExecWeb {
         for (ChebiVertex vertex : chebiGraph.getVertices()) {
             String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
             String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
+            String nodePValue = "pValue :" +"\"" +vertex.getpValue() +"\"";
             if (colorMap.containsKey(vertex.getChebiName())) {
                 String color = colorMap.get(vertex.getChebiName()).toString();
                 String nodeColor = "color :" +"\"" +color +"\"";
                 Integer alpha = vertex.getColor().getAlpha();
                 double alphaScaled = scaleAlpha(alpha);
                 String nodeAlpha = "alpha :" +"\""+alphaScaled +"\"";
-                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" }");
+                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" ," +nodePValue +" }");
             }
-            else nodeList.add("{ " +nodeId +" , " +nodeLabel +" }");
+            else nodeList.add("{ " +nodeId +" , " +nodeLabel +" ," +nodePValue +" }");
 
         }
 

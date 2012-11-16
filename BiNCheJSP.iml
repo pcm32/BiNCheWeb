@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target/BiNCheWebApp" />
+      <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
+    <orderEntry type="module" module-name="BiNChe" />
+    <orderEntry type="library" name="Maven: cytoscape:application:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:util-intr:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:graph-dynamic:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:graph-fixed:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:giny:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:render-immed:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:render-stateful:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:geom-spacial:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:render-export:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:fing:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:phoebe-dnd:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:geom-rtree:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:undo-support:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:equations:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:task:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:ding:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:obo:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape.corelibs:commons-cli-1-x-cytocape-custom:2.8.4-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:l2fprod-common-sheet:7.3" level="project" />
+    <orderEntry type="library" name="Maven: org.swinglabs:swingx:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
+    <orderEntry type="library" name="Maven: org.swinglabs:swing-worker:1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:l2fprod-common-shared:7.3" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:l2fprod-common-fontchooser:7.3" level="project" />
+    <orderEntry type="library" name="Maven: javax.help:javahelp:2.0.02" level="project" />
+    <orderEntry type="library" name="Maven: com.lowagie:itext:2.0.8" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: colt:colt:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:biojava:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.jdom:jdom:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.swinglabs:swing-layout:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.jgoodies:looks:2.1.4" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-export:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-graphics2d:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-graphicsio:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-graphicsio-ps:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-graphicsio-svg:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-graphicsio-java:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-io:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-swing:2.0.3" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-util:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-xml:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:freehep-jas-plotter:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:tclib:1.0" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:violinstrings:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-temp:install4j:4.0" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-sun:jaxb-api:1.0" level="project" />
+    <orderEntry type="library" name="Maven: cytoscape-sun:jaxb-impl:1.0" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jung:jung-graph-impl:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jung:jung-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: net.sourceforge.collections:collections-generic:4.01" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jung:jung-visualization:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jung:jung-algorithms:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-svggen:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-gvt:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-gui-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-ext:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xmlParserAPIs:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-svg-dom:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-dom:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-css:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-xml:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: xerces:xercesImpl:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
+  </component>
+</module>
+

@@ -114,7 +114,10 @@
                 }, {
                     name : "alpha",
                     type : "string"
-                } ],
+                }, {
+                    name : "pValue",
+                    type : "string"
+                }],
 
                 edges : [ {
                     name : "directed",
@@ -140,7 +143,6 @@
         var vis = new org.cytoscapeweb.Visualization(div_id, options);
 
         //specify the graph and layout to draw
-
         var draw_options = {
             network : network_json,
             layout : {
@@ -152,6 +154,7 @@
                  subtreeSpace : 60
                  }*/
             },
+            nodeTooltipsEnabled : true,
             visualStyle : {
                 global : {
                     backgroundColor : "#003333"
@@ -160,16 +163,8 @@
                 nodes : {
                     /*shape : "roundrect",
                      size : "auto",*/
-                    color : {
-                        passthroughMapper : {
-                            attrName : "color"
-                        }
-                    },
-                    opacity : {
-                        passthroughMapper : {
-                            attrName : "alpha"
-                        }
-                    },
+                    color : { passthroughMapper : { attrName : "color" } },
+                    opacity : { passthroughMapper : { attrName : "alpha" } },
                     labelGlowStrength : 100,
                     labelFontSize : 16,
                     labelFontColor : "#ffffff",
@@ -182,50 +177,67 @@
             }
         };
 
-        vis
-                .ready(function() {
-                    $("#save_xgmml")
-                            .click(
-                            function() {
-                                vis
-                                        .exportNetwork('xgmml',
-                                        '${ pageContext.request.contextPath }/GraphExporter?type=xml');
-                            });
+        vis["customTooltip"] = function (data) {
+            var pValue = data["pValue"];
+            var label = data["label"];
+            var id = data["id"];
+            return 'Compound - ' + label + '\n' + 'ChEBI id - CHEBI:' + id + '\n' + 'p-value - ' + pValue;
+        };
 
-                    $("#save_graphml")
-                            .click(
-                            function() {
-                                vis
-                                        .exportNetwork(
-                                        'graphml',
-                                        '${ pageContext.request.contextPath }/GraphExporter?type=xml');
-                            });
+        vis.ready(function() {
 
-                    $("#save_sif")
-                            .click(
-                            function() {
-                                vis
-                                        .exportNetwork('sif',
-                                        '${ pageContext.request.contextPath }/GraphExporter?type=txt');
-                            });
+            var style = vis.visualStyle();
+            style.nodes.tooltipText = { customMapper : { functionName : "customTooltip" } };
+            vis.visualStyle(style);
 
-                    $("#save_png")
-                            .click(
-                            function() {
-                                vis
-                                        .exportNetwork('png',
-                                        '${ pageContext.request.contextPath }/GraphExporter?type=png');
-                            });
+            $("#save_xgmml").click(function() {
+                vis.exportNetwork('xgmml','${ pageContext.request.contextPath }/GraphExporter?type=xml');
+            });
 
-                    $("#save_svg")
-                            .click(
-                            function() {
-                                vis
-                                        .exportNetwork('svg',
-                                        '${ pageContext.request.contextPath }/GraphExporter?type=svg');
-                            });
+            $("#save_graphml").click(function() {
+                vis.exportNetwork('graphml','${ pageContext.request.contextPath }/GraphExporter?type=xml');
+            });
 
-                });
+            $("#save_sif").click(function() {
+                vis.exportNetwork('sif',
+                        '${ pageContext.request.contextPath }/GraphExporter?type=txt');
+            });
+
+            $("#save_png").click(function() {
+                vis.exportNetwork('png','${ pageContext.request.contextPath }/GraphExporter?type=png');
+            });
+
+            $("#save_svg").click(function() {
+                vis.exportNetwork('svg','${ pageContext.request.contextPath }/GraphExporter?type=svg');
+            });
+
+            vis.addContextMenuItem("Go to entry page in ChEBI", "nodes",
+                    function (evt) {
+                        // Get the right-clicked node:
+                        var node = evt.target;
+
+                        //Get the chebi id of the node (it is inside a property called 'data')
+                        var id = node.data.id;
+
+                        //Create a link to the corresponding page in ChEBI and open in a separate tab
+                        var link = "http://www.ebi.ac.uk/chebi/advancedSearchFT.do?searchString=" +id +"&queryBean.stars=2";
+                        window.open(link, '_blank');
+                    })
+
+                    .addContextMenuItem("Select first neighbors", "nodes",
+                    function (evt) {
+                        // Get the right-clicked node:
+                        var rootNode = evt.target;
+
+                        // Get the first neighbors of that node:
+                        var fNeighbors = vis.firstNeighbors([rootNode]);
+                        var neighborNodes = fNeighbors.neighbors;
+
+                        // Select the root node and its neighbors:
+                        vis.select([rootNode]).select(neighborNodes);
+                    }
+            );
+        });
 
         //draw
         vis.draw(draw_options);
