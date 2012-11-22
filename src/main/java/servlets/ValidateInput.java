@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValidateInput
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ValidateInput extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String error = null;
-	/**
+
+
+    /**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ValidateInput() {
@@ -42,19 +45,24 @@ public class ValidateInput extends HttpServlet {
 		//Process input ids
 		String rawInput = request.getParameter("input").trim();
 		String[] input = null;
-		//Check if values are tab-separated or comma-separated
+		//Check if values are separated by comma or space
 		if (rawInput.split(",").length>1) {
 			input = rawInput.split(",");
 		}
 		else {
 			input = rawInput.split("\\s+");
 		}
-		
-		int inputSize = input.length;
-		
-		//Process type of analysis
+
+		//Get type and target of enrichment
+       HttpSession session = request.getSession();
 		String type = request.getParameter("analysisType");
+        session.setAttribute("analysisType", type);
+
+        String target = request.getParameter("targetType");
+        session.setAttribute("targetType", target);
+
 		if (type.equalsIgnoreCase("weighted")) {
+
 			Map <String, String> inputMap = new HashMap<String, String>();
 			List<String> errors = new ArrayList<String>();
 
@@ -75,11 +83,7 @@ public class ValidateInput extends HttpServlet {
 			}
 
 			if (errors.isEmpty()) {
-				request.setAttribute("inputMap", inputMap);
-				inputSize = inputMap.keySet().size();
-				request.setAttribute("inputSize", inputSize); //for testing filter
-				//response.sendRedirect("pages/ResultPage.jsp");
-				request.getRequestDispatcher("pages/ResultJSON.jsp").forward(request, response);
+				session.setAttribute("inputMap", inputMap);
 			}
 			else {
 				response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "The weight has to be a number between 0 and 1!");
@@ -91,10 +95,11 @@ public class ValidateInput extends HttpServlet {
 			for(String id : input) {
 				dummyMap.put(id, "1");
 			}
-			request.setAttribute("inputMap", dummyMap);
-			request.setAttribute("inputSize", inputSize); //for testing filter
-			request.getRequestDispatcher("pages/ResultJSON.jsp").forward(request, response);
+			session.setAttribute("inputMap", dummyMap);
 		}
+
+        //Redirect to the result page
+        response.sendRedirect("pages/Result.jsp");
 		
 	}
 

@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="BiNCheJSP:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="BiNCheWebApp.war">
-      <element id="artifact" artifact-name="BiNCheJSP:war exploded" />
-    </root>
-  </artifact>
-</component>

@@ -104,7 +104,7 @@ public class BiNCheExecWeb {
 
         String ontologyFile = null;
 
-        String target = request.getParameter("targetType");
+        String target = request.getSession().getAttribute("targetType").toString();
         if (target.equalsIgnoreCase("structure")) {
             ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_chemEnt.obo").getFile();
 //            ontologyFile = BiNCheExecWeb.class.getResource("/data/ontology-enrichment-CHEM.on").getFile();
@@ -167,7 +167,7 @@ public class BiNCheExecWeb {
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
-        getJsonObjectFromGraph(chebiGraph, request, response);
+        getJsonObjectFromChebiGraph(chebiGraph, request, response);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
@@ -178,7 +178,7 @@ public class BiNCheExecWeb {
     /*
     Returns the chebi graph as an array of nodes and edges in a json format
      */
-    private void getJsonObjectFromGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
+    private void getJsonObjectFromChebiGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
 
         //Convert vertex colours from RGB to hexadecimal for the web-app
         Map<String, String> colorMap = new HashMap<String, String>();
