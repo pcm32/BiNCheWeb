@@ -25,7 +25,7 @@
         function refillText(textArea) {
             if(textArea.value=='') {
                 textArea.value=textArea.defaultValue; //Set it back to sample ids
-                textArea.style.color='#c7c7c7';  //Set font colour back to grey
+                textArea.style.color='#9b9b9b';  //Set font colour back to grey
             }
         }
     </script>
@@ -45,7 +45,7 @@
         }
 
         #loadingtext {
-            width: 100px;
+            width: 300px;
             height: 100px;
             background-color: #FFF;
             text-align: center;
@@ -59,29 +59,26 @@
 
 <body>
 <center>
-    <div id="loading" style="display:none;">
-        <div id="loadingtext">
-            Please wait...<br /> <img
-                src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
-                border="0" />
-        </div>
+<div id="loading" style="display:none;">
+    <div id="loadingtext">
+        Please wait while the graph loads...<br />
+        <img src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
+            border="0" style="margin-top: 10px"/>
     </div>
-    <h1>ENRICHMENT ANALYSIS</h1> <br>
-    <a href="http://www.ebi.ac.uk/chebi/">
-        <img src="${pageContext.request.contextPath}/images/ChEBI_logo_mid.gif"
-             alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
-             title="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds.">
-    </a> <br> <br>
-    <p> Please enter your list of ChEBI ids, separated by tab, newline or comma.</p> <br>
+</div>
+<h1>ENRICHMENT ANALYSIS</h1> <br>
+<a href="http://www.ebi.ac.uk/chebi/" target="_blank">
+    <img src="${pageContext.request.contextPath}/images/ChEBI_logo_mid.gif"
+         alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
+         title="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds.">
+</a> <br> <br> <br>
 
-
-    <form action="${ pageContext.request.contextPath }/ValidateInput"
-          method="post">
-        <b>ChEBI ids</b>
-        <table style="vertical-align: middle">
-            <tr>
-                <td style="padding: 10px">
-                    <textarea rows="10" cols="50" name="input" id="input" style="color: #c7c7c7" onfocus="clearText(this)" onblur="refillText(this)">
+<form action="${ pageContext.request.contextPath }/ValidateInput" method="post">
+    <b>ChEBI ids</b>
+    <div class="content" style="vertical-align: middle; width: 500px">
+        <div style="padding: 5px" class="textarea">
+            <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; text-align: left"
+                      onfocus="clearText(this)" onblur="refillText(this)">
 CHEBI:108133
 CHEBI:108141
 CHEBI:10983
@@ -200,37 +197,41 @@ CHEBI:16664
 CHEBI:16692
 CHEBI:16697
 CHEBI:1670
-CHEBI:16702</textarea></td>
-            </tr>
-            <tr>
-                <td style="clear: both; padding: 10px"><br> <b>Select
-                    type of analysis </b> <br /> <span> <input type="radio"
-                                                               id="weighted" name="analysisType" value="weighted"
-                                                               onclick="display('weighted');" /> <b>Weighted
-                    Enrichment Analysis </b>
-					</span> <span> <input type="radio" id="plain" name="analysisType"
-                                          value="plain" checked="checked" onclick="display('plain');" /> <b>Plain Enrichment
-                    Analysis </b> <br />
-					</span> <br> <span id="weightInfo"
-                                       style="display: none; padding: 2px"> This analysis accepts a
-							list of ChEBI ids and their weights. <br> Weight is a
-							decimal value between 0 and 1.<br> This analysis runs on the
-							ChEBI structure ontology.
+CHEBI:16702</textarea>
+        </div>
+        <div style="padding: 5px" class="textarea-instruction">
+            <span style="font-size: 10.5pt; padding: 1px;">Please enter your list of ChEBI ids, delimited by tab, newline or comma
+            </span>
+        </div> <br>
+        <div style="padding: 5px" class="type-selection">
+             <span style="padding: 1px;">
+             <b>Select type of analysis </b> <br/>
+                <span> <input type="radio" id="weighted" name="analysisType" value="weighted" onclick="display('weighted');" />
+                    <b>Weighted Enrichment Analysis </b>
+			    </span>
+                <span> <input type="radio" id="plain" name="analysisType" value="plain" checked="checked" onclick="display('plain');" />
+                    <b>Plain Enrichment Analysis </b>
+			    </span>
+                 </span>
+                <span id="weightInfo" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
+                     <p>This analysis accepts a list of ChEBI ids and their weights. <br>
+                         Weight is a decimal value between 0 and 1.<br>
+                         This analysis runs on the ChEBI structure ontology.</p>
+				</span>
+                <span id="plainInfo" style="display: none; padding: 2px; height: 70px; text-align: left; margin-left: 3em">
+					 <p style="font-size: 10.5pt">This method accepts a list of ChEBI ids only.</p>
+                    Select target of enrichment
+                     <select name="targetType">
+                         <option value="structure" selected="selected">ChEBI structure classification</option>
+                         <option value="role">ChEBI role classification</option>
+                         <option value="both">ChEBI structures and roles</option>
+                     </select>
+				</span>
+            <input type="submit" value="Submit" onclick="document.getElementById('loading').style.display = 'block';" style="margin-top: 2em" />
 
-					</span> <span id="plainInfo" style="display: none; padding: 2px">
-							This method accepts a list of ChEBI ids only.<br /> <br> <b>Select
-                    target of enrichment</b> <select name="targetType">
-                    <option value="structure" selected="selected">ChEBI
-                        structure classification</option>
-                    <option value="role">ChEBI role classification</option>
-                    <option value="both">ChEBI structures and roles</option>
-                </select>
-					</span><br> <br> <input type="submit" value="Submit"
-                                            onclick="document.getElementById('loading').style.display = 'block';" />
-                </td>
-            </tr>
-        </table>
-    </form>
+        </div>
+    </div>
+</form>
 <%--
     <br> <br> <i>Test data (For reference)</i> <br>
 
@@ -305,10 +306,10 @@ CHEBI:16702</textarea></td>
         </tr>
     </table>--%>
 
-    <script type="text/javascript">
-        document.getElementById("loading").style.display = "none";
-        display('plain');
-    </script>
+<script type="text/javascript">
+    document.getElementById("loading").style.display = "none";
+    display('plain');
+</script>
 
 </center>
 </body>

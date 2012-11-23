@@ -9,7 +9,7 @@
 
     <!-- Style sheets -->
     <link rel="stylesheet" type="text/css"
-          href="${ pageContext.request.contextPath }/css/result.css?v=3.0.3">
+          href="${ pageContext.request.contextPath }/css/result.css?v=3.0.4">
 
     <link rel="stylesheet" type="text/css"
           href="${ pageContext.request.contextPath }/css/jquery-ui-1.9.0.custom.css">
@@ -175,7 +175,6 @@
 
                     hoverGlowOpacity : 1.0,
                     hoverGlowColor : "#ffff33",
-                    hoverGlowStrength : 20,
                     hoverOpacity : 1.0,
 
                     labelGlowStrength : 100,

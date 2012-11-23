@@ -34,7 +34,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.List;
 
@@ -52,51 +54,51 @@ public class BiNCheExecWeb {
 //				bincheexec.generateImage(args, request, response);
     }
 
-	public BiNCheExecWeb() {
+    public BiNCheExecWeb() {
 
-	}
+    }
 
-	public RenderedImage generateImage(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public RenderedImage generateImage(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		LOGGER.log(Level.INFO, "############ Start ############");
+        LOGGER.log(Level.INFO, "############ Start ############");
 
-		String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
+        String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
 
 
         LOGGER.log(Level.INFO, "Setting default parameters ...");
-		BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
+        BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
 
-		BiNChe binche = new BiNChe();
-		binche.setParameters(parametersSaddle);
+        BiNChe binche = new BiNChe();
+        binche.setParameters(parametersSaddle);
 
-		LOGGER.log(Level.INFO, "Reading input file ...");
-		try {
-			binche.loadDesiredElementsForEnrichmentFromInput(input);
-		} catch (IOException exception) {
-			LOGGER.log(Level.ERROR, "Error reading file: " + exception.getMessage());
-			System.exit(1);
-		}
-		binche.execute();
+        LOGGER.log(Level.INFO, "Reading input file ...");
+        try {
+            binche.loadDesiredElementsForEnrichmentFromInput(input);
+        } catch (IOException exception) {
+            LOGGER.log(Level.ERROR, "Error reading file: " + exception.getMessage());
+            System.exit(1);
+        }
+        binche.execute();
 
-		ChebiGraph chebiGraph =
-				new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
+        ChebiGraph chebiGraph =
+                new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
 
-		LOGGER.log(Level.INFO, "Displaying out graph ...");
+        LOGGER.log(Level.INFO, "Displaying out graph ...");
 
-		VisualizationImageServer<ChebiVertex, ChebiEdge> imageServer = chebiGraph.getVisualisationServer();
-		Image image = imageServer.getImage(new Point.Double(0, 0), new Dimension(1800, 1440));
-		RenderedImage bfImage = toBufferedImage(image);
+        VisualizationImageServer<ChebiVertex, ChebiEdge> imageServer = chebiGraph.getVisualisationServer();
+        Image image = imageServer.getImage(new Point.Double(0, 0), new Dimension(1800, 1440));
+        RenderedImage bfImage = toBufferedImage(image);
 
-		LOGGER.log(Level.INFO, "############ Stop ############");
+        LOGGER.log(Level.INFO, "############ Stop ############");
 
-		HttpSession session = request.getSession();
-		response.setContentType("text/html");
-		session.setAttribute("chebiGraph", bfImage);
+        HttpSession session = request.getSession();
+        response.setContentType("text/html");
+        session.setAttribute("chebiGraph", bfImage);
 
-		return bfImage;
-	}
+        return bfImage;
+    }
 
-	public void generateJson(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void generateJson(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException {
 
         LOGGER.log(Level.INFO, "############ Start ############");
         Boolean structureEnrichment = false;
@@ -106,17 +108,15 @@ public class BiNCheExecWeb {
 
         String target = request.getSession().getAttribute("targetType").toString();
         if (target.equalsIgnoreCase("structure")) {
-            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_chemEnt.obo").getFile();
-//            ontologyFile = BiNCheExecWeb.class.getResource("/data/ontology-enrichment-CHEM.on").getFile();
+            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt.obo").toURI().toString();
             structureEnrichment = true;
         }
         else if (target.equalsIgnoreCase("role")) {
-            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_roles.obo").getFile();
-//            ontologyFile = BiNCheExecWeb.class.getResource("/data/ontology-enrichment-ROLE.on").getFile();
+            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_roles.obo").toURI().toString();
             roleEnrichment = true;
         }
         else if(target.equalsIgnoreCase("both")) {
-            ontologyFile = BiNCheExecWeb.class.getResource("/data/chebiInferred_chemEnt_roles.obo").getFile();
+            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt_roles.obo").toURI().toString();
             structureEnrichment= true;
         }
 
@@ -125,11 +125,11 @@ public class BiNCheExecWeb {
 
         //Set annotation file separately from ontology file
         if (structureEnrichment) {
-            parametersChEBIBin.setAnnotationFile(BiNCheExecWeb.class.getResource("/data/ontology-annotations-CHEM.anno").getFile());
+            parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-CHEM.anno").toURI().toString());
         }
 
         if (roleEnrichment) {
-            parametersChEBIBin.setAnnotationFile(BiNCheExecWeb.class.getResource("/data/ontology-annotations-ROLE.anno").getFile());
+            parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-ROLE.anno").toURI().toString());
         }
 
         BiNChe binche = new BiNChe();
