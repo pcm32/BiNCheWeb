@@ -5,6 +5,7 @@ html,body {
     width: 100%;
     padding: 0;
     margin: 0;
+    font-family: 'Times New Roman',Georgia, serif;
 }
 
 #cytoweb_container {
@@ -38,6 +39,8 @@ html,body {
 #export_graph ul li > ul{width:200px;}
 #export_graph ul li > ul li{display:block; list-style:inside none; padding:0; margin:0; position:relative;}
 #export_graph ul li > ul li a{ outline:none; display:block; position:relative; margin:0; padding:8px 20px; font:10pt Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; text-shadow:1px 1px 0 rgba(0,0,0, 0.5); }
+
+#export_graph > ul > li.name:hover > ul{left: 0px}
 
 #export_graph, #export_graph > ul > li > ul > li:last-child > a:hover, #export_graph > ul > li > ul > li a:hover{background:#bf4143; background:-moz-linear-gradient(top,  #bf4143 0%, #a13742 100%); background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#bf4143), color-stop(100%,#a13742)); background:-webkit-linear-gradient(top,  #bf4143 0%,#a13742 100%); background:-o-linear-gradient(top,  #bf4143 0%,#a13742 100%); background:-ms-linear-gradient(top,  #bf4143 0%,#a13742 100%); background:linear-gradient(top,  #bf4143 0%,#a13742 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf4143', endColorstr='#a13742',GradientType=0 );}
 #export_graph{border-color:/*#cfcfcf*/ #712730;}

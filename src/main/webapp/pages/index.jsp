@@ -4,17 +4,24 @@
 
 <html>
 <head>
-    <title>BiNChe -- Enrichment analysis using ChEBI</title>
+    <title>BiNChe -- Enrichment analysis using ChEBI ontology</title>
+
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
+
     <script type="text/javascript">
         function display(value) {
             var val = document.getElementById(value).value;
             if (val == "plain") {
                 document.getElementById('plainInfo').style.display = 'block';
                 document.getElementById('weightInfo').style.display = 'none';
+
             } else if (val == "weighted") {
                 document.getElementById('plainInfo').style.display = 'none';
                 document.getElementById('weightInfo').style.display = 'block';
             }
+
+            refillText(document.getElementById("input"));
         }
 
         function clearText(textArea) {
@@ -23,10 +30,37 @@
         }
 
         function refillText(textArea) {
-            if(textArea.value=='') {
-                textArea.value=textArea.defaultValue; //Set it back to sample ids
-                textArea.style.color='#9b9b9b';  //Set font colour back to grey
-            }
+            //Based on the type of analysis selected, fill the textbox with examples accordingly
+            if($("#weighted").is(":checked")==true) refillTextWithWeightedIds(textArea);
+
+            else refillTextWithPlainIds(textArea);
+
+        }
+
+        function refillTextWithPlainIds(textArea) {
+            textArea.value=textArea.defaultValue; //Set it back to sample ids
+            textArea.style.color='#9b9b9b';  //Set font colour back to grey
+        }
+
+        function refillTextWithWeightedIds(textArea) {
+            textArea.value='CHEBI:491197	1   \n' +
+                    'CHEBI:591790	0.989   \n' +
+                    'CHEBI:15712	0.915   \n' +
+                    'CHEBI:523039	0.894   \n' +
+                    'CHEBI:28412	0.862   \n' +
+                    'CHEBI:666900	0.862   \n' +
+                    'CHEBI:15649	0.293   \n' +
+                    'CHEBI:491180	0.259   \n' +
+                    'CHEBI:31080	0.252   \n' +
+                    'CHEBI:15712	0.236   \n' +
+                    'CHEBI:28412	0.235   \n' +
+                    'CHEBI:18131	0.23    \n' +
+                    'CHEBI:523039	0.226   \n' +
+                    'CHEBI:521292	0.19    \n' +
+                    'CHEBI:1278800	0.177   \n';
+
+            textArea.style.color='#9b9b9b';  //Set font colour back to grey
+
         }
     </script>
     <style type="text/css">
@@ -57,7 +91,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-family: 'Times New Roman', Georgia, serif">
 <center>
 <div id="loading" style="display:none;">
     <div id="loadingtext">
@@ -78,7 +112,7 @@
     <div class="content" style="vertical-align: middle; width: 500px">
         <div style="padding: 5px" class="textarea">
             <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; text-align: left"
-                      onfocus="clearText(this)" onblur="refillText(this)">
+                      onfocus="clearText(this)" onblur="if(this.value=='') refillText(this);">
 CHEBI:108133
 CHEBI:108141
 CHEBI:10983
@@ -206,27 +240,27 @@ CHEBI:16702</textarea>
         <div style="padding: 5px" class="type-selection">
              <span style="padding: 1px;">
              <b>Select type of analysis </b> <br/>
-                <span> <input type="radio" id="weighted" name="analysisType" value="weighted" onclick="display('weighted');" />
+                <span> <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
                     <b>Weighted Enrichment Analysis </b>
 			    </span>
-                <span> <input type="radio" id="plain" name="analysisType" value="plain" checked="checked" onclick="display('plain');" />
+                <span> <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
                     <b>Plain Enrichment Analysis </b>
 			    </span>
                  </span>
-                <span id="weightInfo" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
+             <span id="weightInfo" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
                      <p>This analysis accepts a list of ChEBI ids and their weights. <br>
                          Weight is a decimal value between 0 and 1.<br>
                          This analysis runs on the ChEBI structure ontology.</p>
-				</span>
-                <span id="plainInfo" style="display: none; padding: 2px; height: 70px; text-align: left; margin-left: 3em">
+		     </span>
+             <span id="plainInfo" style="display: none; padding: 2px; height: 70px; text-align: left; margin-left: 3em">
 					 <p style="font-size: 10.5pt">This method accepts a list of ChEBI ids only.</p>
                     Select target of enrichment
                      <select name="targetType">
                          <option value="structure" selected="selected">ChEBI structure classification</option>
                          <option value="role">ChEBI role classification</option>
-                         <option value="both">ChEBI structures and roles</option>
+                         <option value="structure and role">ChEBI structure and role classification</option>
                      </select>
-				</span>
+		     </span>
             <input type="submit" value="Submit" onclick="document.getElementById('loading').style.display = 'block';" style="margin-top: 2em" />
 
         </div>

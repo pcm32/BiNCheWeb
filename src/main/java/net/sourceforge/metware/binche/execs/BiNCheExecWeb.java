@@ -34,7 +34,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -51,54 +50,24 @@ public class BiNCheExecWeb {
 
         System.out.println("Starting main method....");
         BiNCheExecWeb bincheexec = new BiNCheExecWeb();
-//				bincheexec.generateImage(args, request, response);
+//				bincheexec.processData(args, request, response);
     }
 
     public BiNCheExecWeb() {
 
     }
 
-    public RenderedImage generateImage(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        LOGGER.log(Level.INFO, "############ Start ############");
-
-        String ontologyFile = BiNCheExecWeb.class.getResource("/data/chebi_clean.obo").getFile();
-
-
-        LOGGER.log(Level.INFO, "Setting default parameters ...");
-        BingoParameters parametersSaddle = getDefaultParameters(ontologyFile);
-
-        BiNChe binche = new BiNChe();
-        binche.setParameters(parametersSaddle);
-
-        LOGGER.log(Level.INFO, "Reading input file ...");
-        try {
-            binche.loadDesiredElementsForEnrichmentFromInput(input);
-        } catch (IOException exception) {
-            LOGGER.log(Level.ERROR, "Error reading file: " + exception.getMessage());
-            System.exit(1);
-        }
-        binche.execute();
-
-        ChebiGraph chebiGraph =
-                new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
-
-        LOGGER.log(Level.INFO, "Displaying out graph ...");
-
-        VisualizationImageServer<ChebiVertex, ChebiEdge> imageServer = chebiGraph.getVisualisationServer();
-        Image image = imageServer.getImage(new Point.Double(0, 0), new Dimension(1800, 1440));
-        RenderedImage bfImage = toBufferedImage(image);
-
-        LOGGER.log(Level.INFO, "############ Stop ############");
-
-        HttpSession session = request.getSession();
-        response.setContentType("text/html");
-        session.setAttribute("chebiGraph", bfImage);
-
-        return bfImage;
-    }
-
-    public void generateJson(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException {
+    /**
+     * Processes the input data which is sent by the web interface, performs enrichment analysis, draws the graph,
+     * prunes it to a suitable size and converts the nodes and edges to a json format.
+     * This method is intended to be be called by the web interface.
+     * @param input
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    public void processData(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException {
 
         LOGGER.log(Level.INFO, "############ Start ############");
         Boolean structureEnrichment = false;
@@ -115,7 +84,7 @@ public class BiNCheExecWeb {
             ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_roles.obo").toURI().toString();
             roleEnrichment = true;
         }
-        else if(target.equalsIgnoreCase("both")) {
+        else if(target.equalsIgnoreCase("structure and role")) {
             ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt_roles.obo").toURI().toString();
             structureEnrichment= true;
         }
@@ -167,7 +136,7 @@ public class BiNCheExecWeb {
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
-        getJsonObjectFromChebiGraph(chebiGraph, request, response);
+        getChebiGraphAsJson(chebiGraph, request, response);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
@@ -175,10 +144,14 @@ public class BiNCheExecWeb {
 
     }
 
-    /*
-    Returns the chebi graph as an array of nodes and edges in a json format
+
+    /**
+     * Converts the graph into a list of nodes and a list of edges.
+     * @param chebiGraph
+     * @param request
+     * @param response
      */
-    private void getJsonObjectFromChebiGraph(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
+    private void getChebiGraphAsJson(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
 
         //Convert vertex colours from RGB to hexadecimal for the web-app
         Map<String, String> colorMap = new HashMap<String, String>();
@@ -200,8 +173,10 @@ public class BiNCheExecWeb {
         session.setAttribute("edgeList", edgeList);
     }
 
-    /*
-    Returns the edges in a json format that can be read by CytoscapeWeb
+    /**
+     * Converts the list of edges from ChebiGraph object to a list in json format.
+     * @param chebiGraph
+     * @return
      */
     private List<String> getEdgesForDisplay(ChebiGraph chebiGraph) {
         List<String> edgeList = new ArrayList<String>();
@@ -218,9 +193,13 @@ public class BiNCheExecWeb {
         return edgeList;
     }
 
-    /*
-    Returns the nodes and their properties (colour, alpha which indicates opacity, label, id) in a json format
-    */
+    /**
+     * Converts the list of nodes from ChebiGraph object and returns the nodes and their properties
+     * (colour, alpha which indicates opacity, label, id) in json format
+     * @param chebiGraph
+     * @param colorMap
+     * @return
+     */
     private List getNodesForDisplay (ChebiGraph chebiGraph, Map<String, String> colorMap) {
         List nodeList = new ArrayList();
         for (ChebiVertex vertex : chebiGraph.getVertices()) {
@@ -242,14 +221,23 @@ public class BiNCheExecWeb {
         return nodeList;
     }
 
-    /*
-    Scales alpha from a 0-255 range to 0-1.0
+    /**
+     * Scales alpha from a 0-255 range to 0-1.0 so it can be passed to CytoscapeWeb for colouring the nodes
+     * @param alpha
+     * @return
      */
     private double scaleAlpha(Integer alpha) {
         double al = alpha * (1.0/255.0);
         return al;
     }
 
+    /**
+     * Returns an RGB colour in a hexadecimal format.
+     * @param r
+     * @param g
+     * @param b
+     * @return
+     */
     public static String toHex(int r, int g, int b) {
         return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
     }
@@ -262,20 +250,11 @@ public class BiNCheExecWeb {
         return builder.toString().toUpperCase();
     }
 
-    private static BufferedImage toBufferedImage(Image src) {
-
-        int w = src.getWidth(null);
-        int h = src.getHeight(null);
-        int type = BufferedImage.TYPE_INT_ARGB;
-        BufferedImage dest = new BufferedImage(w, h, type);
-        Graphics2D g2 = dest.createGraphics();
-        g2.fillRect(0, 0, w, h);
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(src, 0, 0, null);
-        g2.dispose();
-        return dest;
-    }
-
+    /**
+     * Method to set BiNGOParameters.
+     * @param ontologyFile
+     * @return
+     */
     public BingoParameters getDefaultParameters(String ontologyFile) {
 
         BingoParameters parametersSaddle = new BingoParameters();

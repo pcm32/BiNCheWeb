@@ -5,14 +5,14 @@
 
 <html>
 <head>
-    <title>BiNChe -- Enrichment analysis using ChEBI</title>
+    <title>BiNChe -- Enrichment analysis using ChEBI ontology</title>
 
     <!-- Style sheets -->
     <link rel="stylesheet" type="text/css"
-          href="${ pageContext.request.contextPath }/css/result.css?v=3.0.4">
+          href="${ pageContext.request.contextPath }/css/result.css?v=3.1.3">
 
-    <link rel="stylesheet" type="text/css"
-          href="${ pageContext.request.contextPath }/css/jquery-ui-1.9.0.custom.css">
+<%--    <link rel="stylesheet" type="text/css"
+          href="${ pageContext.request.contextPath }/css/jquery-ui-1.9.0.custom.css">--%>
 
     <!-- JavaScript -->
     <script type="text/javascript"
@@ -43,6 +43,7 @@
         $(function () {
             $("#draggable").draggable({ containment: "#cytoweb_container", scroll: false});
         });
+
     </script>
 
     <%--    <script type="text/javascript">
@@ -57,9 +58,9 @@
 
 <%--Get the nodes and edges from the BiNCheWeb class--%>
 <%
-    HashMap<String, String> inputMap = (HashMap<String, String>) request.getSession().getAttribute("inputMap");
+    HashMap<String, String> inputMap = (HashMap<String, String>) session.getAttribute("inputMap");
 
-    bincheexec.generateJson(inputMap, request, response);
+    bincheexec.processData(inputMap, request, response);
 
     Object nodeList = session.getAttribute("nodeList");
     Object edgeList = session.getAttribute("edgeList");
@@ -67,7 +68,7 @@
 
 <div align="center" style="padding: 5px">
     <h3>
-        The graph from '<%=request.getSession().getAttribute("analysisType")%>' enrichment analysis for the target ChEBI '<%=request.getSession().getAttribute("targetType")%>'
+        The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using ChEBI <%=request.getSession().getAttribute("targetType")%> ontology
     </h3>
 </div>
 <br>
@@ -83,23 +84,28 @@
 </div>
 
 <div id="export_graph">
-    <ul>
-        <li class="name"><a href="#"><span>Export Graph</span> </a>
+    <ul<%-- id="menu"--%>>
+        <li class="name"><a href="#"> Export Graph </a>
             <ul>
-                <li class="name"> <a href="#"><span>Export as Network Data</span> </a>
+                <li class="name"> <a href="#"> Export as Network Data </a>
                     <ul>
-                        <li id="export_xgmml"> <a href="#"> <span>XGMML</span> </a> </li>
-                        <li id="export_graphml"> <a href="#"> <span>GraphML</span> </a> </li>
-                        <li id="export_sif"> <a href="#"> <span>SIF</span> </a> </li>
+                        <li id="export_xgmml"> <a href="#"> XGMML</a> </li>
+                        <li id="export_graphml"> <a href="#"> GraphML </a> </li>
+                        <li id="export_sif"> <a href="#"> SIF </a> </li>
                     </ul>
                 </li>
                 <li class="name"> <a href="#"><span>Export as Image</span> </a>
                     <ul>
-                        <li id="export_svg"> <a href="#"> <span>SVG</span> </a> </li>
-                        <li id="export_png"> <a href="#"> <span>PNG</span> </a> </li>
+                        <li id="export_svg"> <a href="#"> SVG </a> </li>
+                        <li id="export_png"> <a href="#"> PNG </a> </li>
                     </ul>
                 </li>
-                <li class="name"> <a href="#"> <span>Export as Table</span></a> </li>
+                <li class="name"> <a href="#"> Export as Table</a> </li>
+            </ul>
+        </li>
+        <li class="name"> <a href="#"> Style</a>
+            <ul>
+                <li id="show_node_labels"><a href="#"> Show node labels</a> </li>
             </ul>
         </li>
     </ul>
@@ -158,6 +164,7 @@
                 name : "ForceDirected"
             },
             nodeTooltipsEnabled : true,
+            nodeLabelsVisible : false,
             visualStyle : {
                 global : {
                     /*backgroundColor : "#003333"*/
@@ -203,7 +210,7 @@
 
         vis.ready(function() {
 
-            //Get the visual style, add the custom tooltip to it and set the visual style again
+            //Add custom tooltip to nodes
             var style = vis.visualStyle();
             style.nodes.tooltipText = { customMapper : { functionName : "customTooltip" } };
             vis.visualStyle(style);
@@ -257,6 +264,23 @@
                         vis.select([rootNode]).select(neighborNodes);
                     }
             );
+
+            //Function to toggle node labels on/off
+            $(function () {
+                $("#show_node_labels").click( function() {
+                    if (vis.nodeLabelsVisible()==false) {
+                    vis.nodeLabelsVisible(true);
+                    this.innerHTML="<a href='#'>Hide node labels</a> ";
+                    }
+
+                    else {
+                        vis.nodeLabelsVisible(false);
+                        this.innerHTML="<a href='#'>Show node labels</a> ";
+                    }
+
+                });
+            });
+
         });
 
         //draw

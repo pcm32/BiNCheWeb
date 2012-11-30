@@ -76,7 +76,7 @@ public class ValidateInput extends HttpServlet {
 				String weights = inputMap.get(id);
 				Double weight = Double.valueOf(weights);
 				
-				if (weight>0 && weight<1) continue;
+				if (weight>=0 && weight<=1) continue;
 				else {
 					errors.add(id);
 				}
