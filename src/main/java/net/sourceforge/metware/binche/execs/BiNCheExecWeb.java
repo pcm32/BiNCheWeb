@@ -75,8 +75,11 @@ public class BiNCheExecWeb {
 
         String ontologyFile = null;
 
+        String analysisType = request.getSession().getAttribute("analysisType").toString();
+        System.out.println("analysisType =  "+analysisType);
+        
         String target = request.getSession().getAttribute("targetType").toString();
-        if (target.equalsIgnoreCase("structure")) {
+        if (target.equalsIgnoreCase("structure") || analysisType.equals("weighted")) {
             ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt.obo").toURI().toString();
             structureEnrichment = true;
         }
@@ -89,18 +92,24 @@ public class BiNCheExecWeb {
             structureEnrichment= true;
         }
 
-        LOGGER.log(Level.INFO, "Setting default parameters ...");
-        BingoParameters parametersChEBIBin = ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile);
+        LOGGER.log(Level.INFO, "Setting parameters ...");
+        
+        //Different parameters for weighted and plain analysis
+        BingoParameters parametersChEBIBin = (analysisType.equals("weighted")?
+        		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFile) :
+        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile) );
+        
+        		if (analysisType.equals("plain")) {		
+        			//Set annotation file separately from ontology file
+        			if (structureEnrichment) {
+        				parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-CHEM.anno").toURI().toString());
+        			}
 
-        //Set annotation file separately from ontology file
-        if (structureEnrichment) {
-            parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-CHEM.anno").toURI().toString());
-        }
-
-        if (roleEnrichment) {
-            parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-ROLE.anno").toURI().toString());
-        }
-
+        			if (roleEnrichment) {
+        				parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-ROLE.anno").toURI().toString());
+        			}
+        		}
+        
         BiNChe binche = new BiNChe();
         binche.setParameters(parametersChEBIBin);
 
@@ -122,7 +131,7 @@ public class BiNCheExecWeb {
 
         int prunes=0;
         for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-            if (chebiGraph.getVertexCount()>50) {
+            if (chebiGraph.getVertexCount()>50 && !analysisType.equals("weighted")) { //only prune for plain enrichment
                 chEBIGraphPruner.prune(chebiGraph);
                 prunes++;
                 System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
