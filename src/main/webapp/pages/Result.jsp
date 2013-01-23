@@ -164,7 +164,7 @@
                 name : "ForceDirected"
             },
             nodeTooltipsEnabled : true,
-            nodeLabelsVisible : false,
+            nodeLabelsVisible : true,
             visualStyle : {
                 global : {
                     /*backgroundColor : "#003333"*/

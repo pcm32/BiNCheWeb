@@ -100,7 +100,7 @@
             border="0" style="margin-top: 10px"/>
     </div>
 </div>
-<h1>ENRICHMENT ANALYSIS</h1> <br>
+<h1>BiNChE ENRICHMENT ANALYSIS</h1> <br>
 <a href="http://www.ebi.ac.uk/chebi/" target="_blank">
     <img src="${pageContext.request.contextPath}/images/ChEBI_logo_mid.gif"
          alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
@@ -240,8 +240,8 @@ CHEBI:16702</textarea>
         <div style="padding: 5px" class="type-selection">
              <span style="padding: 1px;">
              <b>Select type of analysis </b> <br/>
-                <span> <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
-                    <b>Weighted Enrichment Analysis </b>
+                <span>   <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
+                    <b>Weighted Enrichment Analysis </b>  
 			    </span>
                 <span> <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
                     <b>Plain Enrichment Analysis </b>
