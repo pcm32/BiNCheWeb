@@ -38,6 +38,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.List;
+import org.apache.log4j.Priority;
 
 /**
  * @author Stephan Beisken
@@ -47,9 +48,9 @@ public class BiNCheExecWeb {
     private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
 
     public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         System.out.println("Starting main method....");
         BiNCheExecWeb bincheexec = new BiNCheExecWeb();
+        // I don't know whether this makes sense
 //				bincheexec.processData(args, request, response);
     }
 
@@ -89,14 +90,27 @@ public class BiNCheExecWeb {
             structureEnrichment= true;
         }
 
-        LOGGER.log(Level.INFO, "Setting default parameters ...");
-        BingoParameters parametersChEBIBin = ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile);
+        /**
+         * Check whether we are doing normal enrichment analysis or weighted enrichment
+         */
+        String analysisType = request.getSession().getAttribute("analysisType").toString();
+        BingoParameters parametersChEBIBin;
+        if(analysisType.equalsIgnoreCase("plain")) {
+            LOGGER.log(Level.INFO, "Setting default parameters for plain enrichment...");
+            parametersChEBIBin = ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile);
+        } else {
+            LOGGER.log(Level.INFO, "Setting default parameters for weighted enrichment...");
+            parametersChEBIBin = ParameterFactory.makeParametersForWeightedAnalysis(ontologyFile);
+        }
+        
+        
 
         //Set annotation file separately from ontology file
+        // This does not make sense for the case of "structure and role", where only the structure annotations
+        // would be used.
         if (structureEnrichment) {
             parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-CHEM.anno").toURI().toString());
         }
-
         if (roleEnrichment) {
             parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-ROLE.anno").toURI().toString());
         }
@@ -115,8 +129,18 @@ public class BiNCheExecWeb {
 
         ChebiGraph chebiGraph = new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
 
-        List<ChEBIGraphPruner> pruners = Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+        /**
+         * We only add pruners for the normal enrichment analysis
+         * 
+         * We need to make a distinction between weighted enrichment analysis for functional analysis
+         * and for fragment analysis.
+         */
+        List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
+        if(!parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM)) {
+            pruners.addAll(Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner()));
+        }
+                
         int originalVertices = chebiGraph.getVertexCount();
         System.out.println("Number of nodes before pruning : " + originalVertices);
 
@@ -136,7 +160,8 @@ public class BiNCheExecWeb {
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
-        getChebiGraphAsJson(chebiGraph, request, response);
+        JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
+        converter.setChebiGraphAsJSON(chebiGraph, request);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
@@ -145,110 +170,7 @@ public class BiNCheExecWeb {
     }
 
 
-    /**
-     * Converts the graph into a list of nodes and a list of edges.
-     * @param chebiGraph
-     * @param request
-     * @param response
-     */
-    private void getChebiGraphAsJson(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
 
-        //Convert vertex colours from RGB to hexadecimal for the web-app
-        Map<String, String> colorMap = new HashMap<String, String>();
-        for (ChebiVertex vertex : chebiGraph.getVertices()) {
-            Color rgbColor = vertex.getColor();
-            String hexColor = toHex(rgbColor.getRed(), rgbColor.getGreen(), rgbColor.getBlue());
-            colorMap.put(vertex.getChebiName(), hexColor);
-        }
-
-        //NODES
-        List <String> nodeList = getNodesForDisplay(chebiGraph, colorMap);
-
-
-        //EDGES
-        List <String> edgeList = getEdgesForDisplay(chebiGraph);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("nodeList", nodeList);
-        session.setAttribute("edgeList", edgeList);
-    }
-
-    /**
-     * Converts the list of edges from ChebiGraph object to a list in json format.
-     * @param chebiGraph
-     * @return
-     */
-    private List<String> getEdgesForDisplay(ChebiGraph chebiGraph) {
-        List<String> edgeList = new ArrayList<String>();
-        Collection<ChebiEdge> edgeSet = chebiGraph.getEdges();
-        for (ChebiEdge edge : edgeSet) {
-            //swapped vertices to reverse direction of edges
-            String vertexOne = edge.getId().split("-")[0];
-            String vertexTwo = edge.getId().split("-")[1];
-            vertexOne = "source :" +"\"" +vertexOne +"\"";
-            vertexTwo = "target :" +"\"" +vertexTwo +"\"";
-            edgeList.add("{ " + vertexTwo + " , " + vertexOne + " }");
-        }
-
-        return edgeList;
-    }
-
-    /**
-     * Converts the list of nodes from ChebiGraph object and returns the nodes and their properties
-     * (colour, alpha which indicates opacity, label, id) in json format
-     * @param chebiGraph
-     * @param colorMap
-     * @return
-     */
-    private List getNodesForDisplay (ChebiGraph chebiGraph, Map<String, String> colorMap) {
-        List nodeList = new ArrayList();
-        for (ChebiVertex vertex : chebiGraph.getVertices()) {
-            String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
-            String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
-            String nodePValue = "pValue :" +"\"" +vertex.getpValue() +"\"";
-            if (colorMap.containsKey(vertex.getChebiName())) {
-                String color = colorMap.get(vertex.getChebiName()).toString();
-                String nodeColor = "color :" +"\"" +color +"\"";
-                Integer alpha = vertex.getColor().getAlpha();
-                double alphaScaled = scaleAlpha(alpha);
-                String nodeAlpha = "alpha :" +"\""+alphaScaled +"\"";
-                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" ," +nodePValue +" }");
-            }
-            else nodeList.add("{ " +nodeId +" , " +nodeLabel +" ," +nodePValue +" }");
-
-        }
-
-        return nodeList;
-    }
-
-    /**
-     * Scales alpha from a 0-255 range to 0-1.0 so it can be passed to CytoscapeWeb for colouring the nodes
-     * @param alpha
-     * @return
-     */
-    private double scaleAlpha(Integer alpha) {
-        double al = alpha * (1.0/255.0);
-        return al;
-    }
-
-    /**
-     * Returns an RGB colour in a hexadecimal format.
-     * @param r
-     * @param g
-     * @param b
-     * @return
-     */
-    public static String toHex(int r, int g, int b) {
-        return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
-    }
-
-    private static String toBrowserHexValue(int number) {
-        StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
-        while (builder.length() < 2) {
-            builder.append("0");
-        }
-        return builder.toString().toUpperCase();
-    }
 
     /**
      * Method to set BiNGOParameters.
