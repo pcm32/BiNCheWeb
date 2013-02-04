@@ -18,7 +18,6 @@
  */
 package net.sourceforge.metware.binche.execs;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,7 +25,6 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +33,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.ChEBIGraphPruner;
-import net.sourceforge.metware.binche.graph.ChebiEdge;
 import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.ChebiVertex;
 import net.sourceforge.metware.binche.graph.LinearBranchCollapserPruner;
 import net.sourceforge.metware.binche.graph.LowPValueBranchPruner;
 import net.sourceforge.metware.binche.graph.MoleculeLeavesPruner;
@@ -53,6 +48,7 @@ import org.apache.log4j.Logger;
 
 import BiNGO.BingoParameters;
 import BiNGO.ParameterFactory;
+import BiNGO.methods.BingoAlgorithm;
 
 /**
  * @author Stephan Beisken, Bhavana Harsha, Janna Hastings
@@ -76,9 +72,8 @@ public class BiNCheExecWeb {
     	}
     	
     	setupTargetNames();
-    	
     }
-
+    	
     //depends on the properties having been initialised successfully. 
     private void setupTargetNames() {
     	int numTargets = Integer.valueOf(binCheProps.getProperty("menu.countTargets"));
@@ -162,8 +157,18 @@ public class BiNCheExecWeb {
 
         ChebiGraph chebiGraph = new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
 
-        List<ChEBIGraphPruner> pruners = Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+        /**
+         * We only add pruners for the normal enrichment analysis
+         * 
+         * We need to make a distinction between weighted enrichment analysis for functional analysis
+         * and for fragment analysis.
+         */
+        List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
+        if(!parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM)) {
+            pruners.addAll(Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner()));
+        }
+                
         int originalVertices = chebiGraph.getVertexCount();
         System.out.println("Number of nodes before pruning : " + originalVertices);
 
@@ -183,7 +188,8 @@ public class BiNCheExecWeb {
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
-        getChebiGraphAsJson(chebiGraph, request, response);
+        JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
+        converter.setChebiGraphAsJSON(chebiGraph, request);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
@@ -192,109 +198,6 @@ public class BiNCheExecWeb {
     }
 
 
-    /**
-     * Converts the graph into a list of nodes and a list of edges.
-     * @param chebiGraph
-     * @param request
-     * @param response
-     */
-    private void getChebiGraphAsJson(ChebiGraph chebiGraph, HttpServletRequest request, HttpServletResponse response) {
 
-        //Convert vertex colours from RGB to hexadecimal for the web-app
-        Map<String, String> colorMap = new HashMap<String, String>();
-        for (ChebiVertex vertex : chebiGraph.getVertices()) {
-            Color rgbColor = vertex.getColor();
-            String hexColor = toHex(rgbColor.getRed(), rgbColor.getGreen(), rgbColor.getBlue());
-            colorMap.put(vertex.getChebiName(), hexColor);
-        }
-
-        //NODES
-        List <String> nodeList = getNodesForDisplay(chebiGraph, colorMap);
-
-
-        //EDGES
-        List <String> edgeList = getEdgesForDisplay(chebiGraph);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("nodeList", nodeList);
-        session.setAttribute("edgeList", edgeList);
-    }
-
-    /**
-     * Converts the list of edges from ChebiGraph object to a list in json format.
-     * @param chebiGraph
-     * @return
-     */
-    private List<String> getEdgesForDisplay(ChebiGraph chebiGraph) {
-        List<String> edgeList = new ArrayList<String>();
-        Collection<ChebiEdge> edgeSet = chebiGraph.getEdges();
-        for (ChebiEdge edge : edgeSet) {
-            //swapped vertices to reverse direction of edges
-            String vertexOne = edge.getId().split("-")[0];
-            String vertexTwo = edge.getId().split("-")[1];
-            vertexOne = "source :" +"\"" +vertexOne +"\"";
-            vertexTwo = "target :" +"\"" +vertexTwo +"\"";
-            edgeList.add("{ " + vertexTwo + " , " + vertexOne + " }");
-        }
-
-        return edgeList;
-    }
-
-    /**
-     * Converts the list of nodes from ChebiGraph object and returns the nodes and their properties
-     * (colour, alpha which indicates opacity, label, id) in json format
-     * @param chebiGraph
-     * @param colorMap
-     * @return
-     */
-    private List getNodesForDisplay (ChebiGraph chebiGraph, Map<String, String> colorMap) {
-        List nodeList = new ArrayList();
-        for (ChebiVertex vertex : chebiGraph.getVertices()) {
-            String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
-            String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
-            String nodePValue = "pValue :" +"\"" +vertex.getpValue() +"\"";
-            if (colorMap.containsKey(vertex.getChebiName())) {
-                String color = colorMap.get(vertex.getChebiName()).toString();
-                String nodeColor = "color :" +"\"" +color +"\"";
-                Integer alpha = vertex.getColor().getAlpha();
-                double alphaScaled = scaleAlpha(alpha);
-                String nodeAlpha = "alpha :" +"\""+alphaScaled +"\"";
-                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" ," +nodePValue +" }");
-            }
-            else nodeList.add("{ " +nodeId +" , " +nodeLabel +" ," +nodePValue +" }");
-
-        }
-
-        return nodeList;
-    }
-
-    /**
-     * Scales alpha from a 0-255 range to 0-1.0 so it can be passed to CytoscapeWeb for colouring the nodes
-     * @param alpha
-     * @return
-     */
-    private double scaleAlpha(Integer alpha) {
-        double al = alpha * (1.0/255.0);
-        return al;
-    }
-
-    /**
-     * Returns an RGB colour in a hexadecimal format.
-     * @param r
-     * @param g
-     * @param b
-     * @return
-     */
-    public static String toHex(int r, int g, int b) {
-        return "#" + toBrowserHexValue(r) + toBrowserHexValue(g) + toBrowserHexValue(b);
-    }
-
-    private static String toBrowserHexValue(int number) {
-        StringBuilder builder = new StringBuilder(Integer.toHexString(number & 0xff));
-        while (builder.length() < 2) {
-            builder.append("0");
-        }
-        return builder.toString().toUpperCase();
-    }
 
 }
