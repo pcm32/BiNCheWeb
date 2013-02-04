@@ -18,45 +18,89 @@
  */
 package net.sourceforge.metware.binche.execs;
 
-import BiNGO.BingoParameters;
-import BiNGO.ParameterFactory;
-import BiNGO.methods.BingoAlgorithm;
-import edu.uci.ics.jung.visualization.VisualizationImageServer;
-import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.*;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.URISyntaxException;
-import java.util.*;
-import java.util.List;
+
+import net.sourceforge.metware.binche.BiNChe;
+import net.sourceforge.metware.binche.graph.ChEBIGraphPruner;
+import net.sourceforge.metware.binche.graph.ChebiEdge;
+import net.sourceforge.metware.binche.graph.ChebiGraph;
+import net.sourceforge.metware.binche.graph.ChebiVertex;
+import net.sourceforge.metware.binche.graph.LinearBranchCollapserPruner;
+import net.sourceforge.metware.binche.graph.LowPValueBranchPruner;
+import net.sourceforge.metware.binche.graph.MoleculeLeavesPruner;
+import net.sourceforge.metware.binche.graph.RootChildrenPruner;
+import net.sourceforge.metware.binche.graph.ZeroDegreeVertexPruner;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import BiNGO.BingoParameters;
+import BiNGO.ParameterFactory;
 
 /**
- * @author Stephan Beisken
+ * @author Stephan Beisken, Bhavana Harsha, Janna Hastings
  */
 public class BiNCheExecWeb {
 
     private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
 
-    public static void main(String[] args, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        System.out.println("Starting main method....");
-        BiNCheExecWeb bincheexec = new BiNCheExecWeb();
-//				bincheexec.processData(args, request, response);
-    }
-
+    private Properties binCheProps; 
+    private Map<String,String> targetNameToOntologyFileMap = new HashMap<String, String>();
+    private Map<String,String> targetNameToAnnotationFileMap = new HashMap<String, String>();
+    
     public BiNCheExecWeb() {
-
+    	binCheProps = new Properties();
+    	try {
+    		InputStream in = getClass().getClassLoader().getResourceAsStream("binche_gui.properties");
+    		binCheProps.load(in);
+    		in.close();
+    	} catch (Exception e) {
+    		throw new InstantiationError("Unable to load properties file, cannot proceed.");
+    	}
+    	
+    	setupTargetNames();
+    	
     }
 
+    //depends on the properties having been initialised successfully. 
+    private void setupTargetNames() {
+    	int numTargets = Integer.valueOf(binCheProps.getProperty("menu.countTargets"));
+    	for (int i=1; i<=numTargets; i++) {
+    		String targetType = binCheProps.getProperty("menu.targetType."+i);
+    		if (targetType != null) {
+    			String ontologyFileName = binCheProps.getProperty("target.ontologyFile."+i);
+    			if (ontologyFileName != null) {
+    				targetNameToOntologyFileMap.put(targetType, ontologyFileName);
+    			}
+    			String annotationFileName = binCheProps.getProperty("target.annotationFile."+i);
+    			if (annotationFileName != null) {
+    				targetNameToAnnotationFileMap.put(targetType, annotationFileName);
+    			}
+    		}
+    	}
+    }
+    
+    public Set<String> getTargetNames() {
+    	return targetNameToOntologyFileMap.keySet();
+    }
+    
     /**
      * Processes the input data which is sent by the web interface, performs enrichment analysis, draws the graph,
      * prunes it to a suitable size and converts the nodes and edges to a json format.
@@ -70,46 +114,40 @@ public class BiNCheExecWeb {
     public void processData(HashMap<String, String> input, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException {
 
         LOGGER.log(Level.INFO, "############ Start ############");
-        Boolean structureEnrichment = false;
-        Boolean roleEnrichment = false;
-
-        String ontologyFile = null;
 
         String analysisType = request.getSession().getAttribute("analysisType").toString();
         System.out.println("analysisType =  "+analysisType);
         
         String target = request.getSession().getAttribute("targetType").toString();
-        if (target.equalsIgnoreCase("structure") || analysisType.equals("weighted")) {
-            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt.obo").toURI().toString();
-            structureEnrichment = true;
+        
+        String ontologyFileName = targetNameToOntologyFileMap.get(target);
+        File ontologyFile = new File(ontologyFileName);
+        if (ontologyFile == null || !ontologyFile.exists()) {
+        	//problem!
+        	throw new FileNotFoundException("Unable to open ontology file: "+ontologyFile.getName());
         }
-        else if (target.equalsIgnoreCase("role")) {
-            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_roles.obo").toURI().toString();
-            roleEnrichment = true;
+        System.out.println("Got ontology file: "+ontologyFileName);
+        
+        String annotationFileName = targetNameToAnnotationFileMap.get(target);
+        if (annotationFileName != null) {
+        	File annotationFile = new File(annotationFileName);
+            if (annotationFile == null || !annotationFile.exists()) {
+            	//problem!
+            	throw new FileNotFoundException("Unable to open annotation file: "+annotationFile.getName());
+            }
         }
-        else if(target.equalsIgnoreCase("structure and role")) {
-            ontologyFile = BiNChe.class.getResource("/BiNGO/data/chebiInferred_chemEnt_roles.obo").toURI().toString();
-            structureEnrichment= true;
-        }
-
+        System.out.println("Got annotation file name: "+annotationFileName);
+        
         LOGGER.log(Level.INFO, "Setting parameters ...");
         
         //Different parameters for weighted and plain analysis
         BingoParameters parametersChEBIBin = (analysisType.equals("weighted")?
-        		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFile) :
-        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFile) );
+        		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFileName) :
+        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName) );
         
-        		if (analysisType.equals("plain")) {		
-        			//Set annotation file separately from ontology file
-        			if (structureEnrichment) {
-        				parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-CHEM.anno").toURI().toString());
-        			}
-
-        			if (roleEnrichment) {
-        				parametersChEBIBin.setAnnotationFile(BiNChe.class.getResource("/BiNGO/data/ontology-annotations-ROLE.anno").toURI().toString());
-        			}
-        		}
-        
+        if (annotationFileName != null) {
+        	parametersChEBIBin.setAnnotationFile(annotationFileName);
+        }
         BiNChe binche = new BiNChe();
         binche.setParameters(parametersChEBIBin);
 
@@ -259,27 +297,4 @@ public class BiNCheExecWeb {
         return builder.toString().toUpperCase();
     }
 
-    /**
-     * Method to set BiNGOParameters.
-     * @param ontologyFile
-     * @return
-     */
-    public BingoParameters getDefaultParameters(String ontologyFile) {
-
-        BingoParameters parametersSaddle = new BingoParameters();
-
-        parametersSaddle.setTest(BingoAlgorithm.SADDLESUM);
-        parametersSaddle.setCorrection(BingoAlgorithm.NONE);
-        parametersSaddle.setOntologyFile(ontologyFile);
-        parametersSaddle.setOntology_default(false);
-        parametersSaddle.setNameSpace("chebi_ontology");
-        parametersSaddle.setOverOrUnder("Overrepresentation");
-        parametersSaddle.setSignificance(new BigDecimal(0.05));
-        parametersSaddle.setCategory(BingoAlgorithm.CATEGORY_CORRECTION);
-        parametersSaddle.setReferenceSet(BingoAlgorithm.GENOME);
-        parametersSaddle.setAllNodes(null);
-        parametersSaddle.setSelectedNodes(null);
-
-        return parametersSaddle;
-    }
 }

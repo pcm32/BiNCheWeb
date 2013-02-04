@@ -3,9 +3,25 @@
 <%@ page import="java.util.HashMap"%>
 <%@ page import="net.sourceforge.metware.binche.execs.BiNCheExecWeb" %>
 
+<%@page import="java.util.Properties" %>
+<%@page import="java.io.FileInputStream" %>
+
+
+<%
+Properties props = new Properties();
+try {
+	props.load(getClass().getClassLoader().getResourceAsStream(
+			"/binche_gui.properties"));
+} catch (Exception e) {
+	out.println("Unable to load properties file due to: "
+			+ e.getMessage());
+	out.println("Root of class path "+getClass().getClassLoader().getResource("/"));
+}
+%>
+
 <html>
 <head>
-    <title>BiNChe -- Enrichment analysis using ChEBI ontology</title>
+    <title><%= props.get("title") %></title>
 
     <!-- Style sheets -->
     <link rel="stylesheet" type="text/css"
@@ -68,7 +84,7 @@
 
 <div align="center" style="padding: 5px">
     <h3>
-        The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using ChEBI <%=request.getSession().getAttribute("targetType")%> ontology
+        The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using the <%=request.getSession().getAttribute("targetType")%> ontology
     </h3>
 </div>
 <br>
@@ -203,9 +219,9 @@
             var label = data["label"];
             var id = data["id"];
             var pValueSciNot = Number(pValue).toPrecision(3);
-            var proportionOfSample = 0.68 + '(dummy value)';
-            var fold = 0.5 + '(dummy value)';
-            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot + '\n% of sample : ' +proportionOfSample + '\nfold of enrichment : ' +fold;
+      //      var proportionOfSample = 0.68 + '(dummy value)';
+      //      var fold = 0.5 + '(dummy value)';
+            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot/* + '\n% of sample : ' +proportionOfSample + '\nfold of enrichment : ' +fold */;
         };
 
         vis.ready(function() {
@@ -238,7 +254,7 @@
             });
 
             //Context menu items
-            vis.addContextMenuItem("Go to entry page in ChEBI", "nodes",
+            vis.addContextMenuItem("Go to entry page", "nodes",
                     function (evt) {
                         // Get the right-clicked node:
                         var node = evt.target;
@@ -247,7 +263,7 @@
                         var id = node.data.id;
 
                         //Create a link to the corresponding page in ChEBI and open in a separate tab
-                        var link = "http://www.ebi.ac.uk/chebi/advancedSearchFT.do?searchString=" +id +"&queryBean.stars=2";
+                        var link = "<%= props.get("graph.link.prefix") %>" +id + "<%=props.get("graph.link.suffix")%>";
                         window.open(link, '_blank');
                     })
 

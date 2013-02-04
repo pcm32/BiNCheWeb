@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
+<%@page import="java.util.Properties" %>
+<%@page import="java.io.FileInputStream" %>
+
+<%
+	Properties props = new Properties();
+	try {
+		props.load(getClass().getClassLoader().getResourceAsStream(
+				"/binche_gui.properties"));
+	} catch (Exception e) {
+		out.println("Unable to load properties file due to: "
+				+ e.getMessage());
+		out.println("Root of class path "+getClass().getClassLoader().getResource("/"));
+	}
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
-    <title>BiNChe -- Enrichment analysis using ChEBI ontology</title>
+    <title><%=props.get("title")%></title>
 
     <script type="text/javascript"
             src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
@@ -100,7 +116,8 @@
             border="0" style="margin-top: 10px"/>
     </div>
 </div>
-<h1>BiNChE ENRICHMENT ANALYSIS</h1> <br>
+<h1><%=props.get("subtitle")%></h1> <br>
+
 <a href="http://www.ebi.ac.uk/chebi/" target="_blank">
     <img src="${pageContext.request.contextPath}/images/ChEBI_logo_mid.gif"
          alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
@@ -234,31 +251,62 @@ CHEBI:1670
 CHEBI:16702</textarea>
         </div>
         <div style="padding: 5px" class="textarea-instruction">
-            <span style="font-size: 10.5pt; padding: 1px;">Please enter your list of ChEBI ids, delimited by tab, newline or comma
+            <span style="font-size: 10.5pt; padding: 1px;"><%=props.get("input.text")%>
             </span>
         </div> <br>
         <div style="padding: 5px" class="type-selection">
              <span style="padding: 1px;">
-             <b>Select type of analysis </b> <br/>
-                <span>   <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
+             <b>Select type of analysis: </b> <br/>
+                  
+                <%
+                                  	boolean showAnalysisTypes = Boolean.valueOf(props
+                                  			.getProperty("menu.showAnalysisTypes"));
+                                  	if (showAnalysisTypes) {
+                                  %>
+                 <span>
+                 <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
                     <b>Weighted Enrichment Analysis </b>  
 			    </span>
                 <span> <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
                     <b>Plain Enrichment Analysis </b>
 			    </span>
-                 </span>
+                
+                 
              <span id="weightInfo" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
                      <p>This analysis accepts a list of ChEBI ids and their weights. <br>
                          Weight is a decimal value between 0 and 1.<br>
                          This analysis runs on the ChEBI structure ontology.</p>
 		     </span>
+		     <%
+		     	} else {
+		     %>
+		     
+		     <span style="display:none"> 
+		         <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked"  onclick="display('plain');" />
+                    <b>Plain Enrichment Analysis </b>
+			    </span>
+		     
+		     <%
+		     		     	}
+		     		     %>
+		      </span>
              <span id="plainInfo" style="display: none; padding: 2px; height: 70px; text-align: left; margin-left: 3em">
-					 <p style="font-size: 10.5pt">This method accepts a list of ChEBI ids only.</p>
-                    Select target of enrichment
+                    Select target of enrichment:
                      <select name="targetType">
-                         <option value="structure" selected="selected">ChEBI structure classification</option>
-                         <option value="role">ChEBI role classification</option>
-                         <option value="structure and role">ChEBI structure and role classification</option>
+                     <%
+                     	int numTargets = Integer.valueOf(props
+                     			.getProperty("menu.countTargets"));
+                     	for (int i = 1; i <= numTargets; i++) {
+
+                     		out.print("<option value=\""
+                     				+ props.get("menu.targetType." + i) + "\" ");
+                     		if (i == 1)
+                     			out.print("selected=\"selected\" ");
+                     		out.print(">");
+                     		out.print(props.get("menu.target.text." + i));
+                     		out.println("</option> ");
+                     	}
+                     %>
                      </select>
 		     </span>
             <input type="submit" value="Submit" onclick="document.getElementById('loading').style.display = 'block';" style="margin-top: 2em" />
@@ -266,79 +314,6 @@ CHEBI:16702</textarea>
         </div>
     </div>
 </form>
-<%--
-    <br> <br> <i>Test data (For reference)</i> <br>
-
-    <table>
-        <tr>
-            <td>
-                <table>
-                    <!-- Weighted table -->
-                    <tr>
-                        <td>CHEBI:17079</td>
-                        <td>0.7665</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:46816</td>
-                        <td>0.7465</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28658</td>
-                        <td>0.7465</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28611</td>
-                        <td>0.7465</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28594</td>
-                        <td>0.6915</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:17048</td>
-                        <td>0.6915</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:7852</td>
-                        <td>0.60575</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:3540</td>
-                        <td>0.509</td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <!-- Plain table -->
-                    <tr>
-                        <td>CHEBI:17079</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:46816</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28658</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28611</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:28594</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:17048</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:7852</td>
-                    </tr>
-                    <tr>
-                        <td>CHEBI:3540</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>--%>
 
 <script type="text/javascript">
     document.getElementById("loading").style.display = "none";
