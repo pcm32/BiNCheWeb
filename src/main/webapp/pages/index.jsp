@@ -22,44 +22,50 @@
 <head>
     <title><%=props.get("title")%></title>
 
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
+        <script type="text/javascript"
+        src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
 
-    <script type="text/javascript">
-        function display(value) {
-            var val = document.getElementById(value).value;
-            if (val == "plain") {
-                document.getElementById('plainInfo').style.display = 'block';
-                document.getElementById('weightInfo').style.display = 'none';
+        <script type="text/javascript">
+            function display(value) {
+                var val = document.getElementById(value).value;
+                if (val == "plain") {
+                    document.getElementById('plainInfo').style.display = 'block';
+                    document.getElementById('weightInfo').style.display = 'none';
+                    document.getElementById('fragmentInfo').style.display = 'none';
 
-            } else if (val == "weighted") {
-                document.getElementById('plainInfo').style.display = 'none';
-                document.getElementById('weightInfo').style.display = 'block';
+                } else if (val == "weighted") {
+                    document.getElementById('plainInfo').style.display = 'none';
+                    document.getElementById('weightInfo').style.display = 'block';
+                    document.getElementById('fragmentInfo').style.display = 'none';
+                } else if (val == "fragment") {
+                    document.getElementById('plainInfo').style.display = 'none';
+                    document.getElementById('weightInfo').style.display = 'none';
+                    document.getElementById('fragmentInfo').style.display = 'block';
+                }
+
+                refillText(document.getElementById("input"));
             }
 
-            refillText(document.getElementById("input"));
-        }
+            function clearText(textArea) {
+                textArea.value = '';   //Clear the area
+                textArea.style.color='#000';  //Set font colour to black
+            }
 
-        function clearText(textArea) {
-            textArea.value = '';   //Clear the area
-            textArea.style.color='#000';  //Set font colour to black
-        }
+            function refillText(textArea) {
+                //Based on the type of analysis selected, fill the textbox with examples accordingly
+                if($("#weighted").is(":checked")==true) refillTextWithWeightedIds(textArea);
 
-        function refillText(textArea) {
-            //Based on the type of analysis selected, fill the textbox with examples accordingly
-            if($("#weighted").is(":checked")==true) refillTextWithWeightedIds(textArea);
+                else refillTextWithPlainIds(textArea);
 
-            else refillTextWithPlainIds(textArea);
+            }
 
-        }
+            function refillTextWithPlainIds(textArea) {
+                textArea.value=textArea.defaultValue; //Set it back to sample ids
+                textArea.style.color='#9b9b9b';  //Set font colour back to grey
+            }
 
-        function refillTextWithPlainIds(textArea) {
-            textArea.value=textArea.defaultValue; //Set it back to sample ids
-            textArea.style.color='#9b9b9b';  //Set font colour back to grey
-        }
-
-        function refillTextWithWeightedIds(textArea) {
-            textArea.value='CHEBI:491197	1   \n' +
+            function refillTextWithWeightedIds(textArea) {
+                textArea.value='CHEBI:491197	1   \n' +
                     'CHEBI:591790	0.989   \n' +
                     'CHEBI:15712	0.915   \n' +
                     'CHEBI:523039	0.894   \n' +
@@ -75,37 +81,37 @@
                     'CHEBI:521292	0.19    \n' +
                     'CHEBI:1278800	0.177   \n';
 
-            textArea.style.color='#9b9b9b';  //Set font colour back to grey
+                textArea.style.color='#9b9b9b';  //Set font colour back to grey
 
-        }
-    </script>
-    <style type="text/css">
-        #loading {
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 100%;
-            background-color: white;
-            text-align: center;
-            opacity: 0.85;
-            filter: alpha(opacity = 85);
-        }
+            }
+        </script>
+        <style type="text/css">
+            #loading {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                background-color: white;
+                text-align: center;
+                opacity: 0.85;
+                filter: alpha(opacity = 85);
+            }
 
-        #loadingtext {
-            width: 300px;
-            height: 100px;
-            background-color: #FFF;
-            text-align: center;
-            padding: 100px 0 0 0;
-            margin: 250px auto 0 auto;
-        }
+            #loadingtext {
+                width: 300px;
+                height: 100px;
+                background-color: #FFF;
+                text-align: center;
+                padding: 100px 0 0 0;
+                margin: 250px auto 0 auto;
+            }
 
-        h1 {font-size: 17pt; font-weight: bold; padding: 3px; color: #066; border: 1px solid #bfbfbf; background: #eef5f5;}
-    </style>
-</head>
+            h1 {font-size: 17pt; font-weight: bold; padding: 3px; color: #066; border: 1px solid #bfbfbf; background: #eef5f5;}
+        </style>
+    </head>
 
 <body style="font-family: 'Times New Roman', Georgia, serif">
 <center>
@@ -315,11 +321,11 @@ CHEBI:16702</textarea>
     </div>
 </form>
 
-<script type="text/javascript">
-    document.getElementById("loading").style.display = "none";
-    display('plain');
-</script>
+            <script type="text/javascript">
+                document.getElementById("loading").style.display = "none";
+                display('plain');
+            </script>
 
-</center>
-</body>
+        </center>
+    </body>
 </html>

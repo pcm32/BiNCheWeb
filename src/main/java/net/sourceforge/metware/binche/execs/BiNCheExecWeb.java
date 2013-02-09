@@ -155,7 +155,7 @@ public class BiNCheExecWeb {
         }
         binche.execute();
 
-        ChebiGraph chebiGraph = new ChebiGraph(binche.getPValueMap(), binche.getOntology(), binche.getNodes());
+        ChebiGraph chebiGraph = new ChebiGraph(binche.getEnrichedNodes(), binche.getOntology(), binche.getInputNodes());
 
         /**
          * We only add pruners for the normal enrichment analysis
