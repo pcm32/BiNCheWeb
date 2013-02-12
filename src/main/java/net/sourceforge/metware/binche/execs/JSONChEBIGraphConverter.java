@@ -46,7 +46,7 @@ public class JSONChEBIGraphConverter {
     private static final Logger LOGGER = Logger.getLogger( JSONChEBIGraphConverter.class );
 
 
-        /**
+    /**
      * Converts the graph into a list of nodes and a list of edges.
      * This shouldn't be part of this object!!!
      * 
@@ -109,13 +109,16 @@ public class JSONChEBIGraphConverter {
             String nodeId = "id :" +"\"" +vertex.getChebiId() +"\"";
             String nodeLabel = "label :" +"\"" +vertex.getChebiName() +"\"";
             String nodePValue = "pValue :" +"\"" +vertex.getpValue() +"\"";
+            String nodeCorrPValue = "corrPValue :" +"\"" +vertex.getCorrPValue() +"\"";
+            String nodePropOfSample = "propOfSample :"+"\""+vertex.getSamplePercentage()+"\"";
+            String nodeFold = "fold :"+"\""+vertex.getFoldOfEnrichment()+"\"";
             if (colorMap.containsKey(vertex.getChebiName())) {
                 String color = colorMap.get(vertex.getChebiName()).toString();
                 String nodeColor = "color :" +"\"" +color +"\"";
                 Integer alpha = vertex.getColor().getAlpha();
                 double alphaScaled = scaleAlpha(alpha);
                 String nodeAlpha = "alpha :" +"\""+alphaScaled +"\"";
-                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" ," +nodePValue +" }");
+                nodeList.add("{ " +nodeId +" , " +nodeLabel +" , " +nodeColor +" , " +nodeAlpha +" ," +nodePValue +" ," +nodeCorrPValue+" , " +nodePropOfSample+" , " +nodeFold +" }");
             }
             else nodeList.add("{ " +nodeId +" , " +nodeLabel +" ," +nodePValue +" }");
 

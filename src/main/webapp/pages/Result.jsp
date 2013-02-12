@@ -105,18 +105,26 @@ try {
             <ul>
                 <li class="name"> <a href="#"> Export as Network Data </a>
                     <ul>
-                        <li id="export_xgmml"> <a href="#"> XGMML</a> </li>
-                        <li id="export_graphml"> <a href="#"> GraphML </a> </li>
-                        <li id="export_sif"> <a href="#"> SIF </a> </li>
+                        <li id="export_xgmml"> <a href="#">XGMML</a> </li>
+                        <li id="export_graphml"> <a href="#">GraphML</a> </li>
+                        <li id="export_sif"> <a href="#">SIF</a> </li>
                     </ul>
                 </li>
                 <li class="name"> <a href="#"><span>Export as Image</span> </a>
                     <ul>
-                        <li id="export_svg"> <a href="#"> SVG </a> </li>
-                        <li id="export_png"> <a href="#"> PNG </a> </li>
+                        <li id="export_svg"> <a href="#">SVG</a> </li>
+                        <li id="export_png"> <a href="#">PNG</a> </li>
                     </ul>
                 </li>
                 <li class="name"> <a href="#"> Export as Table</a> </li>
+            </ul>
+        </li>
+        <li class="name"><a href="#"> Layout </a>
+            <ul>
+                <li id="force_directed_layout"> <a href="#">Force directed</a></li>
+                <li id="circle_layout"> <a href="#">Circular</a></li>
+                <li id="radial_layout"> <a href="#">Radial</a></li>
+                <li id="tree_layout"> <a href="#">Tree</a></li>
             </ul>
         </li>
         <li class="name"> <a href="#"> Style</a>
@@ -146,9 +154,19 @@ try {
                     name : "alpha",
                     type : "string"
                 }, {
-                    name : "pValue",
+                    name : "pValue", 
                     type : "string"
-                }],
+                }, {
+                    name : "corrPValue", 
+                    type : "string"
+                }, {
+                    name : "propOfSample",
+                    type : "string"
+                }, {
+                    name : "fold",
+                    type : "string"
+                }
+            ],
 
                 edges : [ {
                     name : "directed",
@@ -218,10 +236,11 @@ try {
             var pValue = data["pValue"];
             var label = data["label"];
             var id = data["id"];
-            var pValueSciNot = Number(pValue).toPrecision(3);
-      //      var proportionOfSample = 0.68 + '(dummy value)';
-      //      var fold = 0.5 + '(dummy value)';
-            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot/* + '\n% of sample : ' +proportionOfSample + '\nfold of enrichment : ' +fold */;
+            var pValueSciNot = Number(pValue).toExponential(2);
+            var corrPValue = Number(data["corrPValue"]).toExponential(2)
+            var percOfSample = Number(data["propOfSample"]*100).toPrecision(2);
+            var fold = Number(data["fold"]).toPrecision(2);
+            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot+ '\ncorr. p-value : ' + corrPValue + '\n% of sample : ' +percOfSample + '\nfold of enrichment : ' +fold;
         };
 
         vis.ready(function() {
@@ -252,7 +271,20 @@ try {
             $("#export_svg").click(function() {
                 vis.exportNetwork('svg','${ pageContext.request.contextPath }/GraphExporter?type=svg');
             });
-
+            
+            //Layout
+            $("#circle_layout").click(function() {
+                vis.layout('Circle'); 
+            });
+            $("#tree_layout").click(function() {
+                vis.layout('Tree'); 
+            });
+            $("#radial_layout").click(function() {
+                vis.layout('Radial'); 
+            });
+            $("#force_directed_layout").click(function() {
+                vis.layout('ForceDirected'); 
+            });
             //Context menu items
             vis.addContextMenuItem("Go to entry page", "nodes",
                     function (evt) {
@@ -278,8 +310,24 @@ try {
 
                         // Select the root node and its neighbors:
                         vis.select([rootNode]).select(neighborNodes);
-                    }
-            );
+                    })
+                    
+//                    .addContextMenuItem("Select one level of children nodes", "nodes",
+//                    function(evt) {
+//                        var rootNode = evt.target;
+//                        var selected = vis.selected("nodes");
+//                        
+//                        selected.push(rootNode);
+//                        var toAddSelection = [];
+//                        for(var parent in selected) {
+//                            toAddSelection = toAddSelection.concat(vis.childNodes(parent));
+//                        }
+//                        
+//                        selected = selected.concat(toAddSelection);
+//                        alert("Total Number of selected : "+selected.length);
+//                        vis.select(selected);
+//                    })
+                    ;
 
             //Function to toggle node labels on/off
             $(function () {
