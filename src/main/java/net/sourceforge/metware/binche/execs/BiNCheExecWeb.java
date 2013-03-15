@@ -51,7 +51,7 @@ import BiNGO.ParameterFactory;
 import BiNGO.methods.BingoAlgorithm;
 
 /**
- * @author Stephan Beisken, Bhavana Harsha, Janna Hastings
+ * @author Stephan Beisken, Pablo Moreno, Bhavana Harsha, Janna Hastings
  */
 public class BiNCheExecWeb {
 
@@ -164,17 +164,18 @@ public class BiNCheExecWeb {
          * and for fragment analysis.
          */
         List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
-        if(!parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM)) {
-            pruners.addAll(Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner()));
-        }
+        if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
+            pruners.addAll(getPrunersForFragmentAnalysis());
+        else
+            pruners.addAll(getPruners());
+
                 
         int originalVertices = chebiGraph.getVertexCount();
         System.out.println("Number of nodes before pruning : " + originalVertices);
 
         int prunes=0;
         for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-            if (chebiGraph.getVertexCount()>50 && !analysisType.equals("weighted")) { //only prune for plain enrichment
+            if (chebiGraph.getVertexCount()>50) { // && !analysisType.equals("weighted")) { //only prune for plain enrichment
                 chEBIGraphPruner.prune(chebiGraph);
                 prunes++;
                 System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
@@ -195,6 +196,16 @@ public class BiNCheExecWeb {
 
         response.setContentType("text/html");
 
+    }
+
+    private List<ChEBIGraphPruner> getPruners() {
+        return Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+    , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+    }
+
+    private List<ChEBIGraphPruner> getPrunersForFragmentAnalysis() {
+        return Arrays.asList(new LowPValueBranchPruner(0.05), new LinearBranchCollapserPruner(), 
+                new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
     }
 
 
