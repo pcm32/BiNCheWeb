@@ -200,12 +200,12 @@ public class BiNCheExecWeb {
 
     private List<ChEBIGraphPruner> getPruners() {
         return Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-    , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+    , new LinearBranchCollapserPruner(), new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
     }
 
     private List<ChEBIGraphPruner> getPrunersForFragmentAnalysis() {
         return Arrays.asList(new LowPValueBranchPruner(0.05), new LinearBranchCollapserPruner(), 
-                new RootChildrenPruner(3), new ZeroDegreeVertexPruner());
+                new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
     }
 
 
