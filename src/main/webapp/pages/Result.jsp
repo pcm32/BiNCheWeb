@@ -116,7 +116,7 @@ try {
                         <li id="export_png"> <a href="#">PNG</a> </li>
                     </ul>
                 </li>
-                <li class="name"> <a href="#"> Export as Table</a> </li>
+                <li id="export_table"> <a href="#">Export as Table</a> </li>
             </ul>
         </li>
         <li class="name"><a href="#"> Layout </a>
@@ -272,6 +272,10 @@ try {
                 vis.exportNetwork('svg','${ pageContext.request.contextPath }/GraphExporter?type=svg');
             });
             
+            $("#export_table").click(function() {
+                vis.exportNetwork('tab', '${ pageContext.request.contextPath }/GraphExporter?type=tab');
+            });
+            
             //Layout
             $("#circle_layout").click(function() {
                 vis.layout('Circle'); 
@@ -344,7 +348,7 @@ try {
 
                 });
             });
-
+            
         });
 
         //draw
