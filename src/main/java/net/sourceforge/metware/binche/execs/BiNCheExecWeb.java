@@ -117,7 +117,7 @@ public class BiNCheExecWeb {
         
         String ontologyFileName = targetNameToOntologyFileMap.get(target);
         File ontologyFile = new File(ontologyFileName);
-        if (ontologyFile == null || !ontologyFile.exists()) {
+        if (!ontologyFile.exists()) {
         	//problem!
         	throw new FileNotFoundException("Unable to open ontology file: "+ontologyFile.getName());
         }
@@ -126,7 +126,7 @@ public class BiNCheExecWeb {
         String annotationFileName = targetNameToAnnotationFileMap.get(target);
         if (annotationFileName != null) {
         	File annotationFile = new File(annotationFileName);
-            if (annotationFile == null || !annotationFile.exists()) {
+            if (!annotationFile.exists()) {
             	//problem!
             	throw new FileNotFoundException("Unable to open annotation file: "+annotationFile.getName());
             }
