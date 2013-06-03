@@ -129,7 +129,8 @@ try {
         </li>
         <li class="name"> <a href="#"> Style</a>
             <ul>
-                <li id="show_node_labels"><a href="#"> Show node labels</a> </li>
+                <li id="show_node_labels"><a href="#"> Hide node labels</a> </li>
+                <li id="toggle_high_pvalues"><a href="#"> Hide non-signifcant nodes</a>
             </ul>
         </li>
     </ul>
@@ -242,11 +243,13 @@ try {
             var fold = Number(data["fold"]).toPrecision(2);
             return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot+ '\ncorr. p-value : ' + corrPValue + '\n% of sample : ' +percOfSample + '\nfold of enrichment : ' +fold;
         };
+        
+        var filterPValueOn = false;
 
         vis.ready(function() {
 
             //Add custom tooltip to nodes
-            var style = vis.visualStyle();
+            var style = vis.visualStyle();            
             style.nodes.tooltipText = { customMapper : { functionName : "customTooltip" } };
             vis.visualStyle(style);
 
@@ -346,6 +349,21 @@ try {
                         this.innerHTML="<a href='#'>Show node labels</a> ";
                     }
 
+                });
+            });
+            
+            $(function () {
+                $("#toggle_high_pvalues").click( function() {
+                        if(!filterPValueOn) {
+                            vis.filter("nodes",function(node) { return node.data.corrPValue <= 0.05; });
+                            filterPValueOn = true;
+                            this.innerHTML="<a href='#'>Show non-significant nodes</a> ";
+                        } else {
+                            vis.removeFilter();
+                            filterPValueOn = false;
+                            this.innerHTML="<a href='#'>Hide non-significant nodes</a> ";
+                        }
+                        
                 });
             });
             
