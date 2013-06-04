@@ -30,17 +30,19 @@
                 var val = document.getElementById(value).value;
                 if (val == "plain") {
                     document.getElementById('plainInfo').style.display = 'block';
-                    document.getElementById('weightInfo').style.display = 'none';
-                    document.getElementById('fragmentInfo').style.display = 'none';
-
+                    document.getElementById('plainDesc').style.display = 'block';
+                    document.getElementById('weightDesc').style.display = 'none';
+                    document.getElementById('fragmentDesc').style.display = 'none';
                 } else if (val == "weighted") {
-                    document.getElementById('plainInfo').style.display = 'none';
-                    document.getElementById('weightInfo').style.display = 'block';
-                    document.getElementById('fragmentInfo').style.display = 'none';
+                    document.getElementById('plainInfo').style.display = 'block';
+                    document.getElementById('plainDesc').style.display = 'none'
+                    document.getElementById('weightDesc').style.display = 'block';
+                    document.getElementById('fragmentDesc').style.display = 'none';
                 } else if (val == "fragment") {
                     document.getElementById('plainInfo').style.display = 'none';
-                    document.getElementById('weightInfo').style.display = 'none';
-                    document.getElementById('fragmentInfo').style.display = 'block';
+                    document.getElementById('plainDesc').style.display = 'none';
+                    document.getElementById('weightDesc').style.display = 'none';
+                    document.getElementById('fragmentDesc').style.display = 'block';
                 }
 
                 refillText(document.getElementById("input"));
@@ -53,8 +55,8 @@
 
             function refillText(textArea) {
                 //Based on the type of analysis selected, fill the textbox with examples accordingly
-                if($("#weighted").is(":checked")==true) refillTextWithWeightedIds(textArea);
-
+                if($("#weighted").is(":checked")==true || $("#fragment").is(":checked")==true)
+                    refillTextWithWeightedIds(textArea);
                 else refillTextWithPlainIds(textArea);
 
             }
@@ -265,24 +267,45 @@ CHEBI:16702</textarea>
              <b>Select type of analysis: </b> <br/>
                   
                 <%
-                                  	boolean showAnalysisTypes = Boolean.valueOf(props
-                                  			.getProperty("menu.showAnalysisTypes"));
-                                  	if (showAnalysisTypes) {
-                                  %>
-                 <span>
-                 <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
-                    <b>Weighted Enrichment Analysis </b>  
-			    </span>
-                <span> <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
-                    <b>Plain Enrichment Analysis </b>
-			    </span>
-                
-                 
-             <span id="weightInfo" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
-                     <p>This analysis accepts a list of ChEBI ids and their weights. <br>
-                         Weight is a decimal value between 0 and 1.<br>
-                         This analysis runs on the ChEBI structure ontology.</p>
-		     </span>
+                boolean showAnalysisTypes = Boolean.valueOf(props
+                        .getProperty("menu.showAnalysisTypes"));
+                if (showAnalysisTypes) {
+                %>
+                    <span>
+                        <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
+                        <b>Weighted Enrichment Analysis </b>
+                    </span>
+                 <br>
+                    <span>
+                        <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
+                        <b>Plain Enrichment Analysis </b>
+                    </span>
+                 <br>
+                    <span>
+                        <input type="radio" id="fragment" name="analysisType" class="analysisType" value="fragment" onclick="display('fragment');" />
+                        <b>Fragment Enrichment Analysis </b>
+                    </span>
+
+
+                    <span id="weightDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
+                             <p>This analysis accepts a list of ChEBI ids and their weights. <br>
+                                 Weight is a decimal value between 0 and 1. <br>
+                                 Please select your target.
+                             </p>
+                    </span>
+
+                    <span id="fragmentDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
+                             <p>This analysis accepts a list of ChEBI ids and their weights. <br>
+                                 Weight is a decimal value between 0 and 1.<br>
+                                 This analysis runs on the ChEBI structure ontology.
+                             </p>
+                    </span>
+
+                    <span id="plainDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
+                             <p>This analysis accepts a list of ChEBI ids. <br>
+                                 Please select your target.
+                             </p>
+                    </span>
 		     <%
 		     	} else {
 		     %>

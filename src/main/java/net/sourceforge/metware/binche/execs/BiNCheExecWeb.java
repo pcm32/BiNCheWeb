@@ -130,9 +130,9 @@ public class BiNCheExecWeb {
         LOGGER.log(Level.INFO, "Setting parameters ...");
         
         //Different parameters for weighted and plain analysis
-        BingoParameters parametersChEBIBin = (analysisType.equals("weighted")?
+        BingoParameters parametersChEBIBin = analysisType.equals("weighted") || analysisType.equals("fragment")?
         		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFileName) :
-        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName) );
+        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName);
         
         if (annotationFileName != null) {
         	parametersChEBIBin.setAnnotationFile(annotationFileName);
@@ -153,7 +153,7 @@ public class BiNCheExecWeb {
 
 
         PrunningStrategy strategy;
-        if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
+        if(analysisType.equals("fragment") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
             strategy = new FragmentEnrichPruningStrategy();
         else
             strategy = new PlainEnrichPruningStrategy();
