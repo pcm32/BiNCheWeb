@@ -130,7 +130,7 @@ try {
         <li class="name"> <a href="#"> Style</a>
             <ul>
                 <li id="show_node_labels"><a href="#"> Hide node labels</a> </li>
-                <li id="toggle_high_pvalues"><a href="#"> Hide non-signifcant nodes</a>
+                <li id="toggle_high_pvalues"><a href="#"> Hide non-significant nodes</a>
             </ul>
         </li>
     </ul>

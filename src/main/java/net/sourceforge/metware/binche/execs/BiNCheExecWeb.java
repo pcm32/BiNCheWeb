@@ -35,13 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.ChEBIGraphPruner;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.LinearBranchCollapserPruner;
-import net.sourceforge.metware.binche.graph.LowPValueBranchPruner;
-import net.sourceforge.metware.binche.graph.MoleculeLeavesPruner;
-import net.sourceforge.metware.binche.graph.RootChildrenPruner;
-import net.sourceforge.metware.binche.graph.ZeroDegreeVertexPruner;
+import net.sourceforge.metware.binche.graph.*;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -157,12 +151,18 @@ public class BiNCheExecWeb {
 
         ChebiGraph chebiGraph = new ChebiGraph(binche.getEnrichedNodes(), binche.getOntology(), binche.getInputNodes());
 
+
+        PrunningStrategy strategy;
+        if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
+            strategy = new FragmentEnrichPruningStrategy();
+        else
+            strategy = new PlainEnrichPruningStrategy();
         /**
          * We only add pruners for the normal enrichment analysis
          * 
          * We need to make a distinction between weighted enrichment analysis for functional analysis
          * and for fragment analysis.
-         */
+         *
         List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
         if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
             pruners.addAll(getPrunersForFragmentAnalysis());
@@ -183,9 +183,12 @@ public class BiNCheExecWeb {
                 originalVertices = chebiGraph.getVertexCount();
             }
         }
+        */
 
+        int removedVertices = strategy.applyStrategy(chebiGraph);
         int finalVertices = chebiGraph.getVertexCount();
 
+        System.out.println("Removed vertices : "+removedVertices);
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
