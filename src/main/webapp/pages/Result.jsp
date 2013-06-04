@@ -239,6 +239,9 @@ try {
             var id = data["id"];
             var pValueSciNot = Number(pValue).toExponential(2);
             var corrPValue = Number(data["corrPValue"]).toExponential(2)
+            if(isNaN(corrPValue)) {
+                corrPValue = "N/A";
+            }
             var percOfSample = Number(data["propOfSample"]*100).toPrecision(2);
             var fold = Number(data["fold"]).toPrecision(2);
             return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot+ '\ncorr. p-value : ' + corrPValue + '\n% of sample : ' +percOfSample + '\nfold of enrichment : ' +fold;
@@ -355,7 +358,13 @@ try {
             $(function () {
                 $("#toggle_high_pvalues").click( function() {
                         if(!filterPValueOn) {
-                            vis.filter("nodes",function(node) { return node.data.corrPValue <= 0.05; });
+                            vis.filter("nodes",function(node)
+                            {   if(!isNaN(node.data.corrPValue)) {
+                                    return node.data.corrPValue <= 0.05;
+                                } else {
+                                    return node.data.pValue <= 0.05;
+                                }
+                            });
                             filterPValueOn = true;
                             this.innerHTML="<a href='#'>Show non-significant nodes</a> ";
                         } else {
