@@ -67,23 +67,31 @@
             }
 
             function refillTextWithWeightedIds(textArea) {
-                textArea.value='CHEBI:491197	1   \n' +
-                    'CHEBI:591790	0.989   \n' +
-                    'CHEBI:15712	0.915   \n' +
-                    'CHEBI:523039	0.894   \n' +
-                    'CHEBI:28412	0.862   \n' +
-                    'CHEBI:666900	0.862   \n' +
-                    'CHEBI:15649	0.293   \n' +
-                    'CHEBI:491180	0.259   \n' +
-                    'CHEBI:31080	0.252   \n' +
-                    'CHEBI:15712	0.236   \n' +
-                    'CHEBI:28412	0.235   \n' +
-                    'CHEBI:18131	0.23    \n' +
-                    'CHEBI:523039	0.226   \n' +
-                    'CHEBI:521292	0.19    \n' +
-                    'CHEBI:1278800	0.177   \n';
+//                textArea.value='CHEBI:491197	1   \n' +
+//                    'CHEBI:591790	0.989   \n' +
+//                    'CHEBI:15712	0.915   \n' +
+//                    'CHEBI:523039	0.894   \n' +
+//                    'CHEBI:28412	0.862   \n' +
+//                    'CHEBI:666900	0.862   \n' +
+//                    'CHEBI:15649	0.293   \n' +
+//                    'CHEBI:491180	0.259   \n' +
+//                    'CHEBI:31080	0.252   \n' +
+//                    'CHEBI:15712	0.236   \n' +
+//                    'CHEBI:28412	0.235   \n' +
+//                    'CHEBI:18131	0.23    \n' +
+//                    'CHEBI:523039	0.226   \n' +
+//                    'CHEBI:521292	0.19    \n' +
+//                    'CHEBI:1278800	0.177   \n';
+                textArea.value = 'CHEBI:17079	0.7665\n' +
+                                 'CHEBI:46816	0.7464999999999999\n' +
+                                 'CHEBI:28658	0.7464999999999999\n' +
+                                 'CHEBI:28611	0.7464999999999999\n' +
+                                 'CHEBI:28594	0.6915\n' +
+                                 'CHEBI:17048	0.6915\n' +
+                                 'CHEBI:7852	0.60575\n' +
+                                 'CHEBI:3540	0.509\n';
 
-                textArea.style.color='#9b9b9b';  //Set font colour back to grey
+                textArea.style.color = '#9b9b9b';  //Set font colour back to grey
 
             }
         </script>
