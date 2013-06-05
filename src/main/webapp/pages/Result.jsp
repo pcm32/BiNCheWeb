@@ -93,8 +93,9 @@ try {
 
 <div class="gradient_container" id="draggable">
     <div id="gradient_info">
-        <div id="gradient_info_max">1.0</div>
-        <div id="gradient_info_min">0.0</div>
+        <div id="gradient_info_max">None</div>
+        <div id="gradient_info_min">High</div>
+        <div id="gradient_info_desc">Significance</div>
     </div>
     <div class="gradient"></div>
 </div>
