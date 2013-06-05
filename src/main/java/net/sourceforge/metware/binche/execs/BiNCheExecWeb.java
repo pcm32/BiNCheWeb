@@ -153,42 +153,20 @@ public class BiNCheExecWeb {
 
 
         PrunningStrategy strategy;
-        if(analysisType.equals("fragment") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
+        if(analysisType.equals("fragment"))
             strategy = new FragmentEnrichPruningStrategy();
+        else if(analysisType.equals("weighted"))
+            strategy = new WeightedEnrichPruningStrategy();
         else
             strategy = new PlainEnrichPruningStrategy();
-        /**
-         * We only add pruners for the normal enrichment analysis
-         * 
-         * We need to make a distinction between weighted enrichment analysis for functional analysis
-         * and for fragment analysis.
-         *
-        List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
-        if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
-            pruners.addAll(getPrunersForFragmentAnalysis());
-        else
-            pruners.addAll(getPruners());
 
-                
-        int originalVertices = chebiGraph.getVertexCount();
-        System.out.println("Number of nodes before pruning : " + originalVertices);
-
-        int prunes=0;
-        for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-            if (chebiGraph.getVertexCount()>50) { // && !analysisType.equals("weighted")) { //only prune for plain enrichment
-                chEBIGraphPruner.prune(chebiGraph);
-                prunes++;
-                System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
-                System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
-                originalVertices = chebiGraph.getVertexCount();
-            }
+        if(chebiGraph.getVertexCount()>40) {
+            int removedVertices = strategy.applyStrategy(chebiGraph);
+            System.out.println("Removed vertices : "+removedVertices);
         }
-        */
-
-        int removedVertices = strategy.applyStrategy(chebiGraph);
         int finalVertices = chebiGraph.getVertexCount();
 
-        System.out.println("Removed vertices : "+removedVertices);
+
         System.out.println("Final vertices : " + (finalVertices));
 
         //Convert the chebi Graph to a JSON Object for display on webapp
