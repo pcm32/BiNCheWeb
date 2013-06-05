@@ -35,13 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.ChEBIGraphPruner;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.LinearBranchCollapserPruner;
-import net.sourceforge.metware.binche.graph.LowPValueBranchPruner;
-import net.sourceforge.metware.binche.graph.MoleculeLeavesPruner;
-import net.sourceforge.metware.binche.graph.RootChildrenPruner;
-import net.sourceforge.metware.binche.graph.ZeroDegreeVertexPruner;
+import net.sourceforge.metware.binche.graph.*;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -136,9 +130,9 @@ public class BiNCheExecWeb {
         LOGGER.log(Level.INFO, "Setting parameters ...");
         
         //Different parameters for weighted and plain analysis
-        BingoParameters parametersChEBIBin = (analysisType.equals("weighted")?
+        BingoParameters parametersChEBIBin = analysisType.equals("weighted") || analysisType.equals("fragment")?
         		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFileName) :
-        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName) );
+        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName);
         
         if (annotationFileName != null) {
         	parametersChEBIBin.setAnnotationFile(annotationFileName);
@@ -157,34 +151,21 @@ public class BiNCheExecWeb {
 
         ChebiGraph chebiGraph = new ChebiGraph(binche.getEnrichedNodes(), binche.getOntology(), binche.getInputNodes());
 
-        /**
-         * We only add pruners for the normal enrichment analysis
-         * 
-         * We need to make a distinction between weighted enrichment analysis for functional analysis
-         * and for fragment analysis.
-         */
-        List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
-        if(analysisType.equals("weighted") && parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM))
-            pruners.addAll(getPrunersForFragmentAnalysis());
+
+        PrunningStrategy strategy;
+        if(analysisType.equals("fragment"))
+            strategy = new FragmentEnrichPruningStrategy();
+        else if(analysisType.equals("weighted"))
+            strategy = new WeightedEnrichPruningStrategy();
         else
-            pruners.addAll(getPruners());
+            strategy = new PlainEnrichPruningStrategy();
 
-                
-        int originalVertices = chebiGraph.getVertexCount();
-        System.out.println("Number of nodes before pruning : " + originalVertices);
-
-        int prunes=0;
-        for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-            if (chebiGraph.getVertexCount()>50) { // && !analysisType.equals("weighted")) { //only prune for plain enrichment
-                chEBIGraphPruner.prune(chebiGraph);
-                prunes++;
-                System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
-                System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
-                originalVertices = chebiGraph.getVertexCount();
-            }
+        if(chebiGraph.getVertexCount()>40) {
+            int removedVertices = strategy.applyStrategy(chebiGraph);
+            System.out.println("Removed vertices : "+removedVertices);
         }
-
         int finalVertices = chebiGraph.getVertexCount();
+
 
         System.out.println("Final vertices : " + (finalVertices));
 

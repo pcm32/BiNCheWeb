@@ -52,7 +52,6 @@ public class JSONChEBIGraphConverter {
      * 
      * @param chebiGraph
      * @param request
-     * @param response
      */
     public void setChebiGraphAsJSON(ChebiGraph chebiGraph, HttpServletRequest request) {
 
