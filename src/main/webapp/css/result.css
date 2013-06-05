@@ -22,6 +22,8 @@ html,body {
     border: 1px /*#cfcfcf*/ solid #aaaaaa;
 }
 
+#resultDesc{font:bold 14px/100% Arial, Helvetica, sans-serif; text-align:center;}
+
 /*CSS Drop Down Menu*/
 #export_graph{ height:35px; width : 99.5% ; display:block; padding:2px; margin: 0;  border:1px solid; border-radius:1px; }
 #export_graph > ul {list-style:inside none; padding:0; margin:0; text-align:left;}
@@ -55,9 +57,10 @@ html,body {
 
 /*Gradient*/
 .gradient_container {float: right;}
-#gradient_info_max {position: absolute; top: 50px; right: 40px;}
-#gradient_info_min {position: absolute; top: 288px; right: 40px;}
-.gradient {height: 250px; width: 12px; position: absolute; top: 50px; right: 25px; z-index:10; border: 1px solid; background: #ffffff; background: -webkit-linear-gradient( top, #ffffff , #ff4500 ); background: -moz-linear-gradient(top, #ffffff, #ff4500) ; background: -ms-linear-gradient(top, #ffffff, #ff4500);}
+#gradient_info_min {position: absolute; top: 80px; right: 58px; font:bold 13px/100% Arial, Helvetica, sans-serif; text-align:left;}
+#gradient_info_max {position: absolute; top: 168px; right: 55px; font:bold 13px/100% Arial, Helvetica, sans-serif; text-align:left;}
+#gradient_info_desc {position: absolute; top: 60px; right: 30px; font:bold 13px/100% Arial, Helvetica, sans-serif;}
+.gradient {height: 100px; width: 12px; position: absolute; top: 80px; right: 90px; z-index:10; border: 1px solid; background: #ffffff; background: -webkit-linear-gradient( top, #ff4500, #ffffff ); background: -moz-linear-gradient(top, #ff4500, #ffffff) ; background: -ms-linear-gradient(top, #ff4500, #ffffff);}
 
 
 /*--------------Style sheet for the filter in a div called 'side'-------------*/
