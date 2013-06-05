@@ -315,9 +315,7 @@ CHEBI:16702</textarea>
                     </span>
 
                     <span id="plainDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
-                             <p>This analysis accepts a list of ChEBI ids. <br>
-                                 Please select your target.
-                             </p>
+                             <p>This analysis accepts a list of ChEBI ids.</p>
                     </span>
 		     <%
 		     	} else {
@@ -332,7 +330,7 @@ CHEBI:16702</textarea>
 		     		     	}
 		     		     %>
 		      </span>
-             <span id="plainInfo" style="display: none; padding: 2px; height: 70px; text-align: left; margin-left: 3em">
+             <span id="plainInfo" style="display: none; padding: 2px; height: 50px; text-align: left; margin-left: 3em">
                     Select target of enrichment:
                      <select name="targetType">
                      <%

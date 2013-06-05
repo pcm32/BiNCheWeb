@@ -82,7 +82,7 @@ try {
     Object edgeList = session.getAttribute("edgeList");
 %>
 
-<div align="center" style="padding: 5px">
+<div id="resultDesc" align="center" style="padding: 5px">
     <h3>
         The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using the <%=request.getSession().getAttribute("targetType")%> ontology
     </h3>
