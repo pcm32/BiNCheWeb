@@ -89,6 +89,11 @@
                                  'CHEBI:28594	0.6915\n' +
                                  'CHEBI:17048	0.6915\n' +
                                  'CHEBI:7852	0.60575\n' +
+                                 'CHEBI:164200  0.2342\n' +
+                                 'CHEBI:8489    0.25321\n' +
+                                 'CHEBI:9630    0.2543\n' +
+                                 'CHEBI:59477   0.2335\n' +
+                                 'CHEBI:9495    0.2433\n' +
                                  'CHEBI:3540	0.509\n';
 
                 textArea.style.color = '#9b9b9b';  //Set font colour back to grey
