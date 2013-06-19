@@ -21,14 +21,25 @@ try {
 
 <html>
 <head>
+
+    <link rel="stylesheet"  href="http://www.ebi.ac.uk/inc/css/sidebars.css"   type="text/css" />
+    <link rel="stylesheet"  href="http://www.ebi.ac.uk/inc/css/basicstyles.css"   type="text/css" />
+    <link rel="stylesheet"  href="http://www.ebi.ac.uk/inc/css/contents.css"   type="text/css" />
+    <link rel="stylesheet"  href="http://www.ebi.ac.uk/inc/css/headings.css"   type="text/css" />
+
+
+    <link type="text/css" rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/mitigation/develop/ebi-mitigation.css" />
+    <link type="text/css" rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/mitigation/develop/embl-petrol-colours.css" />
+    <script defer="defer" src="//www.ebi.ac.uk/web_guidelines/js/cookiebanner.js"></script>
+    <script defer="defer" src="//www.ebi.ac.uk/web_guidelines/js/foot.js"></script>
+
     <title><%= props.get("title") %></title>
 
     <!-- Style sheets -->
     <link rel="stylesheet" type="text/css"
+          href="${ pageContext.request.contextPath }/css/binche.css">
+    <link rel="stylesheet" type="text/css"
           href="${ pageContext.request.contextPath }/css/result.css?v=3.1.3">
-
-<%--    <link rel="stylesheet" type="text/css"
-          href="${ pageContext.request.contextPath }/css/jquery-ui-1.9.0.custom.css">--%>
 
     <!-- JavaScript -->
     <script type="text/javascript"
@@ -69,6 +80,25 @@ try {
     </script>--%>
 </head>
 <body>
+<%@ include file="header.html" %>
+
+<div id="content">
+<br/>
+
+<table class="contentspane" id="contentspane" summary="The main content pane of the page" style="width: 100%">
+<tbody>
+<tr>
+
+<td class="leftmenucell" id="leftmenucell">
+    <%@ include file="menu.html" %>
+</td>
+
+<td id="contentsarea" class="contentsarea" style="border-left: 1px solid #dedede;">
+<div class="breadcrumbs">
+    <a href="http://www.ebi.ac.uk/" class="firstbreadcrumb">EBI</a><a href ="http://www.ebi.ac.uk/Databases/">Databases</a><a href ="http://www.ebi.ac.uk/Databases/smallmolecules.html">Small Molecules</a><a href="http://www.ebi.ac.uk/chebi">ChEBI</a><a href="/chebi/tools/binche">BiNChE</a>
+</div>
+<h1 class="local-header"><a href="/chebi/tools/binche" title="Back to BiNChE homepage"><%=props.get("subtitle")%></a></h1>
+
 <jsp:useBean id="bincheexec"
              class="net.sourceforge.metware.binche.execs.BiNCheExecWeb"></jsp:useBean>
 
@@ -82,12 +112,11 @@ try {
     Object edgeList = session.getAttribute("edgeList");
 %>
 
-<div id="resultDesc" align="center" style="padding: 5px">
+<div id="resultDesc" align="center">
     <h3>
         The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using the <%=request.getSession().getAttribute("targetType")%> ontology
     </h3>
 </div>
-<br>
 
 <div id="cytoweb_container">
 
@@ -259,7 +288,7 @@ try {
 
             //Exporters
             $("#export_xgmml").click(function() {
-                vis.exportNetwork('xgmml','${ pageContext.request.contextPath }/GraphExporter?type=xml');
+                vis.exportNetwork('xgmml','${ pageContext.request.contextPath }/GraphExporter?type=xgmml');
             });
 
             $("#export_graphml").click(function() {
@@ -406,6 +435,15 @@ and the script that calls the function 'slider' (at approx. line 42)  --%>
         </div>
     </div>
 </div>--%>
+
+</div>
+
+
+</td>
+</tr>
+</tbody>
+</table>
+<%@ include file=   "footer.html" %>
 
 </div>
 </body>

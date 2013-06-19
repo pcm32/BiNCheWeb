@@ -4,18 +4,18 @@ html,body {
     height: 100%;
     width: 100%;
     padding: 0;
-    margin: 0;
-    font-family: 'Times New Roman',Georgia, serif;
 }
 
 #cytoweb_container {
     width: 99.8%;
+    height: 800px;
     position: relative;
     border: 1px solid #aaaaaa;
+    padding-bottom: 5px;
 }
 
 #cytoscapeweb {
-    height: 92%;
+    height: 95%;
     vertical-align: middle;
     padding: 2px;
     width: 99.5%;

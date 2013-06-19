@@ -1,0 +1,46 @@
+.local-header {
+    font-size: 11pt;
+    color: #006666;
+    padding: 4px;
+    background: #eef5f5;
+    border: 1px solid #bfbfbf;
+    margin: 5px 0px 10px 0px;
+    font-weight: bold;
+}
+
+.headerBG {
+    background-image:-webkit-linear-gradient(left, #064f82, #3572a2);
+    background-image: -moz-linear-gradient(left, #064f82, #3572a2);
+    background-image: -ms-linear-gradient(left, #064f82, #3572a2);
+    background-image: -o-linear-gradient(left, #064f82, #3572a2);
+    background-image: linear-gradient(left,#064f82,#3572a2);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#064f82', EndColorStr='#3572a2'); /* IE6/7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#064f82', EndColorStr='#3572a2')"; /* IE8*/
+}
+
+.sidemenu li {
+    padding-bottom:  2px;
+}
+
+#loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-color: white;
+    text-align: center;
+    opacity: 0.85;
+    filter: alpha(opacity = 85);
+}
+
+#loadingtext {
+    width: 300px;
+    height: 100px;
+    background-color: #FFF;
+    text-align: center;
+    padding: 100px 0 0 0;
+    margin: 250px auto 0 auto;
+}
