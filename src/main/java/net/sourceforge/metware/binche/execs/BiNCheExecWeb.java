@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.io.Files;
+import encrypt.Encrypter;
 import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.*;
 
@@ -172,6 +175,16 @@ public class BiNCheExecWeb {
         //Convert the chebi Graph to a JSON Object for display on webapp
         JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
         converter.setChebiGraphAsJSON(chebiGraph, request);
+
+        File tmpDir = Files.createTempDir();
+        String pathToTable = tmpDir+File.separator+"table.tsv";
+        TableWriter writer = new TableWriter(pathToTable);
+        writer.write(chebiGraph);
+
+        Encrypter encrypter = new Encrypter();
+        String encryptedPath = encrypter.encrypt(pathToTable);
+
+        request.getSession().setAttribute("table", URLEncoder.encode(encryptedPath, "UTF-8"));
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
