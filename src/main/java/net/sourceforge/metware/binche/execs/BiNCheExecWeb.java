@@ -23,7 +23,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +41,6 @@ import org.apache.log4j.Logger;
 
 import BiNGO.BingoParameters;
 import BiNGO.ParameterFactory;
-import BiNGO.methods.BingoAlgorithm;
 
 /**
  * @author Stephan Beisken, Pablo Moreno, Bhavana Harsha, Janna Hastings
@@ -172,6 +170,8 @@ public class BiNCheExecWeb {
         //Convert the chebi Graph to a JSON Object for display on webapp
         JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
         converter.setChebiGraphAsJSON(chebiGraph, request);
+
+        request.getSession().setAttribute("chebiGraph",chebiGraph);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
