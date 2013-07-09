@@ -23,8 +23,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +33,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.common.io.Files;
-import encrypt.Encrypter;
 import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.*;
 
@@ -45,7 +41,6 @@ import org.apache.log4j.Logger;
 
 import BiNGO.BingoParameters;
 import BiNGO.ParameterFactory;
-import BiNGO.methods.BingoAlgorithm;
 
 /**
  * @author Stephan Beisken, Pablo Moreno, Bhavana Harsha, Janna Hastings

@@ -1,18 +1,18 @@
 package servlets;
 
-import encrypt.Encrypter;
 import net.sourceforge.metware.binche.execs.TableWriter;
 import net.sourceforge.metware.binche.graph.ChebiGraph;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
+ * Produces a table of enriched categories, based on the chebi graph stored in the session.
+ *
  * Created with IntelliJ IDEA.
  * User: pmoreno
  * Date: 8/7/13
@@ -35,6 +35,5 @@ public class GetTable extends HttpServlet {
         TableWriter writer = new TableWriter(response.getOutputStream());
 
         writer.write((ChebiGraph)request.getSession().getAttribute("chebiGraph"));
-
     }
 }
