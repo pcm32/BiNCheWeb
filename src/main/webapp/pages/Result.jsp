@@ -281,7 +281,7 @@ try {
             
             $("#export_table").click(function() {
                 // vis.exportNetwork('tab', '${ pageContext.request.contextPath }/GraphExporter?type=tab');
-                window.location='${ pageContext.request.contextPath }/getTable?p=<%=request.getSession().getAttribute("table")%>&fn=enrichmentTable';
+                window.location='${ pageContext.request.contextPath }/getTable';
             });
             
             //Layout

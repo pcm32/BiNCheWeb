@@ -2,12 +2,9 @@ package net.sourceforge.metware.binche.execs;
 
 import net.sourceforge.metware.binche.graph.ChebiGraph;
 import net.sourceforge.metware.binche.graph.ChebiVertex;
-import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,11 +21,11 @@ public class TableWriter {
 
     private static final Logger LOGGER = Logger.getLogger(TableWriter.class);
 
-    private String path;
+    private OutputStream outputStream;
 
-    public TableWriter(String pathToTable) {
-        this.path = pathToTable;
-        LOGGER.info("Writing file to path : "+path);
+    public TableWriter(OutputStream pathToTable) {
+        this.outputStream = pathToTable;
+        //LOGGER.info("Writing file to outputStream : "+ outputStream);
     }
 
 
@@ -40,7 +37,7 @@ public class TableWriter {
 
         Collections.sort(vertexes,new VertexComparatorByPValue());
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
             writer.write("ChEBI_ID\tChEBI_Name\tCorr-PValue\tPValue\tFold\tSamplePercentage\n");
             for (ChebiVertex vertex : vertexes) {
                 writer.write("CHEBI:"+vertex.getChebiId()+"\t"+vertex.getChebiName()

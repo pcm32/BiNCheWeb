@@ -1,6 +1,8 @@
 package servlets;
 
 import encrypt.Encrypter;
+import net.sourceforge.metware.binche.execs.TableWriter;
+import net.sourceforge.metware.binche.graph.ChebiGraph;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -26,29 +28,13 @@ public class GetTable extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String encrypted = (String)request.getParameter("p");
-        String fileName = (String)request.getParameter("fn");
-        Encrypter encrypter = new Encrypter();
-        String path = encrypter.decrypt(encrypted);
-
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition",
-                "attachment;filename="+fileName+".txt");
+                "attachment;filename=enrichmentTable.txt");
 
-        LOGGER.info("Reading from "+path);
+        TableWriter writer = new TableWriter(response.getOutputStream());
 
-        InputStream in = new FileInputStream(path);
-        ServletOutputStream out = response.getOutputStream();
-
-        byte[] outputByte = new byte[4096];
-        //copy binary contect to output stream
-        while(in.read(outputByte, 0, 4096) != -1)
-        {
-            out.write(outputByte, 0, 4096);
-        }
-        in.close();
-        out.flush();
-        out.close();
+        writer.write((ChebiGraph)request.getSession().getAttribute("chebiGraph"));
 
     }
 }

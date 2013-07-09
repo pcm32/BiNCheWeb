@@ -176,15 +176,7 @@ public class BiNCheExecWeb {
         JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
         converter.setChebiGraphAsJSON(chebiGraph, request);
 
-        File tmpDir = Files.createTempDir();
-        String pathToTable = tmpDir+File.separator+"table.tsv";
-        TableWriter writer = new TableWriter(pathToTable);
-        writer.write(chebiGraph);
-
-        Encrypter encrypter = new Encrypter();
-        String encryptedPath = encrypter.encrypt(pathToTable);
-
-        request.getSession().setAttribute("table", URLEncoder.encode(encryptedPath, "UTF-8"));
+        request.getSession().setAttribute("chebiGraph",chebiGraph);
 
         LOGGER.log(Level.INFO, "############ Stop ############");
 
