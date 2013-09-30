@@ -31,4 +31,12 @@
 		<servlet-name>GraphExporter</servlet-name>
 		<url-pattern>/GraphExporter/*</url-pattern>
 	</servlet-mapping>
+    <servlet>
+        <servlet-name>GetTable</servlet-name>
+        <servlet-class>servlets.GetTable</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetTable</servlet-name>
+        <url-pattern>/getTable</url-pattern>
+    </servlet-mapping>
 </web-app>
