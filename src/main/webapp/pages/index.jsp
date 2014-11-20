@@ -68,13 +68,19 @@
 
 <br>
 
+<%
+    String type = (String) session.getAttribute("analysisType");
+    String error = (String) session.getAttribute("error");
+    if (type != null && error != null)
+        out.println("<div align = \"center\"><b>" + error.replace("xxxx", type.toUpperCase()) + "</b><br/><br/><br/></div>");
+%>
 <div align="center">
 <form action="${ pageContext.request.contextPath }/ValidateInput" method="post">
     <b>ChEBI ids</b>
     <div class="content" style="vertical-align: middle; width: 500px">
         <div style="padding: 5px" class="textarea">
             <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; text-align: left"
-                      onfocus="clearText(this)" onblur="if(this.value=='') refillText(this);">
+                      onfocus="changeColor(this)" onblur="if(this.value=='') refillText(this);">
 CHEBI:108133
 CHEBI:108141
 CHEBI:10983

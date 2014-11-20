@@ -20,8 +20,8 @@ function display(value) {
     refillText(document.getElementById("input"));
 }
 
-function clearText(textArea) {
-    textArea.value = '';   //Clear the area
+function changeColor(textArea) {
+//    textArea.value = '';   //Clear the area
     textArea.style.color='#000';  //Set font colour to black
 }
 
