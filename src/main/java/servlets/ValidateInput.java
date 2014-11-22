@@ -55,7 +55,9 @@ public class ValidateInput extends HttpServlet {
 		}
 
 		//Get type and target of enrichment
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+		session.setAttribute("query", rawInput.replace("\r\n"," - "));
+
 		String type = request.getParameter("analysisType");
         session.setAttribute("analysisType", type);
 
@@ -76,11 +78,15 @@ public class ValidateInput extends HttpServlet {
 				for (String id : inputMap.keySet()) {
 					String weights = inputMap.get(id);
 
-					Double weight = Double.valueOf(weights);
-					if (weight >= 0.0 && weight <= 1.0) continue;
-					else {
+					try {
+						Double weight = Double.valueOf(weights);
+						if (weight >= 0.0 && weight <= 1.0) continue;
+						else {
+							error = "Please Check your input you have selected xxxx but the weight is not between number between 0 and 1.";
+							break;
+						}
+					} catch (Exception e) {
 						error = "Please Check your input you have selected xxxx but the weight is not between number between 0 and 1.";
-						break;
 					}
 				}
 

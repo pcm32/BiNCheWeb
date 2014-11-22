@@ -72,8 +72,25 @@
     String type = (String) session.getAttribute("analysisType");
     String error = (String) session.getAttribute("error");
     if (type != null && error != null)
-        out.println("<div align = \"center\"><b>" + error.replace("xxxx", type.toUpperCase()) + "</b><br/><br/><br/></div>");
+        out.println("<div id=\"error\" align = \"center\"><b>" + error.replace("xxxx", type.toUpperCase()) + "</b><br/><br/><br/></div>");
+
 %>
+
+<script type="application/javascript">
+
+    var query = "<%= session.getAttribute("query")%>";
+    var type = "<%=type%>";
+
+    if (document.getElementById('error') != null) {
+        window.onload = refillQuery;
+    }
+
+    function refillQuery(){
+        document.getElementById('input').value = query.replace(/\ - /g,'\r\n');
+        document.getElementById(type).checked = true;
+    }
+</script>
+
 <div align="center">
 <form action="${ pageContext.request.contextPath }/ValidateInput" method="post">
     <b>ChEBI ids</b>
