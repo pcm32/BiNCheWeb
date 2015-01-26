@@ -129,7 +129,7 @@ public class BiNCheExecWeb {
         
         //Different parameters for weighted and plain analysis
         BingoParameters parametersChEBIBin = analysisType.equals("weighted") || analysisType.equals("fragment")?
-        		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFileName) :
+        		ParameterFactory.makeParametersForWeightedAnalysis(ontologyFileName) :
         		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName);
         
         if (annotationFileName != null) {
@@ -180,12 +180,12 @@ public class BiNCheExecWeb {
     }
 
     private List<ChEBIGraphPruner> getPruners() {
-        return Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
+        return Arrays.asList(new MoleculeLeavesPruner(), new HighPValueBranchPruner(0.05)
     , new LinearBranchCollapserPruner(), new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
     }
 
     private List<ChEBIGraphPruner> getPrunersForFragmentAnalysis() {
-        return Arrays.asList(new LowPValueBranchPruner(0.05), new LinearBranchCollapserPruner(), 
+        return Arrays.asList(new HighPValueBranchPruner(0.05), new LinearBranchCollapserPruner(),
                 new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
     }
 
