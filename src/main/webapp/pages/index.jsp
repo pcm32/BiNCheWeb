@@ -124,11 +124,11 @@
                 margin: 250px auto 0 auto;
             }
 
-            h1 {font-size: 17pt; font-weight: bold; padding: 3px; color: #066; border: 1px solid #bfbfbf; background: #eef5f5;}
+            h1 {font-size: 17pt; font-weight: bold; padding: 3px; color: #066; border: 1px solid #bfbfbf; background: #eef5f5; font-family: helvetica, 'trebuchet MS', arial, sans-serif;}
         </style>
     </head>
 
-<body style="font-family: 'Times New Roman', Georgia, serif">
+<body style="font-family: helvetica, 'trebuchet MS', arial, sans-serif;">
 <center>
 <div id="loading" style="display:none;">
     <div id="loadingtext">
@@ -140,13 +140,13 @@
 <h1><%=props.get("subtitle")%></h1> <br>
 
 <a href="http://www.ebi.ac.uk/chebi/" target="_blank">
-    <img src="${pageContext.request.contextPath}/images/ChEBI_logo_mid.gif"
+    <img src="${pageContext.request.contextPath}/images/ChEBI_logo.png"
          alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
          title="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds.">
 </a> <br> <br> <br>
 
 <form action="${ pageContext.request.contextPath }/ValidateInput" method="post">
-    <b>ChEBI ids</b>
+    <b>ChEBI Identifiers</b>
     <div class="content" style="vertical-align: middle; width: 500px">
         <div style="padding: 5px" class="textarea">
             <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; text-align: left"
