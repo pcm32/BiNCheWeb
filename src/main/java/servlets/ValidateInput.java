@@ -61,7 +61,7 @@ public class ValidateInput extends HttpServlet {
         String target = request.getParameter("targetType");
         session.setAttribute("targetType", target);
 
-		if (type.equalsIgnoreCase("weighted")) {
+		if (type.equalsIgnoreCase("weighted") || type.equalsIgnoreCase("fragment")) {
 
 			Map <String, String> inputMap = new HashMap<String, String>();
 			List<String> errors = new ArrayList<String>();

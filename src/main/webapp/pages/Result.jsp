@@ -82,7 +82,7 @@ try {
     Object edgeList = session.getAttribute("edgeList");
 %>
 
-<div align="center" style="padding: 5px">
+<div id="resultDesc" align="center" style="padding: 5px">
     <h3>
         The graph from <%=request.getSession().getAttribute("analysisType")%> enrichment analysis using the <%=request.getSession().getAttribute("targetType")%> ontology
     </h3>
@@ -93,8 +93,9 @@ try {
 
 <div class="gradient_container" id="draggable">
     <div id="gradient_info">
-        <div id="gradient_info_max">1.0</div>
-        <div id="gradient_info_min">0.0</div>
+        <div id="gradient_info_max">None</div>
+        <div id="gradient_info_min">High</div>
+        <div id="gradient_info_desc">Significance</div>
     </div>
     <div class="gradient"></div>
 </div>
@@ -105,23 +106,35 @@ try {
             <ul>
                 <li class="name"> <a href="#"> Export as Network Data </a>
                     <ul>
-                        <li id="export_xgmml"> <a href="#"> XGMML</a> </li>
-                        <li id="export_graphml"> <a href="#"> GraphML </a> </li>
-                        <li id="export_sif"> <a href="#"> SIF </a> </li>
+                        <li id="export_xgmml"> <a href="#">XGMML</a> </li>
+                        <li id="export_graphml"> <a href="#">GraphML</a> </li>
+                        <li id="export_sif"> <a href="#">SIF</a> </li>
                     </ul>
                 </li>
                 <li class="name"> <a href="#"><span>Export as Image</span> </a>
                     <ul>
-                        <li id="export_svg"> <a href="#"> SVG </a> </li>
-                        <li id="export_png"> <a href="#"> PNG </a> </li>
+                        <li id="export_svg"> <a href="#">SVG</a> </li>
+                        <li id="export_png"> <a href="#">PNG</a> </li>
                     </ul>
                 </li>
-                <li class="name"> <a href="#"> Export as Table</a> </li>
+                <li id="export_table"> <a href="#">Export as Table</a> </li>
             </ul>
         </li>
-        <li class="name"> <a href="#"> Style</a>
+        <li class="name"><a href="#"> Layout </a>
             <ul>
-                <li id="show_node_labels"><a href="#"> Show node labels</a> </li>
+                <li id="force_directed_layout"> <a href="#">Force directed</a></li>
+                <li id="circle_layout"> <a href="#">Circular</a></li>
+                <li id="radial_layout"> <a href="#">Radial</a></li>
+                <li id="tree_layout"> <a href="#">Tree</a></li>
+            </ul>
+        </li>
+        <li class="name"> <a href="#"> Show/Hide </a>
+            <ul>
+                <li id="show_node_labels"><a href="#"> Hide node labels</a> </li>
+                <li id="toggle_high_pvalues"><a href="#"> Hide non-significant nodes</a></li>
+                <li id="hide_selection"><a href="#"> Hide selected</a> </li>
+                <li id="hide_others"><a href="#"> Show selected only</a> </li>
+                <li id="show_all"><a href="#"> Show all nodes</a> </li>
             </ul>
         </li>
     </ul>
@@ -129,9 +142,23 @@ try {
 </div>
 
 <script type="text/javascript">
+
+
+    var timedOut = false;
+    var vis;
+
+    function startCountdown() {
+        window.setTimeout(inactivateSessionDependent, ${pageContext.session.maxInactiveInterval * 1000});
+    }
+
+    function inactivateSessionDependent() {
+        timedOut = true;
+    }
+
     window.onload = function() {
         // id of Cytoscape Web container div
         var div_id = "cytoscapeweb";
+        startCountdown();
 
         // specify the data schema and data to use (grab the data from server)
         var network_json = {
@@ -146,9 +173,19 @@ try {
                     name : "alpha",
                     type : "string"
                 }, {
-                    name : "pValue",
+                    name : "pValue", 
                     type : "string"
-                }],
+                }, {
+                    name : "corrPValue", 
+                    type : "string"
+                }, {
+                    name : "propOfSample",
+                    type : "string"
+                }, {
+                    name : "fold",
+                    type : "string"
+                }
+            ],
 
                 edges : [ {
                     name : "directed",
@@ -171,7 +208,7 @@ try {
         };
 
         // initialise
-        var vis = new org.cytoscapeweb.Visualization(div_id, options);
+        vis = new org.cytoscapeweb.Visualization(div_id, options);
 
         //specify the graph and layout to draw
         var draw_options = {
@@ -218,16 +255,22 @@ try {
             var pValue = data["pValue"];
             var label = data["label"];
             var id = data["id"];
-            var pValueSciNot = Number(pValue).toPrecision(3);
-      //      var proportionOfSample = 0.68 + '(dummy value)';
-      //      var fold = 0.5 + '(dummy value)';
-            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot/* + '\n% of sample : ' +proportionOfSample + '\nfold of enrichment : ' +fold */;
+            var pValueSciNot = Number(pValue).toExponential(2);
+            var corrPValue = Number(data["corrPValue"]).toExponential(2)
+            if(isNaN(corrPValue)) {
+                corrPValue = "N/A";
+            }
+            var percOfSample = Number(data["propOfSample"]*100).toPrecision(2);
+            var fold = Number(data["fold"]).toPrecision(2);
+            return label + ' (CHEBI:' + id + ')\np-value : ' + pValueSciNot+ '\ncorr. p-value : ' + corrPValue + '\n% of sample : ' +percOfSample + '\nfold of enrichment : ' +fold;
         };
+        
+        var filterPValueOn = false;
 
         vis.ready(function() {
 
             //Add custom tooltip to nodes
-            var style = vis.visualStyle();
+            var style = vis.visualStyle();            
             style.nodes.tooltipText = { customMapper : { functionName : "customTooltip" } };
             vis.visualStyle(style);
 
@@ -252,7 +295,29 @@ try {
             $("#export_svg").click(function() {
                 vis.exportNetwork('svg','${ pageContext.request.contextPath }/GraphExporter?type=svg');
             });
-
+            
+            $("#export_table").click(function() {
+                // vis.exportNetwork('tab', '${ pageContext.request.contextPath }/GraphExporter?type=tab');
+                if(!timedOut) {
+                    window.location='${ pageContext.request.contextPath }/getTable';
+                } else {
+                    alert("Your session has timed out, please make your query again.");
+                }
+            });
+            
+            //Layout
+            $("#circle_layout").click(function() {
+                vis.layout('Circle'); 
+            });
+            $("#tree_layout").click(function() {
+                vis.layout('Tree'); 
+            });
+            $("#radial_layout").click(function() {
+                vis.layout('Radial'); 
+            });
+            $("#force_directed_layout").click(function() {
+                vis.layout('ForceDirected'); 
+            });
             //Context menu items
             vis.addContextMenuItem("Go to entry page", "nodes",
                     function (evt) {
@@ -278,8 +343,80 @@ try {
 
                         // Select the root node and its neighbors:
                         vis.select([rootNode]).select(neighborNodes);
+                    })
+                    
+//                    .addContextMenuItem("Select one level of children nodes", "nodes",
+//                    function(evt) {
+//                        var rootNode = evt.target;
+//                        var selected = vis.selected("nodes");
+//                        
+//                        selected.push(rootNode);
+//                        var toAddSelection = [];
+//                        for(var parent in selected) {
+//                            toAddSelection = toAddSelection.concat(vis.childNodes(parent));
+//                        }
+//                        
+//                        selected = selected.concat(toAddSelection);
+//                        alert("Total Number of selected : "+selected.length);
+//                        vis.select(selected);
+//                    })
+                    ;
+            vis.addContextMenuItem("Select descendants", "nodes",
+                    function (evt) {
+                        var rootNode = evt.target;
+
+                        var myNewNodes = [rootNode];
+                        var allNodesToSel = [rootNode.data.id];
+
+                        var edges = vis.networkModel().data.edges;
+
+                        while(myNewNodes.length>0) {
+                            var seenNodeIds = [];
+                            for(var n=0;n<myNewNodes.length;n++) {
+                                for(var i=0;i<edges.length;i++) {
+                                    if( edges[i].target == myNewNodes[n].data.id ) {
+                                        seenNodeIds.push(edges[i].source);
+                                        allNodesToSel.push(edges[i].source);
+                                    }
+                                }
+                            }
+                            myNewNodes = [];
+                            for(var n=0;n<seenNodeIds.length;n++) {
+                                myNewNodes.push(vis.node(seenNodeIds[n]))
+                            }
+                        }
+
+                        vis.select("nodes",allNodesToSel);
+
+                    })
+
+            $("#hide_others").click( function() {
+                var selected = vis.selected("nodes");
+                if(selected.length>0)
+                    vis.filter("nodes",selected);
+            });
+
+            $("#hide_selection").click(function() {
+                var selected = vis.selected("nodes");
+                if(selected.length>0) {
+                    var selectedIds = [];
+                    for(var i=0;i<selected.length;i++) {
+                        selectedIds.push(selected[i].data.id)
                     }
-            );
+                    var all = vis.nodes();
+                    var allToFilter = [];
+                    for(var i=0;i<all.length;i++) {
+                        if(selectedIds.indexOf(all[i].data.id)==-1) {
+                            allToFilter.push(all[i]);
+                        }
+                    }
+                    vis.filter("nodes",allToFilter);
+                }
+            });
+
+            $("#show_all").click(function() {
+                vis.removeFilter();
+            })
 
             //Function to toggle node labels on/off
             $(function () {
@@ -296,7 +433,28 @@ try {
 
                 });
             });
-
+            
+            $(function () {
+                $("#toggle_high_pvalues").click( function() {
+                        if(!filterPValueOn) {
+                            vis.filter("nodes",function(node)
+                            {   if(!isNaN(node.data.corrPValue)) {
+                                    return node.data.corrPValue <= 0.05;
+                                } else {
+                                    return node.data.pValue <= 0.05;
+                                }
+                            });
+                            filterPValueOn = true;
+                            this.innerHTML="<a href='#'>Show non-significant nodes</a> ";
+                        } else {
+                            vis.removeFilter();
+                            filterPValueOn = false;
+                            this.innerHTML="<a href='#'>Hide non-significant nodes</a> ";
+                        }
+                        
+                });
+            });
+            
         });
 
         //draw

@@ -362,8 +362,7 @@
          */
         visualStyle: function (/*style*/) {
             var swf = this.swf();
-            if (arguments.length > 0) 
-            { swf.setVisualStyle(arguments[0]); return this; }
+            if (arguments.length > 0) { swf.setVisualStyle(arguments[0]); return this; }
             else { return swf.getVisualStyle(); }
         },
 
@@ -1405,6 +1404,13 @@
          */
         sif: function (options) {
             return this.swf().getNetworkAsText("sif", options);
+        },
+
+        /**
+         * Returns only node data as a tab delimited file .
+         * */
+        tab: function (options) {
+            return this.swf().getNetworkAsText("tab", options);
         },
 
         /**

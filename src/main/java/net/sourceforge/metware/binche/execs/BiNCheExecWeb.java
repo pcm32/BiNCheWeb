@@ -23,7 +23,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,23 +34,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.metware.binche.BiNChe;
-import net.sourceforge.metware.binche.graph.ChEBIGraphPruner;
-import net.sourceforge.metware.binche.graph.ChebiGraph;
-import net.sourceforge.metware.binche.graph.LinearBranchCollapserPruner;
-import net.sourceforge.metware.binche.graph.LowPValueBranchPruner;
-import net.sourceforge.metware.binche.graph.MoleculeLeavesPruner;
-import net.sourceforge.metware.binche.graph.RootChildrenPruner;
-import net.sourceforge.metware.binche.graph.ZeroDegreeVertexPruner;
+import net.sourceforge.metware.binche.graph.*;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import BiNGO.BingoParameters;
 import BiNGO.ParameterFactory;
-import BiNGO.methods.BingoAlgorithm;
 
 /**
- * @author Stephan Beisken, Bhavana Harsha, Janna Hastings
+ * @author Stephan Beisken, Pablo Moreno, Bhavana Harsha, Janna Hastings
  */
 public class BiNCheExecWeb {
 
@@ -117,7 +109,7 @@ public class BiNCheExecWeb {
         
         String ontologyFileName = targetNameToOntologyFileMap.get(target);
         File ontologyFile = new File(ontologyFileName);
-        if (ontologyFile == null || !ontologyFile.exists()) {
+        if (!ontologyFile.exists()) {
         	//problem!
         	throw new FileNotFoundException("Unable to open ontology file: "+ontologyFile.getName());
         }
@@ -126,7 +118,7 @@ public class BiNCheExecWeb {
         String annotationFileName = targetNameToAnnotationFileMap.get(target);
         if (annotationFileName != null) {
         	File annotationFile = new File(annotationFileName);
-            if (annotationFile == null || !annotationFile.exists()) {
+            if (!annotationFile.exists()) {
             	//problem!
             	throw new FileNotFoundException("Unable to open annotation file: "+annotationFile.getName());
             }
@@ -136,9 +128,9 @@ public class BiNCheExecWeb {
         LOGGER.log(Level.INFO, "Setting parameters ...");
         
         //Different parameters for weighted and plain analysis
-        BingoParameters parametersChEBIBin = (analysisType.equals("weighted")?
-        		ParameterFactory.makeParametersForChEBISaddleSum(ontologyFileName) :
-        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName) );
+        BingoParameters parametersChEBIBin = analysisType.equals("weighted") || analysisType.equals("fragment")?
+        		ParameterFactory.makeParametersForWeightedAnalysis(ontologyFileName) :
+        		ParameterFactory.makeParametersForChEBIBinomialOverRep(ontologyFileName);
         
         if (annotationFileName != null) {
         	parametersChEBIBin.setAnnotationFile(annotationFileName);
@@ -157,33 +149,21 @@ public class BiNCheExecWeb {
 
         ChebiGraph chebiGraph = new ChebiGraph(binche.getEnrichedNodes(), binche.getOntology(), binche.getInputNodes());
 
-        /**
-         * We only add pruners for the normal enrichment analysis
-         * 
-         * We need to make a distinction between weighted enrichment analysis for functional analysis
-         * and for fragment analysis.
-         */
-        List<ChEBIGraphPruner> pruners = new ArrayList<ChEBIGraphPruner>();
-        if(!parametersChEBIBin.getTest().equalsIgnoreCase(BingoAlgorithm.SADDLESUM)) {
-            pruners.addAll(Arrays.asList(new MoleculeLeavesPruner(), new LowPValueBranchPruner(0.05)
-                , new LinearBranchCollapserPruner(), new RootChildrenPruner(3), new ZeroDegreeVertexPruner()));
-        }
-                
-        int originalVertices = chebiGraph.getVertexCount();
-        System.out.println("Number of nodes before pruning : " + originalVertices);
 
-        int prunes=0;
-        for (ChEBIGraphPruner chEBIGraphPruner : pruners) {
-            if (chebiGraph.getVertexCount()>50 && !analysisType.equals("weighted")) { //only prune for plain enrichment
-                chEBIGraphPruner.prune(chebiGraph);
-                prunes++;
-                System.out.println(chEBIGraphPruner.getClass().getCanonicalName());
-                System.out.println("Removed vertices : " + (originalVertices - chebiGraph.getVertexCount()));
-                originalVertices = chebiGraph.getVertexCount();
-            }
-        }
+        PrunningStrategy strategy;
+        if(analysisType.equals("fragment"))
+            strategy = new FragmentEnrichPruningStrategy();
+        else if(analysisType.equals("weighted"))
+            strategy = new WeightedEnrichPruningStrategy();
+        else
+            strategy = new PlainEnrichPruningStrategy();
 
+        if(chebiGraph.getVertexCount()>40) {
+            int removedVertices = strategy.applyStrategy(chebiGraph);
+            System.out.println("Removed vertices : "+removedVertices);
+        }
         int finalVertices = chebiGraph.getVertexCount();
+
 
         System.out.println("Final vertices : " + (finalVertices));
 
@@ -191,10 +171,22 @@ public class BiNCheExecWeb {
         JSONChEBIGraphConverter converter = new JSONChEBIGraphConverter();
         converter.setChebiGraphAsJSON(chebiGraph, request);
 
+        request.getSession().setAttribute("chebiGraph",chebiGraph);
+
         LOGGER.log(Level.INFO, "############ Stop ############");
 
         response.setContentType("text/html");
 
+    }
+
+    private List<ChEBIGraphPruner> getPruners() {
+        return Arrays.asList(new MoleculeLeavesPruner(), new HighPValueBranchPruner(0.05)
+    , new LinearBranchCollapserPruner(), new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
+    }
+
+    private List<ChEBIGraphPruner> getPrunersForFragmentAnalysis() {
+        return Arrays.asList(new HighPValueBranchPruner(0.05), new LinearBranchCollapserPruner(),
+                new RootChildrenPruner(3,false), new ZeroDegreeVertexPruner());
     }
 
 
