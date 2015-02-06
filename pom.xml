@@ -4,7 +4,7 @@
     <groupId>BiNCheWebApp</groupId>
     <artifactId>BiNCheWebApp</artifactId>
     <packaging>war</packaging>
-    <version>0.6.1  </version>
+    <version>0.2.3</version>
 
     <build>
         <plugins>
@@ -36,12 +36,17 @@
         <dependency>
             <groupId>be.ugent.psb</groupId>
             <artifactId>binche</artifactId>
-            <version>0.3</version>
+            <version>0.2.4</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
         </dependency>
     </dependencies>
 </project>
