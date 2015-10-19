@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.prefs.Preferences;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sourceforge.metware.binche.BiNChe;
 import net.sourceforge.metware.binche.graph.*;
 
+import net.sourceforge.metware.binche.loader.BiNChEOntologyPrefs;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -49,12 +51,14 @@ public class BiNCheExecWeb {
 
     private static final Logger LOGGER = Logger.getLogger(BiNCheExecWeb.class);
 
-    private Properties binCheProps; 
+    private Properties binCheProps;
+	private Preferences binchePrefs;
     private Map<String,String> targetNameToOntologyFileMap = new HashMap<String, String>();
     private Map<String,String> targetNameToAnnotationFileMap = new HashMap<String, String>();
     
     public BiNCheExecWeb() {
     	binCheProps = new Properties();
+	    binchePrefs  = Preferences.userNodeForPackage(BiNChe.class);
     	try {
     		InputStream in = getClass().getClassLoader().getResourceAsStream("binche_gui.properties");
     		binCheProps.load(in);
@@ -72,17 +76,35 @@ public class BiNCheExecWeb {
     	for (int i=1; i<=numTargets; i++) {
     		String targetType = binCheProps.getProperty("menu.targetType."+i);
     		if (targetType != null) {
-    			String ontologyFileName = binCheProps.getProperty("target.ontologyFile."+i);
+			    String ontologyFileName = binCheProps.getProperty("target.ontologyFile."+i,getOntology(i));
     			if (ontologyFileName != null) {
     				targetNameToOntologyFileMap.put(targetType, ontologyFileName);
     			}
-    			String annotationFileName = binCheProps.getProperty("target.annotationFile."+i);
+    			String annotationFileName = binCheProps.getProperty("target.annotationFile."+i,getAnnotation(i));
     			if (annotationFileName != null) {
     				targetNameToAnnotationFileMap.put(targetType, annotationFileName);
     			}
     		}
     	}
     }
+
+	private String getAnnotation(Integer fileNum) {
+		if(fileNum==2) {
+			return binchePrefs.get(BiNChEOntologyPrefs.RoleAnnot.name(),null);
+		}
+		return null;
+	}
+
+	private String getOntology(Integer fileNum) {
+		if(fileNum==1) {
+			return binchePrefs.get(BiNChEOntologyPrefs.StructureOntology.name(), null);
+		} else if(fileNum==2) {
+			return binchePrefs.get(BiNChEOntologyPrefs.RoleOntology.name(),null);
+		} else if (fileNum==3) {
+			return binchePrefs.get(BiNChEOntologyPrefs.RoleAndStructOntology.name(),null);
+		}
+		return null;
+	}
     
     public Set<String> getTargetNames() {
     	return targetNameToOntologyFileMap.keySet();
