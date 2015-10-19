@@ -1,156 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 
 <%@page import="java.util.Properties" %>
 <%@page import="java.io.FileInputStream" %>
 
 <%
-	Properties props = new Properties();
-	try {
-		props.load(getClass().getClassLoader().getResourceAsStream(
-				"/binche_gui.properties"));
-	} catch (Exception e) {
-		out.println("Unable to load properties file due to: "
-				+ e.getMessage());
-		out.println("Root of class path "+getClass().getClassLoader().getResource("/"));
-	}
+    Properties props = new Properties();
+    try {
+        props.load(getClass().getClassLoader().getResourceAsStream(
+                "/binche_gui.properties"));
+    } catch (Exception e) {
+        out.println("Unable to load properties file due to: "
+                + e.getMessage());
+        out.println("Root of class path " + getClass().getClassLoader().getResource("/"));
+    }
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
+<html class="fontface">
 <head>
+
+    <link rel="stylesheet" href="http://www.ebi.ac.uk/web_guidelines/css/compliance/mini/ebi-fluid-embl.css" type="text/css">
+    <link rel="stylesheet" href="/chebi/layouts/styles/chebiColorScheme.css" type="text/css"/>
+
+    <link rel="SHORTCUT ICON" href="/chebi/images/ChEBI_logo_16.ico"/>
+
+    <script defer="defer" src="//www.ebi.ac.uk/web_guidelines/js/cookiebanner.js"></script>
+    <script defer="defer" src="//www.ebi.ac.uk/web_guidelines/js/foot.js"></script>
+
+    <script type="text/javascript">
+        function showSubMenu(menu) {
+            // First reset - hide all menus..
+            document.getElementById("browse").style.display = "none";
+            document.getElementById("documentation").style.display = "none";
+            document.getElementById("tool").style.display = "none";
+
+            //Then display only the menu you want...
+            $(menu).get(0).style.display = "inline";
+            $(menu).get(0).style.paddingTop = "0px";
+            $(menu).get(0).style.marginTop = "0px";
+        }
+    </script>
+
     <title><%=props.get("title")%></title>
 
-        <script type="text/javascript"
-        src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/javascript/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/javascript/textbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/binche.css">
+</head>
 
-        <script type="text/javascript">
-            function display(value) {
-                var val = document.getElementById(value).value;
-                if (val == "plain") {
-                    document.getElementById('plainInfo').style.display = 'block';
-                    document.getElementById('plainDesc').style.display = 'block';
-                    document.getElementById('weightDesc').style.display = 'none';
-                    document.getElementById('fragmentDesc').style.display = 'none';
-                } else if (val == "weighted") {
-                    document.getElementById('plainInfo').style.display = 'block';
-                    document.getElementById('plainDesc').style.display = 'none'
-                    document.getElementById('weightDesc').style.display = 'block';
-                    document.getElementById('fragmentDesc').style.display = 'none';
-                } else if (val == "fragment") {
-                    document.getElementById('plainInfo').style.display = 'none';
-                    document.getElementById('plainDesc').style.display = 'none';
-                    document.getElementById('weightDesc').style.display = 'none';
-                    document.getElementById('fragmentDesc').style.display = 'block';
-                }
+<body>
 
-                refillText(document.getElementById("input"));
-            }
+<div id="wrapper" class="container_24">
 
-            function clearText(textArea) {
-                textArea.value = '';   //Clear the area
-                textArea.style.color='#000';  //Set font colour to black
-            }
+<%@ include file="header.html" %>
 
-            function refillText(textArea) {
-                //Based on the type of analysis selected, fill the textbox with examples accordingly
-                if($("#weighted").is(":checked")==true || $("#fragment").is(":checked")==true)
-                    refillTextWithWeightedIds(textArea);
-                else refillTextWithPlainIds(textArea);
+<div id="content" role="main" class="grid_24 clearfix">
 
-            }
+<div id="breadcrumbs">
+    <p><a href="/chebi/init.do">ChEBI</a> > tools > BiNChE </p>
+</div>
 
-            function refillTextWithPlainIds(textArea) {
-                textArea.value=textArea.defaultValue; //Set it back to sample ids
-                textArea.style.color='#9b9b9b';  //Set font colour back to grey
-            }
-
-            function refillTextWithWeightedIds(textArea) {
-//                textArea.value='CHEBI:491197	1   \n' +
-//                    'CHEBI:591790	0.989   \n' +
-//                    'CHEBI:15712	0.915   \n' +
-//                    'CHEBI:523039	0.894   \n' +
-//                    'CHEBI:28412	0.862   \n' +
-//                    'CHEBI:666900	0.862   \n' +
-//                    'CHEBI:15649	0.293   \n' +
-//                    'CHEBI:491180	0.259   \n' +
-//                    'CHEBI:31080	0.252   \n' +
-//                    'CHEBI:15712	0.236   \n' +
-//                    'CHEBI:28412	0.235   \n' +
-//                    'CHEBI:18131	0.23    \n' +
-//                    'CHEBI:523039	0.226   \n' +
-//                    'CHEBI:521292	0.19    \n' +
-//                    'CHEBI:1278800	0.177   \n';
-                textArea.value = 'CHEBI:17079	0.7665\n' +
-                                 'CHEBI:46816	0.7464999999999999\n' +
-                                 'CHEBI:28658	0.7464999999999999\n' +
-                                 'CHEBI:28611	0.7464999999999999\n' +
-                                 'CHEBI:28594	0.6915\n' +
-                                 'CHEBI:17048	0.6915\n' +
-                                 'CHEBI:7852	0.60575\n' +
-                                 'CHEBI:164200  0.2342\n' +
-                                 'CHEBI:8489    0.25321\n' +
-                                 'CHEBI:9630    0.2543\n' +
-                                 'CHEBI:59477   0.2335\n' +
-                                 'CHEBI:9495    0.2433\n' +
-                                 'CHEBI:3540	0.509\n';
-
-                textArea.style.color = '#9b9b9b';  //Set font colour back to grey
-
-            }
-        </script>
-        <style type="text/css">
-            #loading {
-                position: fixed;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 100%;
-                height: 100%;
-                min-height: 100%;
-                background-color: white;
-                text-align: center;
-                opacity: 0.85;
-                filter: alpha(opacity = 85);
-            }
-
-            #loadingtext {
-                width: 300px;
-                height: 100px;
-                background-color: #FFF;
-                text-align: center;
-                padding: 100px 0 0 0;
-                margin: 250px auto 0 auto;
-            }
-
-            h1 {font-size: 17pt; font-weight: bold; padding: 3px; color: #066; border: 1px solid #bfbfbf; background: #eef5f5; font-family: helvetica, 'trebuchet MS', arial, sans-serif;}
-        </style>
-    </head>
-
-<body style="font-family: helvetica, 'trebuchet MS', arial, sans-serif;">
-<center>
 <div id="loading" style="display:none;">
     <div id="loadingtext">
-        Please wait while the graph loads...<br />
+        Please wait while the graph loads...<br/>
         <img src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
-            border="0" style="margin-top: 10px"/>
+             border="0" style="margin-top: 10px"/>
     </div>
 </div>
-<h1><%=props.get("subtitle")%></h1> <br>
+<h2 class="entry-title" style="text-align: center"><%=props.get("subtitle")%>
+</h2>
 
-<a href="http://www.ebi.ac.uk/chebi/" target="_blank">
-    <img src="${pageContext.request.contextPath}/images/ChEBI_logo.png"
-         alt="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds."
-         title="Chemical Entities of Biological Interest (ChEBI) is a freely available dictionary of molecular entities focused on ‘small’ chemical compounds.">
-</a> <br> <br> <br>
+<%
+    String type = (String) session.getAttribute("analysisType");
+    String error = (String) session.getAttribute("error");
+    if (type != null && error != null)
+        out.println("<div id=\"error\" align = \"center\"><b>" + error.replace("xxxx", type.toUpperCase()) + "</b><br/><br/><br/></div>");
 
+%>
+
+<script type="application/javascript">
+
+    var query = "<%= session.getAttribute("query")%>";
+    var type = "<%=type%>";
+
+    if (document.getElementById('error') != null) {
+        window.onload = refillQuery;
+    }
+
+    function refillQuery() {
+        document.getElementById('input').value = query.replace(/\ - /g, '\r\n');
+        document.getElementById(type).checked = true;
+    }
+</script>
+<div align="center" style="margin-left: 30%;margin-right: 30%">
 <form action="${ pageContext.request.contextPath }/ValidateInput" method="post">
-    <b>ChEBI Identifiers</b>
-    <div class="content" style="vertical-align: middle; width: 500px">
-        <div style="padding: 5px" class="textarea">
-            <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; text-align: left"
-                      onfocus="clearText(this)" onblur="if(this.value=='') refillText(this);">
+
+<div class="content">
+<div class="textarea">
+    <textarea rows="10" cols="50" name="input" id="input" style="color: #9b9b9b; margin-left: 9%; "
+              onfocus="changeColor(this)" onblur="if(this.value=='') refillText(this);">
 CHEBI:108133
 CHEBI:108141
 CHEBI:10983
@@ -274,92 +224,104 @@ CHEBI:16702</textarea>
         <div style="padding: 5px" class="textarea-instruction">
             <span style="font-size: 10.5pt; padding: 1px;"><%=props.get("input.text")%>
             </span>
-        </div> <br>
-        <div style="padding: 5px" class="type-selection">
-             <span style="padding: 1px;">
-             <b>Select type of analysis: </b> <br/>
-                  
-                <%
-                boolean showAnalysisTypes = Boolean.valueOf(props
-                        .getProperty("menu.showAnalysisTypes"));
-                if (showAnalysisTypes) {
-                %>
-                    <span>
-                        <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted" onclick="display('weighted');" />
-                        <b>Weighted Enrichment Analysis </b>
-                    </span>
-                 <br>
-                    <span>
-                        <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked" onclick="display('plain');" />
-                        <b>Plain Enrichment Analysis </b>
-                    </span>
-                 <br>
-                    <span>
-                        <input type="radio" id="fragment" name="analysisType" class="analysisType" value="fragment" onclick="display('fragment');" />
-                        <b>Fragment Enrichment Analysis </b>
-                    </span>
+</div>
 
+<div style="padding: 5px" class="type-selection">
+    <div>
+        <b>Select type of analysis: </b> <br/>
 
-                    <span id="weightDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
-                             <p>This analysis accepts a list of ChEBI ids and their weights. <br>
-                                 Weight is a decimal value between 0 and 1. <br>
-                                 Please select your target.
-                             </p>
-                    </span>
-
-                    <span id="fragmentDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
-                             <p>This analysis accepts a list of ChEBI ids and their weights. <br>
-                                 Weight is a decimal value between 0 and 1.<br>
-                                 This analysis runs on the ChEBI structure ontology.
-                             </p>
-                    </span>
-
-                    <span id="plainDesc" style="display: none; padding: 2px; font-size: 10.5pt; height: 70px; text-align: left; margin-left: 3.5em">
-                             <p>This analysis accepts a list of ChEBI ids.</p>
-                    </span>
-		     <%
-		     	} else {
-		     %>
-		     
-		     <span style="display:none"> 
-		         <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked"  onclick="display('plain');" />
-                    <b>Plain Enrichment Analysis </b>
-			    </span>
-		     
-		     <%
-		     		     	}
-		     		     %>
-		      </span>
-             <span id="plainInfo" style="display: none; padding: 2px; height: 50px; text-align: left; margin-left: 3em">
-                    Select target of enrichment:
-                     <select name="targetType">
-                     <%
-                     	int numTargets = Integer.valueOf(props
-                     			.getProperty("menu.countTargets"));
-                     	for (int i = 1; i <= numTargets; i++) {
-
-                     		out.print("<option value=\""
-                     				+ props.get("menu.targetType." + i) + "\" ");
-                     		if (i == 1)
-                     			out.print("selected=\"selected\" ");
-                     		out.print(">");
-                     		out.print(props.get("menu.target.text." + i));
-                     		out.println("</option> ");
-                     	}
-                     %>
-                     </select>
-		     </span>
-            <input type="submit" value="Submit" onclick="document.getElementById('loading').style.display = 'block';" style="margin-top: 2em" />
-
-        </div>
+        <%--<%--%>
+        <%--boolean showAnalysisTypes = Boolean.valueOf(props--%>
+        <%--.getProperty("menu.showAnalysisTypes"));--%>
+        <%--if (showAnalysisTypes) {--%>
+        <%--%>--%>
+        <span>
+        <input type="radio" id="weighted" name="analysisType" class="analysisType" value="weighted"
+               onclick="display('weighted');"/>
+        <b>Weighted Enrichment Analysis </b>
+        </span><br>
+        <span>
+        <input type="radio" id="plain" name="analysisType" class="analysisType" value="plain"
+               checked="checked" onclick="display('plain');"/>
+        <b>Plain Enrichment Analysis </b>
+        </span><br>
+        <span>
+        <input type="radio" id="fragment" name="analysisType" class="analysisType" value="fragment"
+               onclick="display('fragment');"/>
+        <b>Fragment Enrichment Analysis </b>
+        </span>
     </div>
+
+
+    <div id="weightDesc" style="padding-top: 15px">
+        This analysis accepts a list of ChEBI ids and their weights. <br>
+        Weight is a decimal value between 0 and 1. <br>
+        Please select your target.
+    </div>
+
+    <div id="fragmentDesc" style="padding-top: 15px">
+        This analysis accepts a list of ChEBI ids and their weights. <br>
+        Weight is a decimal value between 0 and 1.<br>
+        This analysis runs on the ChEBI structure ontology.
+
+    </div>
+
+    <div id="plainDesc" style="padding-top: 15px">
+        This analysis accepts a list of ChEBI ids.
+    </div>
+    <%--<%--%>
+    <%--} else {--%>
+    <%--%>--%>
+    <%----%>
+    <%--<span style="display:none">--%>
+    <%--<input type="radio" id="plain" name="analysisType" class="analysisType" value="plain" checked="checked"--%>
+    <%--onclick="display('plain');"/>--%>
+    <%--<b>Plain Enrichment Analysis </b>--%>
+    <%--</span>--%>
+    <%----%>
+    <%--<%--%>
+    <%--}--%>
+    <%--%>--%>
+    <div id="plainInfo" style="display: none; padding-top: 15px;">
+        Select target of enrichment:
+        <select name="targetType">
+            <%
+                int numTargets = Integer.valueOf(props
+                        .getProperty("menu.countTargets"));
+                for (int i = 1; i <= numTargets; i++) {
+
+                    out.print("<option value=\""
+                            + props.get("menu.targetType." + i) + "\" ");
+                    if (i == 1)
+                        out.print("selected=\"selected\" ");
+                    out.print(">");
+                    out.print(props.get("menu.target.text." + i));
+                    out.println("</option> ");
+                }
+            %>
+        </select>
+    </div>
+    <input type="submit" name="submit" class="submit" value="Search" style="margin-left: 45%;margin-top: 15px;"
+           onclick="loading()" />
+
+    <script type="text/javascript">
+        document.getElementById("loading").style.display = "none";
+        display('plain');
+
+        function loading(){
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
+
+</div>
+</div>
 </form>
+</div>
 
-            <script type="text/javascript">
-                document.getElementById("loading").style.display = "none";
-                display('plain');
-            </script>
+</div>
 
-        </center>
-    </body>
+<%@ include file="footer.html" %>
+
+</div>
+</body>
 </html>

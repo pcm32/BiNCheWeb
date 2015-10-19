@@ -1,9 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -19,10 +17,13 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ValidateInput")
 public class ValidateInput extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String error = null;
+	private static String error = null;
+	private static final String TYPE_FRAGMENT = "fragment";
+	private static final String TYPE_PLAIN = "plain";
+	private static final String TYPE_WEIGHT = "weighted";
 
 
-    /**
+	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ValidateInput() {
@@ -45,62 +46,88 @@ public class ValidateInput extends HttpServlet {
 		//Process input ids
 		String rawInput = request.getParameter("input").trim();
 		String[] input = null;
+		error = null;
 		//Check if values are separated by comma or space
-		if (rawInput.split(",").length>1) {
+		if (rawInput.split(",").length > 1) {
 			input = rawInput.split(",");
-		}
-		else {
+		} else {
 			input = rawInput.split("\\s+");
 		}
 
 		//Get type and target of enrichment
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+		session.setAttribute("query", rawInput.replace("\r\n"," - "));
+
 		String type = request.getParameter("analysisType");
         session.setAttribute("analysisType", type);
 
         String target = request.getParameter("targetType");
         session.setAttribute("targetType", target);
 
-		if (type.equalsIgnoreCase("weighted") || type.equalsIgnoreCase("fragment")) {
+		if (type.equalsIgnoreCase(TYPE_WEIGHT) || type.equalsIgnoreCase(TYPE_FRAGMENT)) {
 
-			Map <String, String> inputMap = new HashMap<String, String>();
-			List<String> errors = new ArrayList<String>();
+			if (idAndWeight(input[0], input[1])) {
+				Map<String, String> inputMap = new HashMap<String, String>();
 
-			//Convert string array to a hashmap of ids and weights
-			for (int i=0; i<input.length; i+=2) {
-				inputMap.put(input[i], input[i+1]);
-			}
+				//Convert string array to a hashmap of ids and weights
+				for (int i = 0; i < input.length; i += 2) {
+					if (idAndWeight(input[i], input[i + 1])) {
+						inputMap.put(input[i], input[i + 1]);
+					} else {
+						error = "Please Check your input you have selected xxxx but there is no weight.";
+						break;
+					}
+				}
 
-			//Validate weights
-			for (String id : inputMap.keySet()) {
-				String weights = inputMap.get(id);
-				Double weight = Double.valueOf(weights);
-				
-				if (weight>=0 && weight<=1) continue;
-				else {
-					errors.add(id);
+				if(error ==null){
+				//Validate weights
+				for (String id : inputMap.keySet()) {
+					String weights = inputMap.get(id);
+
+					try {
+						Double weight = Double.valueOf(weights);
+						if (weight >= 0.0 && weight <= 1.0) continue;
+						else {
+							error = "Please Check your input you have selected xxxx but the weight is not between number between 0 and 1.";
+							break;
+						}
+					} catch (Exception e) {
+						error = "Please Check your input you have selected xxxx but the weight is not between number between 0 and 1.";
+					}
+				}
+
+				if (error == null) {
+					session.setAttribute("inputMap", inputMap);
 				}
 			}
 
-			if (errors.isEmpty()) {
-				session.setAttribute("inputMap", inputMap);
+			} else {
+				error = "Please Check your input you have selected xxxx but there is no weight.";
 			}
-			else {
-				response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "The weight has to be a number between 0 and 1!");
 
-			}
-		}
-		else if (type.equalsIgnoreCase("plain")) {
-			Map<String,String> dummyMap = new HashMap<String,String>();
-			for(String id : input) {
+		} else if (type.equalsIgnoreCase(TYPE_PLAIN)) {
+			Map<String, String> dummyMap = new HashMap<String, String>();
+			for (String id : input) {
+				if(!id.contains("CHEBI:"))  {
+					error =  "Please Check your input you have selected xxxx but there are weights.";
+				}
 				dummyMap.put(id, "1");
 			}
 			session.setAttribute("inputMap", dummyMap);
 		}
 
-        //Redirect to the result page
-        response.sendRedirect("pages/Result.jsp");
-		
+		//Redirect to the result page if there is no error
+		if (error == null) {
+			session.removeAttribute("error");
+			response.sendRedirect("pages/Result.jsp");
+		} else {
+			session.setAttribute("error", error);
+			response.sendRedirect("pages/index.jsp");
+		}
+	}
+
+	public static boolean idAndWeight(String chebiId, String weight) {
+		return (chebiId.contains("CHEBI:") && !weight.contains("CHEBI:"));
 	}
 
 }
