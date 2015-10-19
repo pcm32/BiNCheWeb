@@ -71,9 +71,15 @@ public class ValidateInput extends HttpServlet {
 
 				//Convert string array to a hashmap of ids and weights
 				for (int i = 0; i < input.length; i += 2) {
-					inputMap.put(input[i], input[i + 1]);
+					if (idAndWeight(input[i], input[i + 1])) {
+						inputMap.put(input[i], input[i + 1]);
+					} else {
+						error = "Please Check your input you have selected xxxx but there is no weight.";
+						break;
+					}
 				}
 
+				if(error ==null){
 				//Validate weights
 				for (String id : inputMap.keySet()) {
 					String weights = inputMap.get(id);
@@ -93,6 +99,7 @@ public class ValidateInput extends HttpServlet {
 				if (error == null) {
 					session.setAttribute("inputMap", inputMap);
 				}
+			}
 
 			} else {
 				error = "Please Check your input you have selected xxxx but there is no weight.";

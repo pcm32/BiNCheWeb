@@ -28,7 +28,7 @@ public class GetTable extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/octet-stream");
+        response.setContentType("application/x-download");
         response.setHeader("Content-Disposition",
                 "attachment;filename=enrichmentTable.txt");
 

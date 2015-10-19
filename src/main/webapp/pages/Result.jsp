@@ -135,15 +135,15 @@
             <ul>
                 <li class="name"> <a href="#"> Export as Network Data </a>
                     <ul>
-                        <li id="export_xgmml"> <a href="#">XGMML</a> </li>
-                        <li id="export_graphml"> <a href="#">GraphML</a> </li>
-                        <li id="export_sif"> <a href="#">SIF</a> </li>
+                        <li> <a href="#" id="export_xgmml">XGMML</a> </li>
+                        <li> <a href="#" id="export_graphml">GraphML</a> </li>
+                        <li> <a href="#" id="export_sif">SIF</a> </li>
                     </ul>
                 </li>
                 <li class="name"> <a href="#"><span>Export as Image</span> </a>
                     <ul>
-                        <li id="export_svg"> <a href="#">SVG</a> </li>
-                        <li id="export_png"> <a href="#">PNG</a> </li>
+                        <li> <a href="#" id="export_svg">SVG</a> </li>
+                        <li> <a href="#" id="export_png">PNG</a> </li>
                     </ul>
                 </li>
                 <li id="export_table"> <a href="#">Export as Table</a> </li>
@@ -304,25 +304,54 @@ window.onload = function() {
         vis.visualStyle(style);
 
         //Exporters
-        $("#export_xgmml").click(function() {
-            vis.exportNetwork('xgmml','${ pageContext.request.contextPath }/GraphExporter?type=xgmml');
+        $("#export_xgmml").click(function () {
+            if (window.navigator.msSaveOrOpenBlob) {
+                var blobObject = new Blob(vis.xgmml());
+                window.navigator.msSaveOrOpenBlob(blobObject, "export.xgmml");
+            } else {
+                $("#export_xgmml").attr("href", 'data:xml/plain;charset=utf-8,'+ encodeURIComponent(vis.xgmml()));
+                $("#export_xgmml").attr("download", "export.xgmml");
+            }
         });
 
         $("#export_graphml").click(function() {
-            vis.exportNetwork('graphml','${ pageContext.request.contextPath }/GraphExporter?type=xml');
+            if (window.navigator.msSaveOrOpenBlob) {
+                var blobObject = new Blob(vis.graphml());
+                window.navigator.msSaveOrOpenBlob(blobObject, "export.graphml");
+            } else {
+                $( "#export_graphml").attr("href",'data:text/xml;charset=utf-8,'+ encodeURIComponent(vis.graphml()));
+                $("#export_graphml").attr("download", "export.xml");
+            }
         });
 
         $("#export_sif").click(function() {
-            vis.exportNetwork('sif',
-                    '${ pageContext.request.contextPath }/GraphExporter?type=txt');
+            if (window.navigator.msSaveOrOpenBlob) {
+                var blobObject = new Blob(vis.sif());
+                window.navigator.msSaveOrOpenBlob(blobObject, "export.sif");
+            } else {
+                $("#export_sif").attr("href", 'data:text/plain;charset=utf-8,' + encodeURIComponent(vis.sif()));
+                $("#export_sif").attr("download", "export.sif");
+            }
         });
 
         $("#export_png").click(function() {
-            vis.exportNetwork('png','${ pageContext.request.contextPath }/GraphExporter?type=png');
+            if (window.navigator.msSaveOrOpenBlob) {
+                var blobObject = new Blob(vis.png());
+                window.navigator.msSaveOrOpenBlob(blobObject, "export.png");
+            } else {
+                $("#export_png").attr("href", 'data:application/octet-stream;base64,' + vis.png());
+                $("#export_png").attr("download", "export.png");
+            }
         });
 
         $("#export_svg").click(function() {
-            vis.exportNetwork('svg','${ pageContext.request.contextPath }/GraphExporter?type=svg');
+            if (window.navigator.msSaveOrOpenBlob) {
+                var blobObject = new Blob(vis.svg());
+                window.navigator.msSaveOrOpenBlob(blobObject, "export.svg");
+            } else {
+                $("#export_svg").attr("href", 'data:text/svg+xml;charset=utf-8,' + encodeURIComponent(vis.svg()));
+                $("#export_svg").attr("download", "export.svg");
+            }
         });
 
         $("#export_table").click(function() {
