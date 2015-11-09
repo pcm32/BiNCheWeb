@@ -4,7 +4,7 @@
     <groupId>BiNCheWebApp</groupId>
     <artifactId>BiNCheWebApp</artifactId>
     <packaging>war</packaging>
-    <version>0.2.5</version>
+    <version>0.2.6.1</version>
 
     <build>
         <plugins>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>be.ugent.psb</groupId>
             <artifactId>binche</artifactId>
-            <version>0.2.4</version>
+            <version>0.2.5</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

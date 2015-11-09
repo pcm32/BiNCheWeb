@@ -44,3 +44,10 @@
     padding: 100px 0 0 0;
     margin: 250px auto 0 auto;
 }
+
+#citation {
+    margin-left: 9%;
+    margin-top: 25px;
+    text-align: left;
+    padding: 5px;
+}

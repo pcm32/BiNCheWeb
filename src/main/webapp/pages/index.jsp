@@ -318,6 +318,19 @@ CHEBI:16702</textarea>
 </form>
 </div>
 
+    <div id="citation" class="small-boxed-section grid_20">
+        <h4>To Cite BiNChE</h4>
+
+        <p>If you use BiNChE for your research, please cite our paper:</p>
+
+        <p style="padding: 5px 50px 5px;">
+            Moreno P, Beisken S, Harsha B, Muthukrishnan V, Tudose I, Dekker A, Dornfeldt S, Taruttis F,
+            Grosse I, Hastings J, Neumann S, Steinbeck C. (2015) BiNChE: a web tool and library for chemical enrichment
+            analysis based on the ChEBI ontology.
+            BMC Bioinformatics. <a href="http://www.biomedcentral.com/1471-2105/16/56/" target="_blank">doi:
+                10.1186/s12859-015-0486-3</a></p>
+
+    </div>
 </div>
 
 <%@ include file="footer.html" %>
