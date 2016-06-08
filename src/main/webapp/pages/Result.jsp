@@ -22,7 +22,7 @@
 <html class="fontface">
 <head>
 
-    <link rel="stylesheet" href="§//www.ebi.ac.uk/web_guidelines/css/compliance/mini/ebi-fluid-embl.css" type="text/css">
+    <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/compliance/mini/ebi-fluid-embl.css" type="text/css">
     <link rel="stylesheet" href="/chebi/layouts/styles/chebiColorScheme.css" type="text/css"/>
 
     <link rel="SHORTCUT ICON" href="/chebi/images/ChEBI_logo_16.ico"/>
