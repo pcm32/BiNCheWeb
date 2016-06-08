@@ -21,7 +21,7 @@
 <html class="fontface">
 <head>
 
-    <link rel="stylesheet" href="http://www.ebi.ac.uk/web_guidelines/css/compliance/mini/ebi-fluid-embl.css" type="text/css">
+    <link rel="stylesheet" href="//www.ebi.ac.uk/web_guidelines/css/compliance/mini/ebi-fluid-embl.css" type="text/css">
     <link rel="stylesheet" href="/chebi/layouts/styles/chebiColorScheme.css" type="text/css"/>
 
     <link rel="SHORTCUT ICON" href="/chebi/images/ChEBI_logo_16.ico"/>
@@ -62,7 +62,7 @@
     <p><a href="/chebi/init.do">ChEBI</a> > tools > BiNChE </p>
 </div>
 
-<div id="loading" style="display:none;">
+<div id="loading" style="display:none;z-index:10">
     <div id="loadingtext">
         Please wait while the graph loads...<br/>
         <img src="${ pageContext.request.contextPath }/images/ajax-loader.gif"
